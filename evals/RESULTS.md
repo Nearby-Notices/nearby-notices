@@ -1,6 +1,6 @@
 # Evaluation results
 
-Run 17/10/2026 15:04 UTC on openai/qwen3.8-27b (commit 859799d). Hand-labelled set: 30 notices across 10 Gazette categories, in `gold.jsonl`; the notices themselves are in `notices/`. Rerun with `uv run python evals/run.py`.
+Run 17/10/2026 15:26 UTC on openai/qwen3.8-27b-ablit (commit 00e2ba2). Hand-labelled set: 30 notices across 10 Gazette categories, in `gold.jsonl`; the notices themselves are in `notices/`. Rerun with `uv run python evals/run.py`.
 
 ## Extraction fields (per notice)
 
@@ -8,20 +8,21 @@ Run 17/10/2026 15:04 UTC on openai/qwen3.8-27b (commit 859799d). Hand-labelled s
 |---|---|
 | Authority | 97% |
 | Kind of notice | 100% |
-| Start date | 97% |
+| Start date | 100% |
 | End date or deadline | 100% |
 | How-to-object sentence present when the notice has one, absent when it does not | 100% |
-| Heading survived the gate | 63% |
-| Places affected found (recall) | 86% |
+| Model's one-line heading passed the gate | 90% |
+| A gated heading shown (the model's, or the first gated summary sentence) | 100% |
+| Places affected found (recall) | 98% |
 | Correspondence addresses wrongly listed as places | 0 |
 
-Summary sentences kept 76, removed by the gate 17; 0 of 30 notices ended with no summary sentence (the page then shows the facts and the notice only). 4.7 model calls and a median 14 s per notice. Errors: 0.
+Summary sentences kept 83, removed by the gate 4; 0 of 30 notices ended with no summary sentence (the page then shows the facts and the notice only). 4.8 model calls and a median 16 s per notice. Errors: 0.
 
 ## The gate (hand-written true and false sentences)
 
 | | Count |
 |---|---|
-| True sentences kept | 56 of 60 (93%) |
+| True sentences kept | 60 of 60 (100%) |
 | False sentences removed | 60 of 60 (100%) |
 | Of everything the gate kept, share that was true | 100% |
 
