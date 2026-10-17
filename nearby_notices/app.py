@@ -50,7 +50,7 @@ templates.env.filters["nice_date"] = nice_date
 
 def _ctx(request: Request, **kw) -> dict:
     return {"request": request, "disclaimer": DISCLAIMER, "allowed": ALLOWED, "excluded": EXCLUDED,
-            "group_name": groups.group_name, "group_colour": groups.group_colour, "units": geo.UNITS,
+            "group_name": groups.group_name, "group_colour": groups.group_colour, "icons": groups.ICONS, "units": geo.UNITS,
             "unit_choices": {u: spec["choices"] for u, spec in geo.UNITS.items()}, **kw}
 
 
@@ -119,13 +119,9 @@ def _result(con, row: dict, where: places.Place | None, unit: str, asked_m: floa
     ex = store.get_extraction(con, row["id"], config.MODEL)
     fb = con.execute("SELECT up, down FROM feedback WHERE notice_id=?", (row["id"],)).fetchone()
     pts = row["points"] or ([{"postcode": None, "lat": row["lat"], "lon": row["lon"]}] if row.get("lat") is not None else [])
-    near, others = None, []
-    if where and where.lat is not None and where.lon is not None and pts:
-        near = geo.nearest(pts, where.lat, where.lon)
-        others = [f"{p['postcode']} ({geo.fmt(geo.distance_m(where.lat, where.lon, p['lat'], p['lon']), unit)})"
-                  for p in pts if p is not near and p.get("postcode") and not (p["lat"] == near["lat"] and p["lon"] == near["lon"])]
+    near = geo.nearest(pts, where.lat, where.lon) if where and where.lat is not None and where.lon is not None and pts else None
     return {"n": row, "x": ex, "group": groups.group_of(row["notice_code"]), "fb": dict(fb) if fb else {"up": 0, "down": 0},
-            "near": near, "dist": geo.fmt(near["m"], unit) if near else None, "others": others,
+            "near": near, "dist": geo.fmt(near["m"], unit) if near else None,
             "outside": bool(near and asked_m is not None and not _within(near["m"], asked_m))}
 
 
@@ -157,14 +153,15 @@ def search(request: Request, place: str = "", distance: float | None = None, uni
     points = [{"id": r["n"]["id"], "lat": r["near"]["lat"], "lon": r["near"]["lon"], "group": r["group"],
                "title": (r["x"]["what"] if r["x"] and r["x"].get("what") else r["n"]["title"]),
                "published": nice_date(r["n"]["published"]), "url": r["n"]["url"], "dist": r["dist"],
-               "postcode": r["near"].get("postcode"), "others": r["others"], "outside": r["outside"]}
+               "postcode": r["near"].get("postcode"), "outside": r["outside"]}
               for r in results if r["near"]]
     back = f"{request.url.path}?{request.url.query}"
     card_query = {"back": back, "unit": unit, "lat": where.lat, "lon": where.lon}
     return templates.TemplateResponse(request, "results.html", _ctx(
         request, place=where, distance=distance, unit=unit, distance_label=geo.fmt(asked_m, unit), asked_m=asked_m,
         results=results, grouped=grouped, counts=counts, pending_ids=todo, order=groups.ORDER, points=points,
-        view=view if view in ("all", "grouped", "map") else "all", back=back, card_query=card_query))
+        view=view if view in ("all", "grouped", "map") else "all", back=back, card_query=card_query,
+        names={g: groups.group_name(g) for g in groups.ORDER}))
 
 
 @app.get("/status")

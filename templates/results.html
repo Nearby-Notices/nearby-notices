@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% from "_card.html" import card with context %}
+{% from "_ui.html" import icon with context %}
 {% block title %}Notices near {{ place.name }}{% endblock %}
 {% block body %}
 <p class="crumb"><a href="/">Search again</a></p>
@@ -22,7 +23,7 @@
 {% else %}
 <nav class="filters" aria-label="Filter by kind">
   <button class="chip active" data-group="all">All <span>({{ results|length }})</span></button>
-  {% for g in order %}{% if counts[g] %}<button class="chip" data-group="{{ g }}">{{ group_name(g) }} <span>({{ counts[g] }})</span></button>{% endif %}{% endfor %}
+  {% for g in order %}{% if counts[g] %}<button class="chip chip-{{ g }}" data-group="{{ g }}">{{ icon(g) }}{{ group_name(g) }} <span>({{ counts[g] }})</span></button>{% endif %}{% endfor %}
   {% set q = "?place=" ~ (place.query|urlencode) ~ "&distance=" ~ distance ~ "&unit=" ~ unit %}
   <span class="viewtoggle"><a href="{{ q }}&view=all" {% if view == 'all' %}class="on"{% endif %}>List</a> &middot; <a href="{{ q }}&view=grouped" {% if view == 'grouped' %}class="on"{% endif %}>Grouped</a> &middot; <a href="{{ q }}&view=map" {% if view == 'map' %}class="on"{% endif %}>Map</a></span>
 </nav>
@@ -30,22 +31,69 @@
 {% if view == 'map' %}
 <link rel="stylesheet" href="/static/vendor/leaflet/leaflet.css">
 <div id="map" class="map" role="region" aria-label="Map of notices"></div>
+<ul class="map-legend" aria-label="Map key">
+  {% for g in order %}{% if counts[g] %}<li><span class="pin pin-{{ g }}">{{ icon(g) }}</span>{{ group_name(g) }}</li>{% endif %}{% endfor %}
+  <li><span class="pin pin-centre"></span>Your search point</li>
+</ul>
+<p class="small muted">Pins that would sit on top of each other are spread in a ring around their shared point, each joined to it by a short line. Zoom in to separate them.</p>
 <p class="small muted">Each pin sits at the nearest postcode the notice is filed under. For a council order that is often the council's address rather than the street affected; the notice itself names the places. The circle is your chosen distance. Map tiles come from OpenStreetMap, so opening this view means your browser requests them from OpenStreetMap's servers. Map data &copy; OpenStreetMap contributors.</p>
 <script src="/static/vendor/leaflet/leaflet.js"></script>
 <script>
 (function () {
   var points = {{ points|tojson }};
   var centre = [{{ place.lat if place.lat is not none else 'null' }}, {{ place.lon if place.lon is not none else 'null' }}];
-  var colours = {roads: '#594d00', planning: '#0c2d4a', environment: '#005a30', energy: '#491644', other: '#282d30'};
+  var icons = {{ icons|tojson }};
+  // Pins that would overlap at the current zoom (notices filed under the same council address, or neighbouring
+  // postcodes in a town centre) are spread in a ring around their shared point, each joined to it by a short line.
+  // The layout is redone whenever the zoom changes, so zooming in separates them again.
+  var PIN = 30, TOUCH = 34;
+  var pin = function (p, dx, dy, spread) {
+    var g = icons[p.group] ? p.group : 'other';
+    var html = '<span class="pin pin-' + g + (p.outside ? ' outside' : '') + '"><svg class="icon" viewBox="0 0 16 16" aria-hidden="true"><path d="' + icons[g] + '"/></svg></span>';
+    if (!dx && !dy) { return L.divIcon({className: '', iconSize: [PIN, PIN], iconAnchor: [PIN / 2, PIN / 2], popupAnchor: [0, -14], html: html}); }
+    // the icon box is enlarged to hold the line from the true point (at its centre) to the pin (offset by dx, dy)
+    var S = 2 * spread + PIN, c = S / 2;
+    html = '<svg class="spoke" width="' + S + '" height="' + S + '" style="position:absolute;left:0;top:0" aria-hidden="true"><line class="pin-spoke" x1="' + c + '" y1="' + c + '" x2="' + (c + dx) + '" y2="' + (c + dy) + '"/><circle cx="' + c + '" cy="' + c + '" r="2.5" fill="#555"/></svg>' +
+           '<span style="position:absolute;left:' + (c + dx - PIN / 2) + 'px;top:' + (c + dy - PIN / 2) + 'px">' + html + '</span>';
+    return L.divIcon({className: '', iconSize: [S, S], iconAnchor: [c, c], popupAnchor: [dx, dy - 14], html: html});
+  };
+  var layout = function () {
+    var zoom = map.getZoom(), clusters = [];
+    points.forEach(function (p) {
+      var xy = map.project([p.lat, p.lon], zoom);
+      var c = null;
+      for (var i = 0; i < clusters.length; i++) { if (clusters[i].xy.distanceTo(xy) < TOUCH) { c = clusters[i]; break; } }
+      if (c) { c.items.push(p); c.xy = c.xy.multiplyBy(c.items.length - 1).add(xy).divideBy(c.items.length); }
+      else { clusters.push({items: [p], xy: xy}); }
+    });
+    clusters.forEach(function (c) {
+      var mk;
+      if (c.items.length === 1) {
+        mk = window.nnMarkers[c.items[0].id]; mk.marker.setLatLng([c.items[0].lat, c.items[0].lon]); mk.marker.setIcon(pin(c.items[0], 0, 0, 0));
+        return;
+      }
+      var centre = map.unproject(c.xy, zoom), n = c.items.length, spread = Math.max(22, Math.ceil(n * TOUCH / (2 * Math.PI)));
+      c.items.forEach(function (p, i) {
+        var a = -Math.PI / 2 + (2 * Math.PI * i) / n;
+        mk = window.nnMarkers[p.id]; mk.marker.setLatLng(centre);
+        mk.marker.setIcon(pin(p, Math.round(spread * Math.cos(a)), Math.round(spread * Math.sin(a)), spread));
+      });
+    });
+  };
   var map = L.map('map', {scrollWheelZoom: false});
   L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {maxZoom: 19, attribution: '&copy; OpenStreetMap contributors'}).addTo(map);
   var esc = function (s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); };
+  var names = {{ names|tojson }};
+  var short = function (s, n) { s = String(s); if (s.length <= n) { return s; } var cut = s.slice(0, n).replace(/\s+\S*$/, ''); return cut + '…'; };
   var popup = function (p) {
-    var where = p.postcode ? 'Filed under ' + esc(p.postcode) : 'Pinned at the postcode the notice is filed under';
-    if (p.dist) { where += ', ' + esc(p.dist) + ' from your search point'; }
-    if (p.others && p.others.length) { where += '. Also filed under ' + p.others.map(esc).join(', '); }
-    return '<strong>' + esc(p.title) + '</strong><br>' + esc(p.published) + '<br><span class="small">' + where + '</span><br>' +
-      '<a href="#n' + p.id + '">Show in the list</a> &middot; <a href="' + esc(p.url) + '" rel="noopener">The Gazette</a>';
+    var g = icons[p.group] ? p.group : 'other';
+    var meta = [p.published];
+    if (p.dist) { meta.push(esc(p.dist) + ' away' + (p.postcode ? ' (' + esc(p.postcode) + ')' : '')); }
+    return '<div class="popup">' +
+      '<span class="tag tag-' + g + '"><svg class="icon" viewBox="0 0 16 16" aria-hidden="true"><path d="' + icons[g] + '"/></svg>' + esc(names[g]) + '</span>' +
+      '<p class="popup-title">' + esc(short(p.title, 90)) + '</p>' +
+      '<p class="popup-meta">' + meta.join(' &middot; ') + '</p>' +
+      '<p class="popup-links"><a href="#n' + p.id + '">Details</a><a href="' + esc(p.url) + '" rel="noopener">The Gazette</a></p></div>';
   };
   var bounds = [];
   if (centre[0] !== null) {
@@ -55,15 +103,14 @@
   }
   window.nnMarkers = {};
   points.forEach(function (p) {
-    var c = colours[p.group] || colours.other;
-    var style = p.outside ? {radius: 8, color: c, weight: 2, fillColor: '#fff', fillOpacity: 0.9, dashArray: '3 3'}
-                          : {radius: 8, color: '#fff', weight: 2, fillColor: c, fillOpacity: 0.95};
-    var m = L.circleMarker([p.lat, p.lon], style).addTo(map);
-    m.bindPopup(popup(p));
+    var m = L.marker([p.lat, p.lon], {icon: pin(p, 0, 0, 0), title: short(p.title, 90), alt: short(p.title, 90)}).addTo(map);
+    m.bindPopup(popup(p), {maxWidth: 280, minWidth: 220});
     window.nnMarkers[p.id] = {marker: m, point: p, popup: popup};
     bounds.push([p.lat, p.lon]);
   });
   if (bounds.length) { map.fitBounds(bounds, {padding: [30, 30], maxZoom: 14}); } else { map.setView([54.5, -3], 5); }
+  layout();
+  map.on('zoomend', layout);
 })();
 </script>
 {% endif %}

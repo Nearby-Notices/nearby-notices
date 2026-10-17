@@ -55,3 +55,9 @@ def test_nearest_point_wins_and_the_feed_point_is_the_fallback():
     assert n.all_points() == [{"postcode": None, "lat": 52.504007, "lon": -2.009055}]
     n.points = pts
     assert n.all_points() is pts
+
+
+def test_every_group_has_an_icon():
+    from nearby_notices import groups
+    assert set(groups.ICONS) == set(groups.ORDER)
+    assert all(d.startswith("M") for d in groups.ICONS.values())

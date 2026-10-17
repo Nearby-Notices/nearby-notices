@@ -8,7 +8,6 @@ from nearby_notices import config, gazette, geo, places, store, worker
 
 CENTRE = (52.5092, -2.0835)   # DY1 1HF
 NEAR_M = geo.distance_m(*CENTRE, 52.5097, -2.0879)   # to DY1 1RY, about 300 m
-FAR_M = geo.distance_m(*CENTRE, 52.1853, -2.1797)    # to WR5 2QT, about 37 km
 TEXT = "ROAD TRAFFIC REGULATION ACT 1984. " + "The Council has made an Order affecting Priory Road. " * 12
 
 
@@ -42,7 +41,7 @@ def test_search_asks_an_honoured_radius_then_keeps_only_notices_filed_within_the
     assert client.looked_up == ["2", "3"], "only notices whose feed point is outside the circle need the full record"
     assert 'id="n1"' in page and 'id="n2"' in page and 'id="n3"' not in page
     assert "Within 3 miles of DY1 1HF" in page
-    assert f"filed under DY1 1RY, {geo.fmt(NEAR_M, 'mi')} from your search point" in page
+    assert f"{geo.fmt(NEAR_M, 'mi')} away (DY1 1RY)" in page
     assert 'http-equiv="refresh"' not in page
 
 
@@ -51,13 +50,13 @@ def test_kilometres_are_converted_and_shown(client):
     assert client.asked == [5]                      # 5 km is 3.1 miles, so the Gazette is asked for 5 miles
     client.get("/search", params={"place": "Dudley", "distance": 3, "unit": "mi"})
     assert client.asked == [5] and client.looked_up == ["2", "3"], "a second distance inside the same Gazette radius reuses the cached feed and the stored points"
-    assert "Within 5 km of DY1 1HF" in page and f"{geo.fmt(NEAR_M, 'km')} from your search point" in page
+    assert "Within 5 km of DY1 1HF" in page and f"{geo.fmt(NEAR_M, 'km')} away (DY1 1RY)" in page
     assert '<option value="5" selected>5</option>' in page and '<option value="km" selected>km</option>' in page
 
 
 def test_map_points_sit_at_the_nearest_filed_postcode(client):
     page = client.get("/search", params={"place": "Dudley", "distance": 3, "unit": "mi", "view": "map"}).text
-    assert '"postcode": "DY1 1RY"' in page and f'"others": ["WR5 2QT ({geo.fmt(FAR_M, "mi")})"]' in page
+    assert '"postcode": "DY1 1RY"' in page and "WR5 2QT" not in page, "the popup shows the nearest filed postcode only"
     assert '"outside": false' in page and '"outside": true' not in page
     assert "L.circle(centre, {radius: 4828.03" in page
 
@@ -72,7 +71,7 @@ def test_status_and_card_let_the_page_update_in_place(client):
     card = client.get("/card/1", params={"back": "/search?place=Dudley", "unit": "km", "lat": CENTRE[0], "lon": CENTRE[1]}).text
     assert card.startswith(("\n<article", "<article"))
     assert "No waiting on Priory Road" in card and 'value="/search?place=Dudley"' in card
-    assert f"{geo.fmt(geo.distance_m(*CENTRE, 52.5122, -2.0843), 'km')} from your search point" in card
+    assert f"{geo.fmt(geo.distance_m(*CENTRE, 52.5122, -2.0843), 'km')} away" in card
     assert client.get("/card/999").status_code == 404 and client.get("/card/not-an-id").status_code == 404
 
 

@@ -31,6 +31,19 @@ h2 { font-size: 1.5rem; line-height: 1.25; font-weight: 700; margin: 0 0 .5rem; 
 .legend { list-style: none; padding: 0; margin: .6rem 0; }
 .legend li { padding: .25rem 0; }
 .tag { display: inline-block; font-weight: 700; font-size: .85rem; letter-spacing: .03em; text-transform: uppercase; padding: .2rem .55rem; background: var(--tag-other); color: var(--tag-other-ink); }
+.icon { width: 1em; height: 1em; vertical-align: -.12em; margin-right: .35em; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.chip .icon { width: .95em; height: .95em; }
+/* Map pins: a filled disc per kind with the kind's icon in white; a hollow dashed disc for a pin outside the circle. */
+.pin { --pin: var(--tag-other-ink); display: inline-flex; align-items: center; justify-content: center; width: 30px; height: 30px; border-radius: 50%;
+       background: var(--pin); color: #fff; border: 2px solid #fff; box-shadow: 0 1px 4px rgba(0, 0, 0, .45); box-sizing: border-box; }
+.pin .icon { width: 16px; height: 16px; margin: 0; stroke-width: 2; }
+.pin-roads { --pin: var(--tag-roads-ink); } .pin-planning { --pin: var(--tag-planning-ink); } .pin-environment { --pin: var(--tag-env-ink); } .pin-energy { --pin: var(--tag-energy-ink); }
+.pin.outside { background: #fff; color: var(--pin); border: 2px dashed var(--pin); }
+.pin-centre { width: 16px; height: 16px; background: #2b7a78; border-width: 2px; }
+.map-legend { list-style: none; display: flex; flex-wrap: wrap; gap: .4rem 1.4rem; padding: 0; margin: .6rem 0 .4rem; font-size: 1rem; }
+.map-legend li { display: inline-flex; align-items: center; gap: .5rem; }
+.map-legend .pin { width: 24px; height: 24px; box-shadow: none; border-color: var(--line); } .map-legend .pin .icon { width: 13px; height: 13px; }
+.map-legend .pin-centre { width: 14px; height: 14px; }
 .tag-roads { background: var(--tag-roads); color: var(--tag-roads-ink); } .tag-planning { background: var(--tag-planning); color: var(--tag-planning-ink); }
 .tag-environment { background: var(--tag-env); color: var(--tag-env-ink); } .tag-energy { background: var(--tag-energy); color: var(--tag-energy-ink); }
 .caption { color: var(--muted); font-size: 1rem; margin: 0 0 1rem; }
@@ -62,6 +75,15 @@ form.inline { display: inline-flex; align-items: center; gap: .5rem; } form.inli
 .empty { border-left: 10px solid var(--line); padding: .6rem 1rem; }
 .map { height: 28rem; border: 2px solid var(--ink); margin: 0 0 .5rem; background: var(--light); }
 .leaflet-container { font: inherit; }
+/* Popups: square corners, one tag, a short title, one line of facts, two links. */
+#map .leaflet-popup-content-wrapper { border-radius: 0; box-shadow: 0 2px 8px rgba(0, 0, 0, .35); }
+#map .leaflet-popup-content { margin: 12px 14px 10px; font-size: 15px; line-height: 1.35; }
+.popup .tag { font-size: .72rem; padding: .12rem .45rem; }
+.popup-title { font-weight: 700; margin: .45rem 0 .3rem; }
+.popup-meta { color: var(--muted); font-size: .9rem; margin: 0 0 .45rem; }
+.popup-links { margin: 0; } .popup-links a { margin-right: 1rem; font-weight: 700; }
+#map .leaflet-popup-close-button { font-size: 20px; }
+.pin-spoke { stroke: #555; stroke-width: 1.5; }
 footer { border-top: 1px solid var(--line); background: var(--light); margin-top: 3rem; padding: 1.5rem 0 2.5rem; font-size: 1rem; }
 .small, .muted { color: var(--muted); font-size: 1rem; }
 .disclaimer { font-weight: 700; }

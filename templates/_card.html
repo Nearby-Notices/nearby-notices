@@ -1,11 +1,12 @@
+{% from "_ui.html" import tag with context %}
 {% macro card(r) %}
 <article class="card" data-group="{{ r.group }}" id="n{{ r.n.id }}">
   <div class="card-top">
-    <span class="tag tag-{{ r.group }}">{{ group_name(r.group) }}</span>
+    {{ tag(r.group) }}
     <span class="date">Published {{ r.n.published|nice_date }}</span>
   </div>
   <h2>{{ (r.x.what if r.x and r.x.what else r.n.title) }}</h2>
-  <p class="caption">{{ r.n.category }}{% if r.x and r.x.authority %} &middot; {{ r.x.authority }}{% endif %}{% if r.dist %} &middot; {% if r.near.postcode %}filed under {{ r.near.postcode }}, {% else %}filed {% endif %}{{ r.dist }} from your search point{% endif %}</p>
+  <p class="caption">{{ r.n.category }}{% if r.x and r.x.authority %} &middot; {{ r.x.authority }}{% endif %}{% if r.dist %} &middot; {{ r.dist }} away{% if r.near.postcode %} ({{ r.near.postcode }}){% endif %}{% endif %}</p>
   {% if not r.x %}
     <p class="reading">Reading this notice in plain English&hellip;</p>
   {% elif r.x.error %}

@@ -1,0 +1,6 @@
+{% macro icon(g) -%}
+<svg class="icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="{{ icons[g] if g in icons else icons['other'] }}"/></svg>
+{%- endmacro %}
+{% macro tag(g) -%}
+<span class="tag tag-{{ g }}">{{ icon(g) }}{{ group_name(g) }}</span>
+{%- endmacro %}

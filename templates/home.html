@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% from "_ui.html" import tag with context %}
 {% block body %}
 <h1>Find public notices near you</h1>
 <p class="lead">Road closures, parking changes, planning and environmental notices are published in The Gazette in legal language. Enter a postcode or a town to read the ones near you in plain English, each linked to the notice as published.</p>
@@ -37,10 +38,10 @@
 <div class="inset">
   <h2>What it covers</h2>
   <ul class="legend">
-    <li><span class="tag tag-roads">Roads and transport</span> &nbsp;closures, parking and waiting, speed limits, one-way orders</li>
-    <li><span class="tag tag-planning">Planning</span> &nbsp;applications, orders, stopping-up of roads for development</li>
-    <li><span class="tag tag-environment">Environment and water</span> &nbsp;permits, smoke control, drainage, forestry</li>
-    <li><span class="tag tag-energy">Energy</span> &nbsp;electricity and pipeline notices</li>
+    <li>{{ tag('roads') }} &nbsp;closures, parking and waiting, speed limits, one-way orders</li>
+    <li>{{ tag('planning') }} &nbsp;applications, orders, stopping-up of roads for development</li>
+    <li>{{ tag('environment') }} &nbsp;permits, smoke control, drainage, forestry</li>
+    <li>{{ tag('energy') }} &nbsp;electricity and pipeline notices</li>
   </ul>
   <p class="small">It does not cover notices about people (insolvency, estates, appointments), by design. The first search of a place takes a little while: each notice is read and checked before it is shown.</p>
 </div>
