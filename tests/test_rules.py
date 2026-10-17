@@ -136,3 +136,31 @@ def test_heading_falls_back_to_the_first_gated_sentence():
     r = extract.extract(text, ask=model)
     assert r.what == "Mill Lane will be closed from 3 November 2026 for five days." and r.heading_source == "summary"
     assert "Mill Lane shuts for a fortnight." in r.removed
+
+
+def test_model_call_retries_once_when_the_server_is_briefly_unavailable(monkeypatch):
+    import litellm
+
+    calls = []
+
+    from types import SimpleNamespace
+
+    def flaky(**kw):
+        calls.append(kw["model"])
+        if len(calls) == 1:
+            raise litellm.exceptions.ServiceUnavailableError("down", llm_provider="openai", model=kw["model"])
+        return SimpleNamespace(choices=[SimpleNamespace(message=SimpleNamespace(content="ok"))])
+
+    monkeypatch.setattr(litellm, "completion", flaky)
+    monkeypatch.setattr(extract, "RETRY_PAUSE_S", 0)
+    assert extract._ask("s", "u", 5) == "ok" and len(calls) == 2
+
+    def dead(**kw):
+        raise litellm.exceptions.ServiceUnavailableError("down", llm_provider="openai", model=kw["model"])
+
+    monkeypatch.setattr(litellm, "completion", dead)
+    try:
+        extract._ask("s", "u", 5)
+        raise AssertionError("should have raised after the second failure")
+    except litellm.exceptions.ServiceUnavailableError:
+        pass

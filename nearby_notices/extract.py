@@ -152,14 +152,26 @@ def _cap() -> None:
     _calls_today[day] += 1
 
 
+RETRY_PAUSE_S = 5.0
+
+
 def _ask(system: str, user: str, max_tokens: int) -> str:
+    """One model call, retried once after a pause if the server is briefly unavailable (a model being reloaded, a dropped connection)."""
     _cap()
-    r = litellm.completion(
-        model=config.MODEL, api_base=config.MODEL_API_BASE, api_key=config.MODEL_API_KEY,
-        messages=[{"role": "system", "content": system}, {"role": "user", "content": user}],
-        temperature=0, max_tokens=max_tokens,
-    )
-    return r.choices[0].message.content or ""
+    for attempt in (1, 2):
+        try:
+            r = litellm.completion(
+                model=config.MODEL, api_base=config.MODEL_API_BASE, api_key=config.MODEL_API_KEY,
+                messages=[{"role": "system", "content": system}, {"role": "user", "content": user}],
+                temperature=0, max_tokens=max_tokens, timeout=120,
+            )
+            return r.choices[0].message.content or ""
+        except (litellm.exceptions.ServiceUnavailableError, litellm.exceptions.APIConnectionError, litellm.exceptions.Timeout,
+                litellm.exceptions.InternalServerError):
+            if attempt == 2:
+                raise
+            time.sleep(RETRY_PAUSE_S)
+    raise RuntimeError("unreachable")
 
 
 def _json(s: str) -> dict:
