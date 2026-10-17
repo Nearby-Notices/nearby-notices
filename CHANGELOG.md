@@ -2,6 +2,13 @@
 
 All dates are the day the change was made, in the UK.
 
+## 17 October 2026, after the first evaluation run
+
+- Heading: if the model's one-line heading fails the gate, the first gated summary sentence is used, not the Gazette's generic title (the first run fell back to the title in 37% of notices).
+- Gate: a quote that joins two spans with "..." is checked span by span (three of the first run's four misses).
+- Places: a place carrying its own postcode ("near Kinross, PH2 9DW") is kept without the postcode; only addresses are dropped.
+- Gold labels for list notices follow a stated rule (first three sites in notice order); reference points are not places affected. Baseline results kept in `evals/results/`.
+
 ## 17 October 2026
 
 - Evaluation: 30 hand-labelled notices across 10 categories, 120 true/false sentences for the gate, 3 adversarial notices; `evals/run.py` writes `evals/RESULTS.md`.

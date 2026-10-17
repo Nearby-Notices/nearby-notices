@@ -98,6 +98,7 @@ class Result:
     removed: list[str] = field(default_factory=list)
     dropped_places: list[str] = field(default_factory=list)
     dropped_fields: list[str] = field(default_factory=list)   # model values for authority, starts, ends, kind that failed the checks
+    heading_source: str | None = None   # "model" (its one-line heading passed the gate), "summary" (first gated sentence), or None
     advice_removed: int = 0        # generated sentences removed because they instructed the reader
     scrubbed: int = 0              # sentences in the notice addressed to a model, removed before reading
     calls: int = 0
@@ -198,8 +199,10 @@ def gate(text: str, sentence: str, ask=_ask) -> tuple[bool, list[str]]:
     if not isinstance(quotes, list):
         quotes = [d.get("quote")] if d.get("quote") else []
     quotes = [str(q) for q in quotes if str(q or "").strip()][:3]
+    # A quote may join two spans with an ellipsis ("Tarmac Limited ... is applying"); each span must be verbatim on its own.
+    spans = [s.strip() for q in quotes for s in re.split(r"\.{3}|…", q) if len(s.split()) >= 2]
     tn = _norm(text)
-    ok = bool(d.get("supported")) and bool(quotes) and all(_in_text(q, tn) for q in quotes)
+    ok = bool(d.get("supported")) and bool(spans) and all(_in_text(s, tn) for s in spans)
     return ok, quotes
 
 
@@ -228,8 +231,16 @@ def extract(text: str, ask=_ask) -> Result:
     tn = _norm(text)
     for p in d.get("places") or []:
         p = str(p)
-        # a place "affected" that carries a full postcode is almost always an address for inspection or correspondence
-        (res.places if _in_text(p, tn) and not _POSTCODE.search(p) else res.dropped_places).append(p)
+        if _POSTCODE.search(p):
+            # "near Kinross, PH2 9DW" is a place with its postcode; "Perth and Kinross Council, 2 High Street, Perth, PH1 5PH"
+            # is an address for inspection or correspondence. Keep the former without its postcode, drop the latter.
+            bare = _POSTCODE.sub("", p).strip(" ,;.")
+            if len(bare.split()) <= 4 and not re.search(r"\d", bare) and _in_text(bare, tn):
+                res.places.append(bare)
+            else:
+                res.dropped_places.append(p)
+            continue
+        (res.places if _in_text(p, tn) else res.dropped_places).append(p)
     for key in ("authority", "starts", "ends"):
         v = d.get(key)
         v = str(v).strip() if v not in (None, "", "null") else None
@@ -260,9 +271,12 @@ def extract(text: str, ask=_ask) -> Result:
     elif what:
         ok, _ = gate(text, what, asked)
         if ok:
-            res.what = what
+            res.what, res.heading_source = what, "model"
         else:
             res.removed.append(what)
+    if res.what is None and res.summary:
+        # the heading is then the first summary sentence, which has already passed the gate; never the ungated one
+        res.what, res.heading_source = res.summary[0], "summary"
     res.calls = calls
     res.seconds = round(time.time() - t0, 2)
     return res

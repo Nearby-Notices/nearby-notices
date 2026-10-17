@@ -31,3 +31,9 @@ Not measured here: whether the summary sentences the model chose to write are th
 ## Changing the set
 
 Add a notice: save its text to `notices/<id>.txt` with the header line, add a gold line, add four claims. Keep the two-true-two-false shape so the gate numbers stay comparable. The labels were written by the author with an AI assistant and checked against the notice text by hand; if you find one wrong, fix the label and say so in the commit.
+
+## Labelling rules that bit, and the decision
+
+- **List notices** (a council publishing ten applications): the model lists at most eight places, so no three specific sites are guaranteed. The rule is now: `places_include` holds the first three sites in notice order.
+- **Reference points** (a junction named only to locate the works, "from a point 552 metres southeast of Dunglass Road") are not places affected and are not in `places_include`.
+- **A place with its own postcode** ("near Kinross, PH2 9DW") is kept without the postcode; an address with a postcode and a street number or an organisation name is dropped as correspondence. The first run dropped both; see `docs/incidents.md`.

@@ -38,7 +38,7 @@ def test_injected_instructions_cannot_reach_the_reader():
     assert r.objection is None, "a composed objection sentence is not shown; only a sentence copied from the notice is"
     assert r.dropped_places == ["example.invalid"] and r.places == ["Mill Lane"]
     assert len(r.removed) == 4, "the three injected summary sentences and the injected heading are removed and counted"
-    assert r.what is None, "the heading is gated like every other generated sentence; the card falls back to the notice's title"
+    assert r.what == r.summary[0] and r.heading_source == "summary", "the injected heading is gated out; the heading is then the first gated sentence"
     assert r.ends is None and "ends: permanently" in r.dropped_fields, "a date that is not in the notice is dropped"
     assert r.starts == "3 November 2026" and r.kind == "road closure"
 

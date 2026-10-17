@@ -105,3 +105,34 @@ def test_authority_cannot_be_the_gazette_and_places_with_postcodes_are_addresses
     assert r.authority is None and "authority: The Edinburgh Gazette" in r.dropped_fields
     assert r.places == ["land north of Amulree"] and r.dropped_places == ["Perth and Kinross Council, 2 High Street, Perth, PH1 5PH"]
     assert r.ends == "19th November 2026" and r.kind == "electricity or energy" and r.what and r.summary
+
+
+def test_gate_accepts_ellipsis_joined_spans_and_places_keep_their_name_without_the_postcode():
+    text = "Tarmac Limited of Millfields Road, Wolverhampton, is applying to the Agency for a licence to abstract water from Afon Glaslyn near Kinross, PH2 9DW. " * 3
+    ok, _ = extract.gate(text, "Tarmac Limited is applying for a licence.", ask=lambda *a: json.dumps({"supported": True, "quotes": ["Tarmac Limited ... is applying ... for a licence to abstract water"]}))
+    assert ok, "each span between ellipses is verbatim, so the sentence is supported"
+    ok, _ = extract.gate(text, "Tarmac Limited is applying for a permit.", ask=lambda *a: json.dumps({"supported": True, "quotes": ["Tarmac Limited ... is applying ... for a permit"]}))
+    assert not ok
+
+    def model(system, user, max_tokens):
+        if "Sentence:" in user:
+            return json.dumps({"supported": True, "quotes": ["licence to abstract water from Afon Glaslyn"]})
+        return json.dumps({"what": "A licence to abstract water from Afon Glaslyn is sought.", "places": ["near Kinross, PH2 9DW", "Millfields Road, Wolverhampton"],
+                           "summary": "Tarmac Limited seeks a licence to abstract water from Afon Glaslyn.", "kind": "water or drainage"})
+    r = extract.extract(text, ask=model)
+    assert r.places == ["near Kinross", "Millfields Road, Wolverhampton"]
+
+
+def test_heading_falls_back_to_the_first_gated_sentence():
+    text = "The Council will close Mill Lane from 3 November 2026 for five days while gas works take place. " * 4
+
+    def model(system, user, max_tokens):
+        if "Sentence:" in user:
+            sentence = user.split('Sentence: "', 1)[1].split('"', 1)[0]
+            good = "five days" in sentence
+            return json.dumps({"supported": good, "quotes": ["close Mill Lane from 3 November 2026 for five days"] if good else []})
+        return json.dumps({"what": "Mill Lane shuts for a fortnight.", "places": ["Mill Lane"], "kind": "road closure",
+                           "summary": "Mill Lane will be closed from 3 November 2026 for five days. Gas works are the reason, for five days."})
+    r = extract.extract(text, ask=model)
+    assert r.what == "Mill Lane will be closed from 3 November 2026 for five days." and r.heading_source == "summary"
+    assert "Mill Lane shuts for a fortnight." in r.removed

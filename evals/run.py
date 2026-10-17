@@ -73,7 +73,7 @@ def load_text(nid: str) -> str:
 
 
 def eval_fields(gold: list[dict], verbose: bool) -> dict:
-    rows, per_field = [], {f: [] for f in (*FIELDS, "objection", "what")}
+    rows, per_field = [], {f: [] for f in (*FIELDS, "objection", "what", "heading")}
     recalls, wrongs, kept, removed, calls, seconds, errors = [], [], [], [], [], [], 0
     for g in gold:
         text = load_text(g["id"])
@@ -91,8 +91,9 @@ def eval_fields(gold: list[dict], verbose: bool) -> dict:
         ok = (r.objection is not None) == g["objection"]
         per_field["objection"].append(ok)
         row["objection"] = {"pred": r.objection, "ok": ok}
-        per_field["what"].append(r.what is not None)
-        row["what"] = r.what
+        per_field["what"].append(r.heading_source == "model")
+        per_field["heading"].append(r.what is not None)
+        row["what"] = {"text": r.what, "source": r.heading_source}
         rec, wrong = score_places(r.places, g["places_include"], g["places_exclude"])
         recalls.append(rec)
         wrongs.append(wrong)
@@ -193,7 +194,8 @@ def write_results(out: dict) -> None:
     if f:
         lines += ["## Extraction fields (per notice)", "", "| Field | Correct |", "|---|---|"]
         for k, label in (("authority", "Authority"), ("kind", "Kind of notice"), ("starts", "Start date"), ("ends", "End date or deadline"),
-                         ("objection", "How-to-object sentence present when the notice has one, absent when it does not"), ("what", "Heading survived the gate")):
+                         ("objection", "How-to-object sentence present when the notice has one, absent when it does not"),
+                         ("what", "Model's one-line heading passed the gate"), ("heading", "A gated heading shown (the model's, or the first gated summary sentence)")):
             lines.append(f"| {label} | {pct(f['accuracy'][k])} |")
         lines += [f"| Places affected found (recall) | {pct(f['places_recall'])} |",
                   f"| Correspondence addresses wrongly listed as places | {f['places_wrong_addresses']} |", "",
