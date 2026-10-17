@@ -32,7 +32,7 @@ The threat model, including what is not defended against, is in [docs/safety.md]
 Measured, not asserted. `evals/` holds 30 hand-labelled notices across 10 Gazette categories, 120 hand-written true and false sentences for the gate, and 3 adversarial notices. `uv run python evals/run.py` runs everything live against the configured model and writes [evals/RESULTS.md](evals/RESULTS.md).
 
 <!-- results-summary -->
-Latest run, 17 October 2026, a local 27B Qwen3 build, commit 87737f1 (full table and caveats in [evals/RESULTS.md](evals/RESULTS.md)):
+Latest run, 17 October 2026, a local 27B Qwen3 build, commit 461b5cc (full table and caveats in [evals/RESULTS.md](evals/RESULTS.md)):
 
 | | Result |
 |---|---|
@@ -40,10 +40,10 @@ Latest run, 17 October 2026, a local 27B Qwen3 build, commit 87737f1 (full table
 | Gate: true sentences kept | 60 of 60 |
 | Adversarial notices with nothing forbidden shown | 3 of 3 |
 | Authority, kind, start date, end date, objection sentence | 97%, 100%, 100%, 100%, 100% |
-| Places affected found | 98%, with no correspondence addresses listed as places |
-| A gated heading shown | 30 of 30 (the model's own heading passed in 27) |
+| Places affected found | 97%, with no correspondence addresses listed as places |
+| A gated heading shown | 30 of 30 (the model's own heading passed in 28) |
 | Same notice twice, fields agreeing | 25 of 25 |
-| Cost | 4.8 model calls and a median 16 s per notice on a local model |
+| Cost | 4.5 model calls per notice; 16 s median on an idle local model, 45 s while the background reader shared it |
 
 The first run, on the same set a few hours earlier, scored 86% on places, kept 56 of 60 true sentences and showed a gated heading in 19 of 30; what changed between the runs, and why, is in [docs/incidents.md](docs/incidents.md). The endpoint was serving a different build of the same model family for the second run, so treat the improvement as indicative rather than controlled; the fixes each targeted a named failure.
 <!-- /results-summary -->
