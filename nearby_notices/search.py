@@ -36,17 +36,21 @@ def candidates(con, where: places.Place, radius: int) -> list[str]:
     ids = store.cached_feed(con, key)
     if ids is not None:
         return ids
-    ids = []
+    # All network first, then one short burst of writes: a transaction must never wait on the Gazette.
     with httpx.Client() as client:
-        for n in gazette.search_near(where.postcode, radius, page_size=PAGE_SIZE, client=client):
+        notices = gazette.search_near(where.postcode, radius, page_size=PAGE_SIZE, client=client)
+        for n in notices:
             if len(n.text.split()) < 60:
                 n.text = gazette.full_text(n.id, client)
-            cached = store.get_notice(con, n.id)
-            if cached and cached["points"]:
-                n.points = cached["points"]
-            store.put_notice(con, n)
-            ids.append(n.id)
+    ids = []
+    for n in notices:
+        cached = store.get_notice(con, n.id)
+        if cached and cached["points"]:
+            n.points = cached["points"]
+        store.put_notice(con, n)
+        ids.append(n.id)
     store.put_feed(con, key, ids)
+    con.commit()
     return ids
 
 
@@ -68,10 +72,12 @@ def select(con, where: places.Place, ids: list[str], asked_m: float) -> list[str
     unsure = [nid for nid, row in rows.items() if not row["points"] and (near := measured(row)) and not within(near["m"], asked_m)]
     if unsure:
         with httpx.Client() as client, ThreadPoolExecutor(max_workers=gazette.PARALLEL) as pool:
-            for nid, pts in zip(unsure[:MAX_POINT_FETCHES], pool.map(lambda i: gazette.points(i, client), unsure[:MAX_POINT_FETCHES])):
-                if pts:
-                    store.put_points(con, nid, pts)
-                    rows[nid]["points"] = pts
+            fetched = list(zip(unsure[:MAX_POINT_FETCHES], pool.map(lambda i: gazette.points(i, client), unsure[:MAX_POINT_FETCHES])))
+        for nid, pts in fetched:          # writes only after every lookup has returned
+            if pts:
+                store.put_points(con, nid, pts)
+                rows[nid]["points"] = pts
+        con.commit()
     kept = [nid for nid, row in rows.items() if (near := measured(row)) is None or within(near["m"], asked_m)]
     return kept[: config.MAX_RESULTS]
 
@@ -97,6 +103,7 @@ def find(place_query: str, distance: float | None, unit: str) -> Found | None:
     asked_m = geo.to_metres(distance, unit)
     with store.db() as con:
         store.bump(con, "search")
+        con.commit()                      # the counter is its own tiny transaction; nothing waits behind it
         ids = select(con, where, candidates(con, where, geo.gazette_radius(geo.to_miles(distance, unit))), asked_m)
         results = [describe(con, row, where, unit, asked_m) for nid in ids if (row := store.get_notice(con, nid))]
     return Found(where, distance, unit, asked_m, results, [r["n"]["id"] for r in results if r["x"] is None])
@@ -109,8 +116,9 @@ def read(notice_id: str, make_now: bool = False) -> tuple[dict, dict | None] | N
         if not row:
             return None
         ex = store.get_extraction(con, notice_id, config.MODEL)
-        if ex is None and make_now:
-            r = extract.extract(row["text"])
-            ex = r.to_dict()
+    if ex is None and make_now:
+        r = extract.extract(row["text"])      # outside any transaction: this can take half a minute
+        ex = r.to_dict()
+        with store.db() as con:
             store.put_extraction(con, notice_id, config.MODEL, ex, len(r.summary), len(r.removed), r.seconds)
     return row, ex

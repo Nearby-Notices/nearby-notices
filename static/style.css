@@ -67,6 +67,7 @@ h2 { font-size: 1.5rem; line-height: 1.25; font-weight: 700; margin: 0 0 .5rem; 
 @media (max-width: 40rem) { .facts { grid-template-columns: 1fr; } .facts dt { margin-top: .4rem; } h1 { font-size: 2rem; } }
 .summary { background: var(--light); border-left: 10px solid #2b7a78; padding: .8rem 1rem; margin: .8rem 0; }
 .reading { color: var(--muted); font-style: italic; }
+.preview { color: var(--muted); font-size: 1rem; border-left: 4px solid var(--line); padding-left: .8rem; margin: .4rem 0 .8rem; }
 .verbatim { white-space: pre-wrap; font: .95rem/1.5 "Helvetica Neue", Arial, sans-serif; background: var(--light); padding: 1rem; border-left: 4px solid var(--line); max-height: 24rem; overflow: auto; margin: .5rem 0; }
 details summary { cursor: pointer; color: var(--link); text-decoration: underline; text-underline-offset: .2em; margin: .4rem 0; }
 .actions { display: flex; gap: 1.5rem; align-items: center; flex-wrap: wrap; margin-top: .8rem; }

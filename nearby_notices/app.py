@@ -52,6 +52,7 @@ def _ctx(request: Request, **kw) -> dict:
 @app.on_event("startup")
 def _startup() -> None:
     worker.start()
+    worker.warm_up()
 
 
 @app.get("/", response_class=HTMLResponse)

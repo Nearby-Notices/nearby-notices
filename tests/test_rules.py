@@ -164,3 +164,27 @@ def test_model_call_retries_once_when_the_server_is_briefly_unavailable(monkeypa
         raise AssertionError("should have raised after the second failure")
     except litellm.exceptions.ServiceUnavailableError:
         pass
+
+
+def test_store_uses_wal_so_readers_never_block_on_the_reader_thread(tmp_path, monkeypatch):
+    import threading
+    import time as _time
+
+    monkeypatch.setattr(store.config, "DB_PATH", tmp_path / "t.sqlite")
+    with store.db() as con:
+        assert con.execute("PRAGMA journal_mode").fetchone()[0] == "wal"
+        store.put_notice(con, gazette.Notice(id="1", title="x", category="c", notice_code=1501, published="2026-01-01", text="t", url="u"))
+    # a writer that holds a transaction open for a moment must not make a concurrent reader fail
+    def slow_writer():
+        with store.db() as con:
+            store.feedback(con, "1", True)
+            _time.sleep(0.6)
+    t = threading.Thread(target=slow_writer)
+    t.start()
+    _time.sleep(0.2)
+    with store.db() as con:
+        assert store.get_notice(con, "1")["title"] == "x"
+        store.bump(con, "search")       # a second writer waits its turn instead of failing
+    t.join()
+    with store.db() as con:
+        assert con.execute("SELECT up FROM feedback WHERE notice_id='1'").fetchone()[0] == 1

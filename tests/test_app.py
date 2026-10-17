@@ -78,3 +78,14 @@ def test_status_and_card_let_the_page_update_in_place(client):
 def test_unknown_place_shows_the_form_again(client):
     page = client.get("/search", params={"place": ""}).text
     assert "I could not find that place" in page
+
+
+def test_warm_up_queues_cached_searches_that_lack_plain_english(client, monkeypatch):
+    client.get("/search", params={"place": "Dudley", "distance": 3, "unit": "mi"})
+    queued = []
+    monkeypatch.setattr(worker, "enqueue", lambda ids: queued.extend(ids))
+    assert worker.warm_up() == 3 and sorted(queued) == ["1", "2", "3"], "every notice of a cached search lacks a version, including the one outside this distance"
+    with store.db() as con:
+        store.put_extraction(con, "1", config.MODEL, {"what": "x", "summary": [], "removed": []}, 0, 0, 0.0)
+    queued.clear()
+    assert worker.warm_up() == 2 and sorted(queued) == ["2", "3"]

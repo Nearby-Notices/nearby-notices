@@ -27,10 +27,15 @@ CREATE TABLE IF NOT EXISTS counters (day TEXT, name TEXT, n INTEGER DEFAULT 0, P
 
 @contextmanager
 def db():
+    """A connection in WAL mode with a generous busy timeout: the web requests, the background reader and the MCP
+    server all write to this file, and readers must never block on a writer. Keep network and model calls OUTSIDE
+    the block; a transaction held across a 30 s model call is how "database is locked" happens."""
     config.DB_PATH.parent.mkdir(parents=True, exist_ok=True)
-    con = sqlite3.connect(config.DB_PATH)
+    con = sqlite3.connect(config.DB_PATH, timeout=30)
     con.row_factory = sqlite3.Row
     try:
+        con.execute("PRAGMA journal_mode=WAL")
+        con.execute("PRAGMA busy_timeout=30000")
         con.executescript(SCHEMA)
         _migrate(con)
         yield con

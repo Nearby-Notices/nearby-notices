@@ -8,7 +8,8 @@
   <h2>{{ (r.x.what if r.x and r.x.what else r.n.title) }}</h2>
   <p class="caption">{{ r.n.category }}{% if r.x and r.x.authority %} &middot; {{ r.x.authority }}{% endif %}{% if r.dist %} &middot; {{ r.dist }} away{% if r.near.postcode %} ({{ r.near.postcode }}){% endif %}{% endif %}</p>
   {% if not r.x %}
-    <p class="reading">Reading this notice in plain English&hellip;</p>
+    <p class="reading">Reading this notice in plain English&hellip; the facts and a checked summary will appear here. Meanwhile, how it starts:</p>
+    <p class="preview">{{ r.n.text[:420] }}{% if r.n.text|length > 420 %}&hellip;{% endif %}</p>
   {% elif r.x.error %}
     <p class="muted">No plain-English version available ({{ r.x.error }}). The notice is shown as published below.</p>
   {% else %}
