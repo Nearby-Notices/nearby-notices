@@ -75,3 +75,12 @@ def test_model_failure_degrades_to_verbatim():
         raise ConnectionError("down")
     r = extract.extract(NOTICE, ask=broken)
     assert r.error and r.error.startswith("model unavailable") and r.summary == []
+
+
+def test_feed_entry_geo_is_read_and_staff_names_are_not():
+    entry = {"id": "https://www.thegazette.co.uk/id/notice/42", "f:notice-code": "1501", "title": "Road Traffic Acts",
+             "published": "2026-10-16T17:40:23", "content": "<p>" + "word " * 80 + "</p>",
+             "geo:Point": {"geo:lat": "52.50401", "geo:long": "-2.009055"}, "f:name": "Someone", "f:familyName": "Staff"}
+    n = gazette._parse_entry(entry)
+    assert n and n.lat == 52.50401 and n.lon == -2.009055
+    assert "Someone" not in repr(n) and "Staff" not in repr(n)

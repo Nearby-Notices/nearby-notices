@@ -21,11 +21,39 @@
 <nav class="filters" aria-label="Filter by kind">
   <button class="chip active" data-group="all">All <span>({{ results|length }})</span></button>
   {% for g in order %}{% if counts[g] %}<button class="chip" data-group="{{ g }}">{{ group_name(g) }} <span>({{ counts[g] }})</span></button>{% endif %}{% endfor %}
-  <span class="viewtoggle"><a href="?place={{ place.query|urlencode }}&distance={{ distance }}&view=all" {% if view == 'all' %}class="on"{% endif %}>List</a> &middot; <a href="?place={{ place.query|urlencode }}&distance={{ distance }}&view=grouped" {% if view == 'grouped' %}class="on"{% endif %}>Grouped</a></span>
+  <span class="viewtoggle"><a href="?place={{ place.query|urlencode }}&distance={{ distance }}&view=all" {% if view == 'all' %}class="on"{% endif %}>List</a> &middot; <a href="?place={{ place.query|urlencode }}&distance={{ distance }}&view=grouped" {% if view == 'grouped' %}class="on"{% endif %}>Grouped</a> &middot; <a href="?place={{ place.query|urlencode }}&distance={{ distance }}&view=map" {% if view == 'map' %}class="on"{% endif %}>Map</a></span>
 </nav>
 
+{% if view == 'map' %}
+<link rel="stylesheet" href="/static/vendor/leaflet/leaflet.css">
+<div id="map" class="map" role="region" aria-label="Map of notices"></div>
+<p class="small muted">Pins sit at the postcode each notice is filed under, which for a council order is often the council's own address rather than the street affected. The map tiles come from OpenStreetMap; opening this view means your browser requests them from OpenStreetMap's servers. Map data &copy; OpenStreetMap contributors.</p>
+<script src="/static/vendor/leaflet/leaflet.js"></script>
+<script>
+(function () {
+  var points = {{ points|tojson }};
+  var centre = [{{ place.lat if place.lat is not none else 'null' }}, {{ place.lon if place.lon is not none else 'null' }}];
+  var colours = {roads: '#594d00', planning: '#0c2d4a', environment: '#005a30', energy: '#491644', other: '#282d30'};
+  var map = L.map('map', {scrollWheelZoom: false});
+  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {maxZoom: 19, attribution: '&copy; OpenStreetMap contributors'}).addTo(map);
+  var bounds = [];
+  if (centre[0] !== null) {
+    L.circle(centre, {radius: {{ distance }} * {{ miles_to_m }}, color: '#2b7a78', weight: 1, fillOpacity: 0.05}).addTo(map);
+    L.circleMarker(centre, {radius: 6, color: '#2b7a78', fillColor: '#2b7a78', fillOpacity: 1}).addTo(map).bindPopup('Your search point');
+    bounds.push(centre);
+  }
+  points.forEach(function (p) {
+    var m = L.circleMarker([p.lat, p.lon], {radius: 8, color: '#fff', weight: 2, fillColor: colours[p.group] || colours.other, fillOpacity: 0.95}).addTo(map);
+    m.bindPopup('<strong>' + p.title.replace(/</g, '&lt;') + '</strong><br>' + p.published + '<br><a href="#n' + p.id + '">Show in the list</a> &middot; <a href="' + p.url + '" rel="noopener">The Gazette</a>');
+    bounds.push([p.lat, p.lon]);
+  });
+  if (bounds.length) { map.fitBounds(bounds, {padding: [30, 30], maxZoom: 14}); } else { map.setView([54.5, -3], 5); }
+})();
+</script>
+{% endif %}
+
 {% macro card(r) %}
-<article class="card" data-group="{{ r.group }}">
+<article class="card" data-group="{{ r.group }}" id="n{{ r.n.id }}">
   <div class="card-top">
     <span class="tag tag-{{ r.group }}">{{ group_name(r.group) }}</span>
     <span class="date">Published {{ r.n.published|nice_date }}</span>

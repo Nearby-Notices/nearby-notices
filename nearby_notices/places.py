@@ -20,6 +20,8 @@ class Place:
     query: str
     postcode: str
     name: str  # what we show back, for example "Dudley (St. James's ward), West Midlands"
+    lat: float | None = None
+    lon: float | None = None
 
 
 def _get(client: httpx.Client, path: str, params: dict | None = None) -> dict:
@@ -43,7 +45,7 @@ def resolve(query: str, client: httpx.Client | None = None) -> Place | None:
             res = d.get("result")
             if not res:
                 return None
-            return Place(q, res["postcode"], _describe(res))
+            return Place(q, res["postcode"], _describe(res), res.get("latitude"), res.get("longitude"))
         d = _get(client, "/places", {"q": q, "limit": 1})
         places = d.get("result") or []
         if not places:
@@ -54,7 +56,8 @@ def resolve(query: str, client: httpx.Client | None = None) -> Place | None:
         if not res:
             return None
         label = p.get("name_1") or q
-        return Place(q, res["postcode"], f"{label}, {p.get('county_unitary') or p.get('region') or ''}".strip(", "))
+        return Place(q, res["postcode"], f"{label}, {p.get('county_unitary') or p.get('region') or ''}".strip(", "),
+                     p.get("latitude"), p.get("longitude"))
     finally:
         if own:
             client.close()

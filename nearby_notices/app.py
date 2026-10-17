@@ -89,9 +89,14 @@ def search(request: Request, place: str = "", distance: int = config.DEFAULT_DIS
         worker.enqueue(todo)
     counts = {g: sum(1 for r in results if r["group"] == g) for g in groups.ORDER}
     grouped = [(g, [r for r in results if r["group"] == g]) for g in groups.ORDER if counts[g]]
+    points = [{"id": r["n"]["id"], "lat": r["n"]["lat"], "lon": r["n"]["lon"], "group": r["group"],
+               "title": (r["x"]["what"] if r["x"] and r["x"].get("what") else r["n"]["title"]),
+               "published": nice_date(r["n"]["published"]), "url": r["n"]["url"]}
+              for r in results if r["n"].get("lat") is not None and r["n"].get("lon") is not None]
     return templates.TemplateResponse(request, "results.html", _ctx(
         request, place=where, distance=distance, results=results, grouped=grouped, counts=counts,
-        pending=pending, view=view if view in ("all", "grouped") else "all", order=groups.ORDER))
+        pending=pending, view=view if view in ("all", "grouped", "map") else "all", order=groups.ORDER,
+        points=points, miles_to_m=1609.34))
 
 
 @app.post("/feedback")

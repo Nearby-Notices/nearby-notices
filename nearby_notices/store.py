@@ -15,7 +15,7 @@ from .categories import is_allowed
 SCHEMA = """
 CREATE TABLE IF NOT EXISTS notices (
   id TEXT PRIMARY KEY, title TEXT, category TEXT, notice_code INTEGER, published TEXT,
-  text TEXT, url TEXT, fetched_at REAL);
+  text TEXT, url TEXT, fetched_at REAL, lat REAL, lon REAL);
 CREATE TABLE IF NOT EXISTS extractions (
   notice_id TEXT PRIMARY KEY, model TEXT, payload TEXT, kept INTEGER, removed INTEGER,
   seconds REAL, created_at REAL);
@@ -32,18 +32,28 @@ def db():
     con.row_factory = sqlite3.Row
     try:
         con.executescript(SCHEMA)
+        _migrate(con)
         yield con
         con.commit()
     finally:
         con.close()
 
 
+def _migrate(con: sqlite3.Connection) -> None:
+    """Databases made before 17/10/2026 lack the coordinate columns; add them and forget cached feeds so notices refetch with them."""
+    cols = {r["name"] for r in con.execute("PRAGMA table_info(notices)")}
+    if "lat" not in cols:
+        con.execute("ALTER TABLE notices ADD COLUMN lat REAL")
+        con.execute("ALTER TABLE notices ADD COLUMN lon REAL")
+        con.execute("DELETE FROM feed_cache")
+
+
 def put_notice(con: sqlite3.Connection, n) -> None:
     if not is_allowed(n.notice_code):
         raise ValueError(f"refused: notice code {n.notice_code} is outside the allowed categories")
     con.execute(
-        "INSERT OR REPLACE INTO notices VALUES (?,?,?,?,?,?,?,?)",
-        (n.id, n.title, n.category, n.notice_code, n.published, n.text, n.url, time.time()),
+        "INSERT OR REPLACE INTO notices VALUES (?,?,?,?,?,?,?,?,?,?)",
+        (n.id, n.title, n.category, n.notice_code, n.published, n.text, n.url, time.time(), n.lat, n.lon),
     )
 
 

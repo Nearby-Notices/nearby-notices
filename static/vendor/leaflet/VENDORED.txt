@@ -1,0 +1,1 @@
+Leaflet 1.9.4, BSD-2-Clause licence, https://leafletjs.com. Vendored here so the only third party contacted by the map view is the OpenStreetMap tile server.

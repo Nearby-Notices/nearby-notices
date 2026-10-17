@@ -58,6 +58,8 @@ details summary { cursor: pointer; color: var(--link); text-decoration: underlin
 form.inline { display: inline-flex; align-items: center; gap: .5rem; } form.inline button { font: inherit; background: #fff; border: 2px solid var(--ink); padding: .15rem .55rem; cursor: pointer; }
 .error-summary { border: 5px solid #d4351c; padding: 1rem; margin: 0 0 1.5rem; } .error-summary h2 { margin: 0 0 .3rem; font-size: 1.3rem; }
 .empty { border-left: 10px solid var(--line); padding: .6rem 1rem; }
+.map { height: 28rem; border: 2px solid var(--ink); margin: 0 0 .5rem; background: var(--light); }
+.leaflet-container { font: inherit; }
 footer { border-top: 1px solid var(--line); background: var(--light); margin-top: 3rem; padding: 1.5rem 0 2.5rem; font-size: 1rem; }
 .small, .muted { color: var(--muted); font-size: 1rem; }
 .disclaimer { font-weight: 700; }

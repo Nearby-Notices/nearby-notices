@@ -39,6 +39,16 @@ class Notice:
     published: str
     text: str
     url: str
+    lat: float | None = None   # the feed's geo:Point: the postcode the notice is filed under
+    lon: float | None = None
+
+
+def _geo(e: dict) -> tuple[float | None, float | None]:
+    p = e.get("geo:Point") or {}
+    try:
+        return float(p.get("geo:lat")), float(p.get("geo:long"))
+    except (TypeError, ValueError):
+        return None, None
 
 
 def _polite_get(client: httpx.Client, url: str, params: dict | None = None) -> httpx.Response:
@@ -72,6 +82,9 @@ def _parse_entry(e: dict) -> Notice | None:
     if not url:
         url = f"{config.GAZETTE_BASE}/notice/{nid}"
     cat = e.get("category") or {}
+    lat, lon = _geo(e)
+    # Only these fields are kept. The feed also carries the Gazette staff member's name on each entry
+    # (f:name, f:familyName); it is personal data and is never read into this tool.
     return Notice(
         id=nid,
         title=str(e.get("title") or ""),
@@ -80,6 +93,8 @@ def _parse_entry(e: dict) -> Notice | None:
         published=str(e.get("published") or "")[:10],
         text=clean_text(str(e.get("content") or "")),
         url=url,
+        lat=lat,
+        lon=lon,
     )
 
 
