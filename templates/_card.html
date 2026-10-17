@@ -1,0 +1,33 @@
+{% macro card(r) %}
+<article class="card" data-group="{{ r.group }}" id="n{{ r.n.id }}">
+  <div class="card-top">
+    <span class="tag tag-{{ r.group }}">{{ group_name(r.group) }}</span>
+    <span class="date">Published {{ r.n.published|nice_date }}</span>
+  </div>
+  <h2>{{ (r.x.what if r.x and r.x.what else r.n.title) }}</h2>
+  <p class="caption">{{ r.n.category }}{% if r.x and r.x.authority %} &middot; {{ r.x.authority }}{% endif %}{% if r.dist %} &middot; {% if r.near.postcode %}filed under {{ r.near.postcode }}, {% else %}filed {% endif %}{{ r.dist }} from your search point{% endif %}</p>
+  {% if not r.x %}
+    <p class="reading">Reading this notice in plain English&hellip;</p>
+  {% elif r.x.error %}
+    <p class="muted">No plain-English version available ({{ r.x.error }}). The notice is shown as published below.</p>
+  {% else %}
+    <dl class="facts">
+      {% if r.x.kind %}<dt>What kind</dt><dd>{{ r.x.kind }}</dd>{% endif %}
+      {% if r.x.places %}<dt>Where</dt><dd>{{ r.x.places|join(', ') }}</dd>{% endif %}
+      {% if r.x.starts %}<dt>From</dt><dd>{{ r.x.starts }}</dd>{% endif %}
+      {% if r.x.ends %}<dt>Until</dt><dd>{{ r.x.ends }}</dd>{% endif %}
+      {% if r.x.objection %}<dt>To object or comment</dt><dd>&ldquo;{{ r.x.objection }}&rdquo; <span class="small">(quoted from the notice)</span></dd>{% endif %}
+    </dl>
+    {% if r.x.summary %}<p class="summary">{{ r.x.summary|join(' ') }}</p>{% endif %}
+    {% if r.x.removed %}<p class="small muted">{{ r.x.removed|length }} generated sentence{{ '' if r.x.removed|length == 1 else 's' }} removed because the notice did not support {{ 'it' if r.x.removed|length == 1 else 'them' }}.</p>{% endif %}
+  {% endif %}
+  <details><summary>The notice as published</summary><pre class="verbatim">{{ r.n.text }}</pre></details>
+  <div class="actions">
+    <a href="{{ r.n.url }}" rel="noopener">Read on The Gazette</a>
+    <form class="inline" method="post" action="/feedback"><input type="hidden" name="notice_id" value="{{ r.n.id }}"><input type="hidden" name="back" value="{{ back }}">
+      <span class="small">Was the plain English right?</span>
+      <button name="vote" value="up" title="Accurate">Yes {{ r.fb.up }}</button>
+      <button name="vote" value="down" title="Wrong or unclear">No {{ r.fb.down }}</button></form>
+  </div>
+</article>
+{% endmacro %}

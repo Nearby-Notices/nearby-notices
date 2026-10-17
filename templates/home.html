@@ -11,12 +11,29 @@
   </div>
   <div class="form-group">
     <label class="label" for="distance">Within</label>
-    <select class="select" id="distance" name="distance">
-      {% for d in [1, 3, 5, 10, 15] %}<option value="{{ d }}" {% if d == distance %}selected{% endif %}>{{ d }} miles</option>{% endfor %}
-    </select>
+    <div class="distance">
+      <select class="select" id="distance" name="distance">
+        {% for d in units[unit].choices %}<option value="{{ d }}" {% if d == distance %}selected{% endif %}>{{ d }}</option>{% endfor %}
+      </select>
+      <select class="select" id="unit" name="unit" aria-label="Unit of distance">
+        {% for u, spec in units.items() %}<option value="{{ u }}" {% if u == unit %}selected{% endif %}>{{ spec.name }}</option>{% endfor %}
+      </select>
+    </div>
   </div>
   <button class="button" type="submit">Search</button>
 </form>
+<script>
+(function () {
+  var choices = {{ unit_choices|tojson }};
+  var unit = document.getElementById('unit'), dist = document.getElementById('distance');
+  unit.addEventListener('change', function () {
+    var keep = dist.selectedIndex;
+    dist.innerHTML = '';
+    choices[unit.value].forEach(function (d) { var o = document.createElement('option'); o.value = d; o.textContent = d; dist.appendChild(o); });
+    dist.selectedIndex = Math.min(keep, dist.options.length - 1);
+  });
+})();
+</script>
 <div class="inset">
   <h2>What it covers</h2>
   <ul class="legend">

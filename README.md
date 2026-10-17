@@ -6,10 +6,10 @@ Built with an AI coding assistant under the author's direction, in the author's 
 
 ## How it works
 
-1. **Find:** The Gazette's own feed, filtered by postcode and distance (`location-postcode-1`, `location-distance-1`) and by category, newest first. Place lookup through [postcodes.io](https://postcodes.io) (ONS and Ordnance Survey open data).
+1. **Find:** The Gazette's own feed, filtered by postcode and distance (`location-postcode-1`, `location-distance-1`) and by category, newest first. Place lookup through [postcodes.io](https://postcodes.io) (ONS and Ordnance Survey open data). The Gazette only honours radii of 1, 5, 10, 15, 20, 25 and 30 miles (anything else is rounded down by the Gazette, so "3 miles" would silently be 1), so the tool asks for the smallest honoured radius that covers the distance you chose, in miles or kilometres, then measures each notice itself. A notice is usually filed under several postcodes (the street affected, the council, a consultant's office) and the feed only gives the first, so when that one falls outside your circle the tool reads the notice's linked-data record for all of them and keeps the notice only if its nearest filed postcode is inside.
 2. **Read:** a language model (any model through LiteLLM; by default a local one) returns the facts of each notice as JSON: what is changing, the places, dates, the authority, the kind of notice, and the notice's own sentence on how to object.
 3. **Check:** every place name must appear word for word in the notice or it is dropped. Every plain-English sentence is judged by a second step that must return a supporting quote that really is in the text; sentences that fail are removed and counted. The model never writes advice.
-4. **Show:** the plain-English version, the facts, the notice verbatim, and the link.
+4. **Show:** the plain-English version, the facts, the notice verbatim, and the link, as a list, grouped by kind, or on a map (Leaflet, served from this site; OpenStreetMap tiles are only requested when you open the map). Each pin sits at the nearest postcode the notice is filed under. Notices are read in the background; the page asks `/status` every few seconds and swaps in each card as it is ready, without reloading.
 
 ## What it refuses, by design
 

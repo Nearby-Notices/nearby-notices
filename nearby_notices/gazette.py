@@ -1,24 +1,34 @@
 """The Gazette feed client: gentle, cached, and limited to the allowed categories.
 
-Feed: /all-notices/notice/data.json with categorycode, location-postcode-1, location-distance-1,
-sort-by=latest-date, results-page-size, results-page. Each entry carries the notice's HTML in "content".
+Feed: /all-notices/notice/data.json with categorycode, location-postcode-1, location-distance-1 (miles; only
+1, 5, 10, 15, 20, 25, 30 are honoured), sort-by=latest-date, results-page-size, results-page. Each entry
+carries the notice's HTML in "content" and ONE geo:Point, although a notice is usually filed under several
+postcodes (the affected street, the council, a consultant's office) and the Gazette's distance filter matches
+on any of them. All of a notice's postcodes, with coordinates: /notice/{id}/data.jsonld.
 Full text, if the feed's copy is short: /notice/{id}/data.xml. Checked live on 17/10/2026.
 """
 from __future__ import annotations
 
 import html
+import json
 import re
+import threading
 import time
-from dataclasses import dataclass
+from concurrent.futures import ThreadPoolExecutor
+from dataclasses import dataclass, field
 
 import httpx
 
 from . import config
 from .categories import ALLOWED, is_allowed
 
+POSTCODE_ID = "https://www.thegazette.co.uk/id/postcode/"
+PARALLEL = 3   # category feeds fetched side by side; the Gazette answers each in 2 to 4 s, so one at a time felt slow
+
 _TAG = re.compile(r"<[^>]+>")
 _WS = re.compile(r"\s+")
 _last_call = 0.0
+_gap_lock = threading.Lock()
 
 
 def clean_text(fragment: str) -> str:
@@ -39,8 +49,16 @@ class Notice:
     published: str
     text: str
     url: str
-    lat: float | None = None   # the feed's geo:Point: the postcode the notice is filed under
+    lat: float | None = None   # the feed's geo:Point: the first postcode the notice is filed under
     lon: float | None = None
+    points: list[dict] = field(default_factory=list)  # every filed postcode: {"postcode", "lat", "lon"}; empty until fetched
+
+    def all_points(self) -> list[dict]:
+        if self.points:
+            return self.points
+        if self.lat is not None and self.lon is not None:
+            return [{"postcode": None, "lat": self.lat, "lon": self.lon}]
+        return []
 
 
 def _geo(e: dict) -> tuple[float | None, float | None]:
@@ -52,12 +70,13 @@ def _geo(e: dict) -> tuple[float | None, float | None]:
 
 
 def _polite_get(client: httpx.Client, url: str, params: dict | None = None) -> httpx.Response:
-    """Fair use: at most two requests a second, a named user agent, no retries storms."""
+    """Fair use: requests start at most two a second across every thread, a named user agent, no retry storms."""
     global _last_call
-    gap = time.monotonic() - _last_call
-    if gap < 0.5:
-        time.sleep(0.5 - gap)
-    _last_call = time.monotonic()
+    with _gap_lock:
+        gap = time.monotonic() - _last_call
+        if gap < 0.5:
+            time.sleep(0.5 - gap)
+        _last_call = time.monotonic()
     r = client.get(url, params=params, headers={"User-Agent": config.USER_AGENT}, timeout=30)
     r.raise_for_status()
     return r
@@ -99,30 +118,67 @@ def _parse_entry(e: dict) -> Notice | None:
 
 
 def search_near(postcode: str, distance_miles: int, page_size: int = 10, client: httpx.Client | None = None) -> list[Notice]:
-    """Latest notices in every allowed category within the distance of the postcode (the Gazette's own filter)."""
+    """Latest notices in every allowed category within the distance of the postcode (the Gazette's own filter).
+
+    distance_miles must be one of the radii the Gazette honours (see geo.gazette_radius); others are silently rounded down by the Gazette."""
     own = client is None
     client = client or httpx.Client()
+
+    def one(cat: int) -> list[Notice]:
+        params = {
+            "categorycode": cat,
+            "location-postcode-1": postcode,
+            "location-distance-1": distance_miles,
+            "sort-by": "latest-date",
+            "results-page-size": page_size,
+            "results-page": 1,
+        }
+        r = _polite_get(client, f"{config.GAZETTE_BASE}/all-notices/notice/data.json", params)
+        return [n for n in (_parse_entry(e) for e in _entries(r.json())) if n]
+
     out: list[Notice] = []
     try:
-        for cat in ALLOWED:
-            params = {
-                "categorycode": cat,
-                "location-postcode-1": postcode,
-                "location-distance-1": distance_miles,
-                "sort-by": "latest-date",
-                "results-page-size": page_size,
-                "results-page": 1,
-            }
-            r = _polite_get(client, f"{config.GAZETTE_BASE}/all-notices/notice/data.json", params)
-            for e in _entries(r.json()):
-                n = _parse_entry(e)
-                if n:
-                    out.append(n)
+        with ThreadPoolExecutor(max_workers=PARALLEL) as pool:
+            for batch in pool.map(one, ALLOWED):
+                out.extend(batch)
     finally:
         if own:
             client.close()
     out.sort(key=lambda n: n.published, reverse=True)
     return out
+
+
+def _postcode_label(node_id: str) -> str:
+    """'https://www.thegazette.co.uk/id/postcode/B693DE' -> 'B69 3DE'."""
+    raw = node_id.rsplit("/", 1)[-1].upper()
+    return f"{raw[:-3]} {raw[-3:]}" if len(raw) > 3 else raw
+
+
+def points_from_jsonld(payload: dict) -> list[dict]:
+    """Every postcode node in a notice's linked-data record, as {"postcode", "lat", "lon"}. Nothing else is read."""
+    out, seen = [], set()
+    for node in payload.get("@graph") or [payload]:
+        nid = str(node.get("@id", ""))
+        if not nid.startswith(POSTCODE_ID) or nid in seen:
+            continue
+        try:
+            out.append({"postcode": _postcode_label(nid), "lat": float(node["lat"]), "lon": float(node["long"])})
+            seen.add(nid)
+        except (KeyError, TypeError, ValueError):
+            continue
+    return out
+
+
+def points(notice_id: str, client: httpx.Client | None = None) -> list[dict]:
+    """All the postcodes a notice is filed under, with coordinates, from its linked-data record."""
+    own = client is None
+    client = client or httpx.Client()
+    try:
+        r = _polite_get(client, f"{config.GAZETTE_BASE}/notice/{notice_id}/data.jsonld")
+        return points_from_jsonld(json.loads(r.text))
+    finally:
+        if own:
+            client.close()
 
 
 def full_text(notice_id: str, client: httpx.Client | None = None) -> str:

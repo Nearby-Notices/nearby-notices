@@ -24,6 +24,7 @@ h2 { font-size: 1.5rem; line-height: 1.25; font-weight: 700; margin: 0 0 .5rem; 
 .hint { color: var(--muted); margin: 0 0 .5rem; font-size: 1rem; }
 .input, .select { font: inherit; width: 100%; max-width: 30em; padding: .5rem; border: 2px solid var(--ink); background: #fff; height: 2.6rem; }
 .select { max-width: 12em; }
+.distance { display: flex; gap: .5rem; } .distance .select { max-width: 7em; }
 .button { font: inherit; font-weight: 700; color: #fff; background: var(--green); border: 2px solid transparent; box-shadow: 0 2px 0 #002d18; padding: .55rem 1.2rem; cursor: pointer; }
 .button:hover { background: #005a30; } .button:active { top: 2px; }
 .inset { border-left: 10px solid var(--line); padding: .6rem 0 .6rem 1rem; margin: 1.5rem 0; }
@@ -36,7 +37,7 @@ h2 { font-size: 1.5rem; line-height: 1.25; font-weight: 700; margin: 0 0 .5rem; 
 .crumb { font-size: 1rem; margin: 0 0 .5rem; }
 .results-head { display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 1rem; }
 .refine { display: flex; align-items: center; gap: .6rem; font-weight: 700; }
-.refine .select { height: 2.3rem; }
+.refine .select { height: 2.3rem; width: auto; max-width: 7em; }
 .filters { display: flex; flex-wrap: wrap; gap: .4rem 1.2rem; align-items: baseline; border-bottom: 1px solid var(--line); padding: .6rem 0; margin: 1rem 0 1.2rem; position: sticky; top: 0; background: #fff; z-index: 2; }
 .chip { font: inherit; font-weight: 700; color: var(--link); background: none; border: 0; padding: .2rem 0; cursor: pointer; text-decoration: underline; text-underline-offset: .2em; }
 .chip span { color: var(--muted); font-weight: 400; margin-left: .25rem; }
@@ -45,6 +46,7 @@ h2 { font-size: 1.5rem; line-height: 1.25; font-weight: 700; margin: 0 0 .5rem; 
 .group-title { font-size: 1.3rem; margin: 2rem 0 .8rem; padding-bottom: .3rem; border-bottom: 2px solid var(--ink); }
 .group-title span { color: var(--muted); font-weight: 400; margin-left: .4rem; }
 .card { border-top: 2px solid var(--ink); padding: 1rem 0 1.2rem; margin: 0 0 .6rem; }
+.card:target { outline: 3px solid var(--focus); outline-offset: 6px; }
 .card-top { display: flex; justify-content: space-between; align-items: center; gap: 1rem; margin-bottom: .5rem; }
 .date { color: var(--muted); font-size: 1rem; }
 .facts { display: grid; grid-template-columns: 11rem 1fr; gap: .35rem 1rem; margin: .8rem 0; border-top: 1px solid var(--line); padding-top: .8rem; }

@@ -15,7 +15,7 @@ from .categories import is_allowed
 SCHEMA = """
 CREATE TABLE IF NOT EXISTS notices (
   id TEXT PRIMARY KEY, title TEXT, category TEXT, notice_code INTEGER, published TEXT,
-  text TEXT, url TEXT, fetched_at REAL, lat REAL, lon REAL);
+  text TEXT, url TEXT, fetched_at REAL, lat REAL, lon REAL, points TEXT);
 CREATE TABLE IF NOT EXISTS extractions (
   notice_id TEXT PRIMARY KEY, model TEXT, payload TEXT, kept INTEGER, removed INTEGER,
   seconds REAL, created_at REAL);
@@ -46,19 +46,32 @@ def _migrate(con: sqlite3.Connection) -> None:
         con.execute("ALTER TABLE notices ADD COLUMN lat REAL")
         con.execute("ALTER TABLE notices ADD COLUMN lon REAL")
         con.execute("DELETE FROM feed_cache")
+    if "points" not in cols:
+        con.execute("ALTER TABLE notices ADD COLUMN points TEXT")
+        con.execute("DELETE FROM feed_cache")
 
 
 def put_notice(con: sqlite3.Connection, n) -> None:
     if not is_allowed(n.notice_code):
         raise ValueError(f"refused: notice code {n.notice_code} is outside the allowed categories")
     con.execute(
-        "INSERT OR REPLACE INTO notices VALUES (?,?,?,?,?,?,?,?,?,?)",
-        (n.id, n.title, n.category, n.notice_code, n.published, n.text, n.url, time.time(), n.lat, n.lon),
+        "INSERT OR REPLACE INTO notices VALUES (?,?,?,?,?,?,?,?,?,?,?)",
+        (n.id, n.title, n.category, n.notice_code, n.published, n.text, n.url, time.time(), n.lat, n.lon,
+         json.dumps(n.points) if n.points else None),
     )
 
 
-def get_notice(con: sqlite3.Connection, nid: str):
-    return con.execute("SELECT * FROM notices WHERE id=?", (nid,)).fetchone()
+def put_points(con: sqlite3.Connection, nid: str, points: list[dict]) -> None:
+    con.execute("UPDATE notices SET points=? WHERE id=?", (json.dumps(points), nid))
+
+
+def get_notice(con: sqlite3.Connection, nid: str) -> dict | None:
+    row = con.execute("SELECT * FROM notices WHERE id=?", (nid,)).fetchone()
+    if not row:
+        return None
+    d = dict(row)
+    d["points"] = json.loads(d["points"]) if d.get("points") else []
+    return d
 
 
 def get_extraction(con: sqlite3.Connection, nid: str, model: str) -> dict | None:
