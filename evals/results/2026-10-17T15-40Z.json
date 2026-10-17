@@ -1,7 +1,7 @@
 {
  "when": "17/10/2026 15:26 UTC",
  "model": "openai/qwen3.8-27b-ablit",
- "commit": "00e2ba2",
+ "commit": "87737f1",
  "gold_size": 30,
  "categories": 10,
  "fields": {

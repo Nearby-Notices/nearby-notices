@@ -1,6 +1,6 @@
 # Evaluation results
 
-Run 17/10/2026 15:26 UTC on openai/qwen3.8-27b-ablit (commit 00e2ba2). Hand-labelled set: 30 notices across 10 Gazette categories, in `gold.jsonl`; the notices themselves are in `notices/`. Rerun with `uv run python evals/run.py`.
+Run 17/10/2026 15:26 UTC on openai/qwen3.8-27b-ablit (commit 87737f1). Hand-labelled set: 30 notices across 10 Gazette categories, in `gold.jsonl`; the notices themselves are in `notices/`. Rerun with `uv run python evals/run.py`.
 
 ## Extraction fields (per notice)
 

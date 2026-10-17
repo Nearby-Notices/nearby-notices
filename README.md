@@ -32,7 +32,7 @@ The threat model, including what is not defended against, is in [docs/safety.md]
 Measured, not asserted. `evals/` holds 30 hand-labelled notices across 10 Gazette categories, 120 hand-written true and false sentences for the gate, and 3 adversarial notices. `uv run python evals/run.py` runs everything live against the configured model and writes [evals/RESULTS.md](evals/RESULTS.md).
 
 <!-- results-summary -->
-Latest run, 17 October 2026, a local 27B Qwen3 build, commit 00e2ba2 (full table and caveats in [evals/RESULTS.md](evals/RESULTS.md)):
+Latest run, 17 October 2026, a local 27B Qwen3 build, commit 87737f1 (full table and caveats in [evals/RESULTS.md](evals/RESULTS.md)):
 
 | | Result |
 |---|---|
