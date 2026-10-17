@@ -1,11 +1,13 @@
-"""The web app: one search box, results in plain English with the verbatim notice beside each, a privacy page.
+"""The web app: one search box, results grouped by kind with plain English beside the verbatim notice, a privacy page.
 
 No cookies, no accounts. What the user types is used for the search and not stored. Access logs are off;
-the only counters are daily totals with no identifiers.
+the only counters are daily totals with no identifiers. Notices are read by a background worker so the
+page returns at once and refreshes itself while any are still being read.
 """
 from __future__ import annotations
 
 import logging
+from datetime import date
 from pathlib import Path
 
 from fastapi import FastAPI, Form, Request
@@ -13,7 +15,7 @@ from fastapi.responses import HTMLResponse, RedirectResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 
-from . import config, extract, gazette, places, store
+from . import config, gazette, groups, places, store, worker
 from .categories import ALLOWED, EXCLUDED
 
 logging.getLogger("uvicorn.access").disabled = True
@@ -27,8 +29,24 @@ DISCLAIMER = ("Not affiliated with The Gazette, the Government or any council. T
               "Open Government Licence v3.")
 
 
+def nice_date(s: str) -> str:
+    try:
+        return date.fromisoformat(s[:10]).strftime("%-d %B %Y")
+    except (ValueError, TypeError):
+        return s or ""
+
+
+templates.env.filters["nice_date"] = nice_date
+
+
 def _ctx(request: Request, **kw) -> dict:
-    return {"request": request, "disclaimer": DISCLAIMER, "allowed": ALLOWED, "excluded": EXCLUDED, **kw}
+    return {"request": request, "disclaimer": DISCLAIMER, "allowed": ALLOWED, "excluded": EXCLUDED,
+            "group_name": groups.group_name, "group_colour": groups.group_colour, **kw}
+
+
+@app.on_event("startup")
+def _startup() -> None:
+    worker.start()
 
 
 @app.get("/", response_class=HTMLResponse)
@@ -37,36 +55,43 @@ def home(request: Request):
 
 
 @app.get("/search", response_class=HTMLResponse)
-def search(request: Request, place: str = "", distance: int = config.DEFAULT_DISTANCE_MILES):
+def search(request: Request, place: str = "", distance: int = config.DEFAULT_DISTANCE_MILES, view: str = "all"):
     distance = max(1, min(distance, 15))
     where = places.resolve(place)
     if not where:
         return templates.TemplateResponse(request, "home.html", _ctx(request, distance=distance, error="I could not find that place. Try a full postcode or a town name."))
-    results = []
+    results, pending = [], 0
     with store.db() as con:
-        store.bump(con, "search")
         key = f"{where.postcode}|{distance}"
         ids = store.cached_feed(con, key)
         if ids is None:
-            notices = gazette.search_near(where.postcode, distance, page_size=max(2, config.MAX_RESULTS // len(ALLOWED) + 1))
+            store.bump(con, "search")
+            notices = gazette.search_near(where.postcode, distance, page_size=max(3, config.MAX_RESULTS // len(ALLOWED) + 2))
             for n in notices:
                 if len(n.text.split()) < 60:
                     n.text = gazette.full_text(n.id)
                 store.put_notice(con, n)
             ids = [n.id for n in notices][: config.MAX_RESULTS]
             store.put_feed(con, key, ids)
+        todo = []
         for nid in ids:
             row = store.get_notice(con, nid)
             if not row:
                 continue
             ex = store.get_extraction(con, nid, config.MODEL)
             if ex is None:
-                r = extract.extract(row["text"])
-                ex = r.to_dict()
-                store.put_extraction(con, nid, config.MODEL, ex, len(r.summary), len(r.removed), r.seconds)
+                todo.append(nid)
+                pending += 1
             fb = con.execute("SELECT up, down FROM feedback WHERE notice_id=?", (nid,)).fetchone()
-            results.append({"n": dict(row), "x": ex, "fb": dict(fb) if fb else {"up": 0, "down": 0}})
-    return templates.TemplateResponse(request, "results.html", _ctx(request, place=where, distance=distance, results=results))
+            results.append({"n": dict(row), "x": ex, "group": groups.group_of(row["notice_code"]),
+                            "fb": dict(fb) if fb else {"up": 0, "down": 0}})
+    if todo:
+        worker.enqueue(todo)
+    counts = {g: sum(1 for r in results if r["group"] == g) for g in groups.ORDER}
+    grouped = [(g, [r for r in results if r["group"] == g]) for g in groups.ORDER if counts[g]]
+    return templates.TemplateResponse(request, "results.html", _ctx(
+        request, place=where, distance=distance, results=results, grouped=grouped, counts=counts,
+        pending=pending, view=view if view in ("all", "grouped") else "all", order=groups.ORDER))
 
 
 @app.post("/feedback")

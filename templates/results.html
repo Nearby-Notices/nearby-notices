@@ -1,15 +1,40 @@
 {% extends "base.html" %}
 {% block title %}Notices near {{ place.name }}{% endblock %}
+{% block head %}{% if pending %}<meta http-equiv="refresh" content="8">{% endif %}{% endblock %}
 {% block body %}
-<p><a href="/">&larr; New search</a></p>
-<h1>Near {{ place.name }}</h1>
-<p class="small">Within {{ distance }} miles of {{ place.postcode }}. Newest first. {{ results|length }} notice{{ '' if results|length == 1 else 's' }}.</p>
-{% if not results %}<p>No notices in the covered categories were found within {{ distance }} miles. Try a wider distance.</p>{% endif %}
-{% for r in results %}
-<article class="notice">
-  <h2>{{ r.x.what or r.n.title }}</h2>
-  <p class="meta">{{ r.n.category }} &middot; published {{ r.n.published }}{% if r.x.authority %} &middot; {{ r.x.authority }}{% endif %}</p>
-  {% if r.x.error %}
+<p class="crumb"><a href="/">Search again</a></p>
+<div class="results-head">
+  <div>
+    <h1>Notices near {{ place.name }}</h1>
+    <p class="caption">Within {{ distance }} miles of {{ place.postcode }}, newest first. {{ results|length }} notice{{ '' if results|length == 1 else 's' }}.{% if pending %} <span class="reading">Reading {{ pending }} in plain English; this page refreshes itself.</span>{% endif %}</p>
+  </div>
+  <form action="/search" method="get" class="refine">
+    <input type="hidden" name="place" value="{{ place.query }}">
+    <label for="distance">Within</label>
+    <select class="select" id="distance" name="distance" onchange="this.form.submit()">{% for d in [1, 3, 5, 10, 15] %}<option value="{{ d }}" {% if d == distance %}selected{% endif %}>{{ d }} miles</option>{% endfor %}</select>
+  </form>
+</div>
+
+{% if not results %}
+<p class="empty">No notices in the covered categories were found within {{ distance }} miles. Try a wider distance.</p>
+{% else %}
+<nav class="filters" aria-label="Filter by kind">
+  <button class="chip active" data-group="all">All <span>({{ results|length }})</span></button>
+  {% for g in order %}{% if counts[g] %}<button class="chip" data-group="{{ g }}">{{ group_name(g) }} <span>({{ counts[g] }})</span></button>{% endif %}{% endfor %}
+  <span class="viewtoggle"><a href="?place={{ place.query|urlencode }}&distance={{ distance }}&view=all" {% if view == 'all' %}class="on"{% endif %}>List</a> &middot; <a href="?place={{ place.query|urlencode }}&distance={{ distance }}&view=grouped" {% if view == 'grouped' %}class="on"{% endif %}>Grouped</a></span>
+</nav>
+
+{% macro card(r) %}
+<article class="card" data-group="{{ r.group }}">
+  <div class="card-top">
+    <span class="tag tag-{{ r.group }}">{{ group_name(r.group) }}</span>
+    <span class="date">Published {{ r.n.published|nice_date }}</span>
+  </div>
+  <h2>{{ (r.x.what if r.x and r.x.what else r.n.title) }}</h2>
+  <p class="caption">{{ r.n.category }}{% if r.x and r.x.authority %} &middot; {{ r.x.authority }}{% endif %}</p>
+  {% if not r.x %}
+    <p class="reading">Reading this notice in plain English&hellip;</p>
+  {% elif r.x.error %}
     <p class="muted">No plain-English version available ({{ r.x.error }}). The notice is shown as published below.</p>
   {% else %}
     <dl class="facts">
@@ -23,10 +48,34 @@
     {% if r.x.removed %}<p class="small muted">{{ r.x.removed|length }} generated sentence{{ '' if r.x.removed|length == 1 else 's' }} removed because the notice did not support {{ 'it' if r.x.removed|length == 1 else 'them' }}.</p>{% endif %}
   {% endif %}
   <details><summary>The notice as published</summary><pre class="verbatim">{{ r.n.text }}</pre></details>
-  <p class="actions"><a href="{{ r.n.url }}" rel="noopener">Read on The Gazette</a>
+  <div class="actions">
+    <a href="{{ r.n.url }}" rel="noopener">Read on The Gazette</a>
     <form class="inline" method="post" action="/feedback"><input type="hidden" name="notice_id" value="{{ r.n.id }}"><input type="hidden" name="back" value="{{ request.url.path }}?{{ request.url.query }}">
-      <button name="vote" value="up" title="This plain-English version was accurate">&#128077; {{ r.fb.up }}</button>
-      <button name="vote" value="down" title="This plain-English version was wrong or unclear">&#128078; {{ r.fb.down }}</button></form></p>
+      <span class="small">Was the plain English right?</span>
+      <button name="vote" value="up" title="Accurate">Yes {{ r.fb.up }}</button>
+      <button name="vote" value="down" title="Wrong or unclear">No {{ r.fb.down }}</button></form>
+  </div>
 </article>
-{% endfor %}
+{% endmacro %}
+
+{% if view == 'grouped' %}
+  {% for g, items in grouped %}
+  <section class="group" data-group="{{ g }}">
+    <h2 class="group-title">{{ group_name(g) }} <span>({{ items|length }})</span></h2>
+    {% for r in items %}{{ card(r) }}{% endfor %}
+  </section>
+  {% endfor %}
+{% else %}
+  {% for r in results %}{{ card(r) }}{% endfor %}
+{% endif %}
+{% endif %}
+<script>
+document.querySelectorAll('.filters .chip').forEach(function (b) {
+  b.addEventListener('click', function () {
+    var g = b.dataset.group;
+    document.querySelectorAll('.filters .chip').forEach(function (c) { c.classList.toggle('active', c === b); });
+    document.querySelectorAll('.card, .group').forEach(function (el) { el.style.display = (g === 'all' || el.dataset.group === g) ? '' : 'none'; });
+  });
+});
+</script>
 {% endblock %}

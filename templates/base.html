@@ -5,18 +5,24 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{% block title %}Nearby Notices{% endblock %}</title>
 <link rel="stylesheet" href="/static/style.css">
+{% block head %}{% endblock %}
 </head>
 <body>
-<header>
-  <a class="brand" href="/">Nearby Notices</a>
-  <nav><a href="/about">About</a> <a href="/privacy">Privacy</a></nav>
+<header class="site">
+  <div class="wrap">
+    <a class="brand" href="/">Nearby Notices</a>
+    <nav><a href="/about">About</a><a href="/privacy">Privacy</a></nav>
+  </div>
 </header>
-<main>
+<div class="phase"><div class="wrap"><span class="tag-phase">Independent</span>Not an official service. Public notices from The Gazette, read in plain English. Always read the notice itself.</div></div>
+<main class="wrap">
 {% block body %}{% endblock %}
 </main>
 <footer>
-  <p class="disclaimer">{{ disclaimer }}</p>
-  <p class="small">Place lookup: postcodes.io (ONS and Ordnance Survey open data). No cookies. Nothing you type is stored.</p>
+  <div class="wrap">
+    <p class="disclaimer">{{ disclaimer }}</p>
+    <p class="small">Place lookup: postcodes.io (ONS and Ordnance Survey open data). No cookies. Nothing you type is stored. Built with an AI coding assistant under the author's direction, in the author's own time.</p>
+  </div>
 </footer>
 </body>
 </html>

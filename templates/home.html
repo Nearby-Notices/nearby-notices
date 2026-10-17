@@ -1,16 +1,30 @@
 {% extends "base.html" %}
 {% block body %}
-<h1>What is changing near you?</h1>
-<p class="lead">Road closures, parking changes, planning and environmental notices are published in The Gazette in legal language. Type a postcode or a town and read them in plain English, each linked to the notice itself.</p>
-{% if error %}<p class="error">{{ error }}</p>{% endif %}
-<form action="/search" method="get" class="search">
-  <label for="place">Postcode or town</label>
-  <input id="place" name="place" type="text" placeholder="for example DY1 1HF or Dudley" required autocomplete="off">
-  <label for="distance">Within</label>
-  <select id="distance" name="distance">
-    {% for d in [1, 3, 5, 10, 15] %}<option value="{{ d }}" {% if d == distance %}selected{% endif %}>{{ d }} miles</option>{% endfor %}
-  </select>
-  <button type="submit">Search</button>
+<h1>Find public notices near you</h1>
+<p class="lead">Road closures, parking changes, planning and environmental notices are published in The Gazette in legal language. Enter a postcode or a town to read the ones near you in plain English, each linked to the notice as published.</p>
+{% if error %}<div class="error-summary" role="alert"><h2>There is a problem</h2><p>{{ error }}</p></div>{% endif %}
+<form action="/search" method="get">
+  <div class="form-group">
+    <label class="label" for="place">Postcode or town</label>
+    <p class="hint">For example DY1 1HF, or Dudley</p>
+    <input class="input" id="place" name="place" type="text" required autocomplete="off" spellcheck="false">
+  </div>
+  <div class="form-group">
+    <label class="label" for="distance">Within</label>
+    <select class="select" id="distance" name="distance">
+      {% for d in [1, 3, 5, 10, 15] %}<option value="{{ d }}" {% if d == distance %}selected{% endif %}>{{ d }} miles</option>{% endfor %}
+    </select>
+  </div>
+  <button class="button" type="submit">Search</button>
 </form>
-<p class="small">Covers: {% for k, v in allowed.items() %}{{ v }}{% if not loop.last %}, {% endif %}{% endfor %}. Does not cover notices about people (insolvency, estates, appointments), by design.</p>
+<div class="inset">
+  <h2>What it covers</h2>
+  <ul class="legend">
+    <li><span class="tag tag-roads">Roads and transport</span> &nbsp;closures, parking and waiting, speed limits, one-way orders</li>
+    <li><span class="tag tag-planning">Planning</span> &nbsp;applications, orders, stopping-up of roads for development</li>
+    <li><span class="tag tag-environment">Environment and water</span> &nbsp;permits, smoke control, drainage, forestry</li>
+    <li><span class="tag tag-energy">Energy</span> &nbsp;electricity and pipeline notices</li>
+  </ul>
+  <p class="small">It does not cover notices about people (insolvency, estates, appointments), by design. The first search of a place takes a little while: each notice is read and checked before it is shown.</p>
+</div>
 {% endblock %}
