@@ -4,23 +4,21 @@ verbatim notice, and a privacy page.
 No cookies, no accounts. What the user types is used for the search and not stored. Access logs are off;
 the only counters are daily totals with no identifiers. Notices are read by a background worker so the
 page returns at once; a small script then asks /status every few seconds and swaps in each card as it is
-ready, so the page never reloads under the reader.
+ready, so the page never reloads under the reader. The search itself lives in search.py, shared with the MCP server.
 """
 from __future__ import annotations
 
 import logging
 import re
-from concurrent.futures import ThreadPoolExecutor
 from datetime import date
 from pathlib import Path
 
-import httpx
 from fastapi import FastAPI, Form, HTTPException, Request
 from fastapi.responses import HTMLResponse, RedirectResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 
-from . import config, gazette, geo, groups, places, store, worker
+from . import config, geo, groups, places, search, store, worker
 from .categories import ALLOWED, EXCLUDED
 
 logging.getLogger("uvicorn.access").disabled = True
@@ -32,9 +30,6 @@ templates = Jinja2Templates(directory=ROOT / "templates")
 DISCLAIMER = ("Not affiliated with The Gazette, the Government or any council. This tool shows public notices in plain "
               "English and does not give advice. Always read the notice itself. Notice data: The Gazette, "
               "Open Government Licence v3.")
-MAX_POINT_FETCHES = 16     # linked-data lookups per search, so one search can never hammer the Gazette
-PAGE_SIZE = 6              # latest notices per category asked of the Gazette; six categories, so at most 36 candidates
-TOLERANCE = 1.02           # measured distance may exceed the asked distance by 2% plus 50 m before a notice is dropped
 _ID = re.compile(r"^\d{1,12}$")
 
 
@@ -64,90 +59,17 @@ def home(request: Request):
     return templates.TemplateResponse(request, "home.html", _ctx(request, distance=config.DEFAULT_DISTANCE_MILES, unit="mi"))
 
 
-def _within(m: float | None, asked_m: float) -> bool:
-    return m is None or m <= asked_m * TOLERANCE + 50
-
-
-def _candidates(con, where: places.Place, radius: int) -> list[str]:
-    """Every notice the Gazette lists within one of its honoured radii, cached for an hour under that radius so a
-    change of distance or unit within it needs no new feed call."""
-    key = f"{where.postcode}|g{radius}"
-    ids = store.cached_feed(con, key)
-    if ids is not None:
-        return ids
-    ids = []
-    with httpx.Client() as client:
-        for n in gazette.search_near(where.postcode, radius, page_size=PAGE_SIZE, client=client):
-            if len(n.text.split()) < 60:
-                n.text = gazette.full_text(n.id, client)
-            cached = store.get_notice(con, n.id)
-            if cached and cached["points"]:
-                n.points = cached["points"]
-            store.put_notice(con, n)
-            ids.append(n.id)
-    store.put_feed(con, key, ids)
-    return ids
-
-
-def _select(con, where: places.Place, ids: list[str], asked_m: float) -> list[str]:
-    """Measure each candidate against the nearest postcode it is filed under and keep those inside the asked distance."""
-    if where.lat is None or where.lon is None:
-        return ids[: config.MAX_RESULTS]
-    rows = {nid: row for nid in ids if (row := store.get_notice(con, nid))}
-
-    def filed_points(row: dict) -> list[dict]:
-        return row["points"] or ([{"postcode": None, "lat": row["lat"], "lon": row["lon"]}] if row.get("lat") is not None else [])
-
-    def measured(row: dict) -> dict | None:
-        return geo.nearest(filed_points(row), where.lat, where.lon)
-
-    # The feed's single point is often a correspondence address; before dropping a notice, look up every
-    # postcode it is filed under (one small request each, a few side by side, kept with the notice for good).
-    unsure = [nid for nid, row in rows.items() if not row["points"] and (near := measured(row)) and not _within(near["m"], asked_m)]
-    if unsure:
-        with httpx.Client() as client, ThreadPoolExecutor(max_workers=gazette.PARALLEL) as pool:
-            for nid, pts in zip(unsure[:MAX_POINT_FETCHES], pool.map(lambda i: gazette.points(i, client), unsure[:MAX_POINT_FETCHES])):
-                if pts:
-                    store.put_points(con, nid, pts)
-                    rows[nid]["points"] = pts
-    kept = [nid for nid, row in rows.items() if (near := measured(row)) is None or _within(near["m"], asked_m)]
-    return kept[: config.MAX_RESULTS]
-
-
-def _result(con, row: dict, where: places.Place | None, unit: str, asked_m: float | None) -> dict:
-    """One notice as the templates see it: record, extraction, group, feedback counts, and where it sits."""
-    ex = store.get_extraction(con, row["id"], config.MODEL)
-    fb = con.execute("SELECT up, down FROM feedback WHERE notice_id=?", (row["id"],)).fetchone()
-    pts = row["points"] or ([{"postcode": None, "lat": row["lat"], "lon": row["lon"]}] if row.get("lat") is not None else [])
-    near = geo.nearest(pts, where.lat, where.lon) if where and where.lat is not None and where.lon is not None and pts else None
-    return {"n": row, "x": ex, "group": groups.group_of(row["notice_code"]), "fb": dict(fb) if fb else {"up": 0, "down": 0},
-            "near": near, "dist": geo.fmt(near["m"], unit) if near else None,
-            "outside": bool(near and asked_m is not None and not _within(near["m"], asked_m))}
-
-
 @app.get("/search", response_class=HTMLResponse)
-def search(request: Request, place: str = "", distance: float | None = None, unit: str = "mi", view: str = "all"):
+def search_page(request: Request, place: str = "", distance: float | None = None, unit: str = "mi", view: str = "all"):
     unit = geo.unit_key(unit)
     distance = geo.choose_distance(distance if distance is not None else config.DEFAULT_DISTANCE_MILES, unit)
-    where = places.resolve(place)
-    if not where:
+    found = search.find(place, distance, unit)
+    if not found:
         return templates.TemplateResponse(request, "home.html", _ctx(
             request, distance=distance, unit=unit, error="I could not find that place. Try a full postcode or a town name."))
-    asked_m = geo.to_metres(distance, unit)
-    results, todo = [], []
-    with store.db() as con:
-        store.bump(con, "search")
-        ids = _select(con, where, _candidates(con, where, geo.gazette_radius(geo.to_miles(distance, unit))), asked_m)
-        for nid in ids:
-            row = store.get_notice(con, nid)
-            if not row:
-                continue
-            r = _result(con, row, where, unit, asked_m)
-            if r["x"] is None:
-                todo.append(nid)
-            results.append(r)
-    if todo:
-        worker.enqueue(todo)
+    if found.pending:
+        worker.enqueue(found.pending)
+    results, where = found.results, found.where
     counts = {g: sum(1 for r in results if r["group"] == g) for g in groups.ORDER}
     grouped = [(g, [r for r in results if r["group"] == g]) for g in groups.ORDER if counts[g]]
     points = [{"id": r["n"]["id"], "lat": r["near"]["lat"], "lon": r["near"]["lon"], "group": r["group"],
@@ -158,8 +80,8 @@ def search(request: Request, place: str = "", distance: float | None = None, uni
     back = f"{request.url.path}?{request.url.query}"
     card_query = {"back": back, "unit": unit, "lat": where.lat, "lon": where.lon}
     return templates.TemplateResponse(request, "results.html", _ctx(
-        request, place=where, distance=distance, unit=unit, distance_label=geo.fmt(asked_m, unit), asked_m=asked_m,
-        results=results, grouped=grouped, counts=counts, pending_ids=todo, order=groups.ORDER, points=points,
+        request, place=where, distance=found.distance, unit=unit, distance_label=geo.fmt(found.asked_m, unit), asked_m=found.asked_m,
+        results=results, grouped=grouped, counts=counts, pending_ids=found.pending, order=groups.ORDER, points=points,
         view=view if view in ("all", "grouped", "map") else "all", back=back, card_query=card_query,
         names={g: groups.group_name(g) for g in groups.ORDER}))
 
@@ -186,7 +108,7 @@ def card(request: Request, notice_id: str, back: str = "/", unit: str = "mi", la
         if not row:
             raise HTTPException(404)
         where = places.Place("", "", "", lat, lon) if lat is not None and lon is not None else None
-        r = _result(con, row, where, geo.unit_key(unit), None)
+        r = search.describe(con, row, where, geo.unit_key(unit), None)
     return templates.TemplateResponse(request, "card.html", _ctx(request, r=r, back=back if back.startswith("/") else "/"))
 
 
