@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block title %}Notices near {{ place.name }}{% endblock %}
+{% block body %}
+<p><a href="/">&larr; New search</a></p>
+<h1>Near {{ place.name }}</h1>
+<p class="small">Within {{ distance }} miles of {{ place.postcode }}. Newest first. {{ results|length }} notice{{ '' if results|length == 1 else 's' }}.</p>
+{% if not results %}<p>No notices in the covered categories were found within {{ distance }} miles. Try a wider distance.</p>{% endif %}
+{% for r in results %}
+<article class="notice">
+  <h2>{{ r.x.what or r.n.title }}</h2>
+  <p class="meta">{{ r.n.category }} &middot; published {{ r.n.published }}{% if r.x.authority %} &middot; {{ r.x.authority }}{% endif %}</p>
+  {% if r.x.error %}
+    <p class="muted">No plain-English version available ({{ r.x.error }}). The notice is shown as published below.</p>
+  {% else %}
+    <dl class="facts">
+      {% if r.x.kind %}<dt>What kind</dt><dd>{{ r.x.kind }}</dd>{% endif %}
+      {% if r.x.places %}<dt>Where</dt><dd>{{ r.x.places|join(', ') }}</dd>{% endif %}
+      {% if r.x.starts %}<dt>From</dt><dd>{{ r.x.starts }}</dd>{% endif %}
+      {% if r.x.ends %}<dt>Until</dt><dd>{{ r.x.ends }}</dd>{% endif %}
+      {% if r.x.objection %}<dt>To object or comment</dt><dd>&ldquo;{{ r.x.objection }}&rdquo; <span class="small">(quoted from the notice)</span></dd>{% endif %}
+    </dl>
+    {% if r.x.summary %}<p class="summary">{{ r.x.summary|join(' ') }}</p>{% endif %}
+    {% if r.x.removed %}<p class="small muted">{{ r.x.removed|length }} generated sentence{{ '' if r.x.removed|length == 1 else 's' }} removed because the notice did not support {{ 'it' if r.x.removed|length == 1 else 'them' }}.</p>{% endif %}
+  {% endif %}
+  <details><summary>The notice as published</summary><pre class="verbatim">{{ r.n.text }}</pre></details>
+  <p class="actions"><a href="{{ r.n.url }}" rel="noopener">Read on The Gazette</a>
+    <form class="inline" method="post" action="/feedback"><input type="hidden" name="notice_id" value="{{ r.n.id }}"><input type="hidden" name="back" value="{{ request.url.path }}?{{ request.url.query }}">
+      <button name="vote" value="up" title="This plain-English version was accurate">&#128077; {{ r.fb.up }}</button>
+      <button name="vote" value="down" title="This plain-English version was wrong or unclear">&#128078; {{ r.fb.down }}</button></form></p>
+</article>
+{% endfor %}
+{% endblock %}

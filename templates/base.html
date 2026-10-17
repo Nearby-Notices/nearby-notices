@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{% block title %}Nearby Notices{% endblock %}</title>
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<header>
+  <a class="brand" href="/">Nearby Notices</a>
+  <nav><a href="/about">About</a> <a href="/privacy">Privacy</a></nav>
+</header>
+<main>
+{% block body %}{% endblock %}
+</main>
+<footer>
+  <p class="disclaimer">{{ disclaimer }}</p>
+  <p class="small">Place lookup: postcodes.io (ONS and Ordnance Survey open data). No cookies. Nothing you type is stored.</p>
+</footer>
+</body>
+</html>

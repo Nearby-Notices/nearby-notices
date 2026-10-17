@@ -1,0 +1,26 @@
+:root { --ink: #1b1b1b; --muted: #555; --line: #ddd; --accent: #005ea5; --bg: #fff; }
+* { box-sizing: border-box; }
+body { margin: 0; font: 17px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; color: var(--ink); background: var(--bg); }
+header, main, footer { max-width: 56rem; margin: 0 auto; padding: 0 1rem; }
+header { display: flex; justify-content: space-between; align-items: baseline; padding-top: 1rem; border-bottom: 2px solid var(--ink); }
+.brand { font-weight: 700; font-size: 1.3rem; color: var(--ink); text-decoration: none; }
+nav a { margin-left: 1rem; color: var(--accent); }
+h1 { font-size: 1.8rem; margin: 1.2rem 0 .4rem; }
+h2 { font-size: 1.15rem; margin: 0 0 .3rem; }
+.lead { font-size: 1.1rem; }
+.search { display: grid; grid-template-columns: 1fr; gap: .5rem; margin: 1rem 0; }
+.search input, .search select, .search button { font: inherit; padding: .6rem; border: 2px solid var(--ink); border-radius: 4px; }
+.search button { background: var(--accent); color: #fff; border-color: var(--accent); cursor: pointer; }
+@media (min-width: 40rem) { .search { grid-template-columns: 1fr auto auto auto auto; align-items: end; } .search label { align-self: center; } }
+.notice { border: 1px solid var(--line); border-radius: 6px; padding: 1rem; margin: 1rem 0; }
+.meta, .small, .muted { color: var(--muted); font-size: .9rem; }
+.facts { display: grid; grid-template-columns: 9rem 1fr; gap: .2rem .8rem; margin: .6rem 0; }
+.facts dt { font-weight: 600; } .facts dd { margin: 0; }
+.summary { background: #f3f7fb; border-left: 4px solid var(--accent); padding: .6rem .8rem; }
+.verbatim { white-space: pre-wrap; font: .9rem/1.4 ui-monospace, Menlo, Consolas, monospace; background: #fafafa; padding: .8rem; border: 1px solid var(--line); max-height: 24rem; overflow: auto; }
+details summary { cursor: pointer; color: var(--accent); }
+.actions { display: flex; gap: 1rem; align-items: center; }
+form.inline { display: inline; } form.inline button { font: inherit; background: none; border: 1px solid var(--line); border-radius: 4px; padding: .2rem .5rem; cursor: pointer; }
+.error { color: #b10e1e; font-weight: 600; }
+footer { border-top: 1px solid var(--line); margin-top: 2rem; padding: 1rem; }
+.disclaimer { font-weight: 600; }
