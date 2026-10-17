@@ -84,3 +84,24 @@ def test_feed_entry_geo_is_read_and_staff_names_are_not():
     n = gazette._parse_entry(entry)
     assert n and n.lat == 52.50401 and n.lon == -2.009055
     assert "Someone" not in repr(n) and "Staff" not in repr(n)
+
+
+def test_authority_cannot_be_the_gazette_and_places_with_postcodes_are_addresses():
+    text = ("Notice category: Energy Notice type: Electricity Publication date: 16 October 2026 Edition: The Edinburgh Gazette "
+            "Notice ID: 1 Notice code: 2103 ENERGIEKONTOR UK LTD. ELECTRICITY ACT 1989. Notice is hereby given that Energiekontor UK Ltd "
+            "has applied for consent to construct Meall Dearg Wind Farm at land north of Amulree. Copies are available at "
+            "Perth and Kinross Council, 2 High Street, Perth, PH1 5PH. " + "Representations should be received by 19th November 2026. " * 6)
+
+    def model(system, user, max_tokens):
+        if "Sentence:" in user:
+            return json.dumps({"supported": True, "quotes": ["construct Meall Dearg Wind Farm at land north of Amulree"]})
+        assert "Notice category:" not in user and "Edinburgh Gazette" not in user, "the catalogue line is stripped before the model reads the notice"
+        return json.dumps({"what": "Energiekontor UK Ltd has applied to construct Meall Dearg Wind Farm at land north of Amulree.",
+                           "places": ["land north of Amulree", "Perth and Kinross Council, 2 High Street, Perth, PH1 5PH"],
+                           "authority": "The Edinburgh Gazette", "starts": None, "ends": "19th November 2026", "kind": "electricity or energy",
+                           "objection": None, "summary": "The wind farm is at land north of Amulree."})
+
+    r = extract.extract(text, ask=model)
+    assert r.authority is None and "authority: The Edinburgh Gazette" in r.dropped_fields
+    assert r.places == ["land north of Amulree"] and r.dropped_places == ["Perth and Kinross Council, 2 High Street, Perth, PH1 5PH"]
+    assert r.ends == "19th November 2026" and r.kind == "electricity or energy" and r.what and r.summary

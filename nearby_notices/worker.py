@@ -35,6 +35,7 @@ def _run() -> None:
 
 def start() -> None:
     global _thread
+    config.discover_model()
     if _thread is None or not _thread.is_alive():
         _thread = threading.Thread(target=_run, name="notice-reader", daemon=True)
         _thread.start()

@@ -6,9 +6,34 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 
-MODEL = os.environ.get("NN_MODEL", "openai/qwen3.8-27b")
+MODEL = os.environ.get("NN_MODEL", "openai/local")
 MODEL_API_BASE = os.environ.get("NN_MODEL_API_BASE", "http://127.0.0.1:8696/v1")
 MODEL_API_KEY = os.environ.get("NN_MODEL_API_KEY", "local")
+MODEL_DISCOVERED = False
+
+
+def discover_model() -> str:
+    """Name the model honestly. A local OpenAI-compatible server (llama-server, Ollama, a proxy) ignores the model
+    field and serves whatever it has loaded, so unless NN_MODEL was set the name recorded with every plain-English
+    version is read from the server's own model list (only when it lists exactly one). Called once at startup."""
+    global MODEL, MODEL_DISCOVERED
+    if MODEL_DISCOVERED or "NN_MODEL" in os.environ:
+        MODEL_DISCOVERED = True
+        return MODEL
+    MODEL_DISCOVERED = True
+    try:
+        import httpx
+
+        r = httpx.get(f"{MODEL_API_BASE.rstrip('/')}/models", headers={"Authorization": f"Bearer {MODEL_API_KEY}"}, timeout=2)
+        items = r.json().get("data") or []
+        if len(items) == 1 and items[0].get("id"):
+            name = str(items[0]["id"]).replace("\\", "/").rsplit("/", 1)[-1]
+            name = name[:-5] if name.lower().endswith(".gguf") else name
+            MODEL = f"openai/{name}"
+    except Exception as e:  # noqa: BLE001 no server, or not OpenAI-shaped: keep the configured name
+        MODEL_DISCOVERY_NOTE = f"model name not discovered ({type(e).__name__}); using {MODEL}"
+        globals()["MODEL_DISCOVERY_NOTE"] = MODEL_DISCOVERY_NOTE
+    return MODEL
 DAILY_CALL_CAP = int(os.environ.get("NN_DAILY_CALL_CAP", "2000"))
 
 DB_PATH = Path(os.environ.get("NN_DB_PATH", ROOT / "data" / "notices.sqlite"))

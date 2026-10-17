@@ -20,7 +20,7 @@
       {% if r.x.objection %}<dt>To object or comment</dt><dd>&ldquo;{{ r.x.objection }}&rdquo; <span class="small">(quoted from the notice)</span></dd>{% endif %}
     </dl>
     {% if r.x.summary %}<p class="summary">{{ r.x.summary|join(' ') }}</p>{% endif %}
-    {% if r.x.removed %}<p class="small muted">{{ r.x.removed|length }} generated sentence{{ '' if r.x.removed|length == 1 else 's' }} removed because the notice did not support {{ 'it' if r.x.removed|length == 1 else 'them' }}.</p>{% endif %}
+    {% if r.x.removed %}<p class="small muted">{{ r.x.removed|length }} generated sentence{{ '' if r.x.removed|length == 1 else 's' }} removed by the checks{% if r.x.advice_removed %} ({{ r.x.advice_removed }} for telling you what to do){% endif %}: only sentences the notice supports word for word are shown.</p>{% endif %}
   {% endif %}
   <details><summary>The notice as published</summary><pre class="verbatim">{{ r.n.text }}</pre></details>
   <div class="actions">
