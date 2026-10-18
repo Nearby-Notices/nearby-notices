@@ -33,6 +33,15 @@ Authority 97%, kind 100%, dates 97% and 100%, objection sentence 100%, places re
 - **Six labels were stricter than the notice justified**: list notices where the model's eight-place cap could not reach a site I had chosen, a town name where the model correctly gave the street, and a junction used as a reference point. Relabelled under a stated rule (evals/README.md). This is label repair, not fitting: the rule is written down and applies to any future notice.
 - Left alone: one start date (the date of the notice rather than the date the order takes effect) and one authority (the deciding Ministers rather than the applicant company). Both are defensible readings; the labels stay strict so the number stays honest.
 
+## 18/10/2026, 00:30 to 01:55, first deployment to Azure
+
+- **The directory's security defaults block the Azure CLI's device-code login** (error 530035) even after a multi-factor sign-in to the portal. Rather than switch security defaults off, a service principal with Contributor on the one resource group was created from the portal's Cloud Shell and the CLI logs in as that; it is also what the deploy workflow uses. Least privilege and revocable in one click.
+- **The subscription stayed "read only" for about ten minutes after the upgrade to pay-as-you-go** (ReadOnlyDisabledSubscription on every write) while the portal already said Active. A retry loop in Cloud Shell waited it out.
+- **The budget command's date format**: `--time-period start-date=YYYY-MM-01T00:00:00Z end-date=...`; a bare date is rejected as "not the first of the month".
+- **The container re-synced packages at startup** because `uv run` syncs by default, pulling the dev group over the network on every cold start. Fixed with `UV_NO_SYNC=1` in the image.
+- **Model name case**: GitHub's registry requires lowercase image names; the first image workflow failed on the repository's mixed-case owner name.
+- Live check after creation: health, home, a first search (22 s, 9 notices), the Azure model reading them at about 5 s a notice against 16 to 45 s on the local model. The SQLite cache lives in the container's own disk, so it empties when the app scales to zero; a notice is re-read on the next search. Mounting a file share is the obvious next step if that ever matters.
+
 ## 17/10/2026, 22:44, the author's first search after the cache was cleared
 
 - **A page of empty cards.** Every cached plain-English version had been deleted earlier in the day (wrong model label), so a search of a Highland town showed twelve cards with only "Reading this notice..." and the verbatim text, filling in one at a time at 25 to 37 s each (the endpoint was slower than in the afternoon). It looked like the details had been lost. Fixes: at startup the reader re-reads every notice of every cached search that lacks a version under the current model (`worker.warm_up`), so a restart or a model change is invisible; a card being read now shows the first 400 characters of the notice under the "reading" line.

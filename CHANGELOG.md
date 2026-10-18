@@ -2,6 +2,12 @@
 
 All dates are the day the change was made, in the UK.
 
+## 18 October 2026
+
+- Live on Azure Container Apps (UK South) at https://nearby-notices.bluesea-79d4ea2e.uksouth.azurecontainerapps.io, reading with an Azure OpenAI gpt-4.1-mini deployment in the same resource group; scale-to-zero, one replica at most, £5 monthly budget with email alerts; image published to GitHub's container registry and pulled from there; `deploy/azure.sh` and the `deploy` workflow.
+- Public-endpoint settings: a lower daily model-call cap and a per-client searches-per-minute limit that keeps no addresses.
+- Startup warm-up re-reads cached searches; a card being read shows a preview of the notice; the store uses WAL and never holds a transaction across a network or model call; summaries no longer restate the authority or dates.
+
 ## 17 October 2026, after the first evaluation run
 
 - Heading: if the model's one-line heading fails the gate, the first gated summary sentence is used, not the Gazette's generic title (the first run fell back to the title in 37% of notices).

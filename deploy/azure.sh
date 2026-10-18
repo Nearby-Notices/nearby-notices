@@ -23,9 +23,10 @@ az account set --subscription "$SUB"
 az group create -n "$RG" -l "$LOC" -o none
 
 # 1. A budget alert before anything that can cost money: £5 a month, email at 80% and 100% of forecast and actual.
-start=$(date -u +%Y-%m-01)
+start=$(date -u +%Y-%m-01T00:00:00Z)
+az config set extension.use_dynamic_install=yes_without_prompt -o none 2>/dev/null || true
 az consumption budget create-with-rg --resource-group "$RG" --budget-name nearby-notices-monthly --amount 5 --category cost \
-  --time-grain Monthly --start-date "$start" --end-date 2030-01-01 \
+  --time-grain Monthly --time-period start-date="$start" end-date=2030-01-01T00:00:00Z \
   --notifications "{\"actual80\":{\"enabled\":true,\"operator\":\"GreaterThan\",\"threshold\":80,\"contactEmails\":[\"$ALERT_EMAIL\"]},\"actual100\":{\"enabled\":true,\"operator\":\"GreaterThan\",\"threshold\":100,\"contactEmails\":[\"$ALERT_EMAIL\"]}}" \
   -o none 2>/dev/null || echo "budget: already exists or the consumption extension is unavailable; set it in the portal (Cost Management > Budgets)"
 
