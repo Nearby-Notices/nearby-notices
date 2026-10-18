@@ -34,7 +34,8 @@ def db():
     con = sqlite3.connect(config.DB_PATH, timeout=30)
     con.row_factory = sqlite3.Row
     try:
-        con.execute("PRAGMA journal_mode=WAL")
+        # WAL needs shared memory, which a network file share (Azure Files) cannot give; there, NN_DB_JOURNAL=DELETE.
+        con.execute(f"PRAGMA journal_mode={config.DB_JOURNAL}")
         con.execute("PRAGMA busy_timeout=30000")
         con.executescript(SCHEMA)
         _migrate(con)

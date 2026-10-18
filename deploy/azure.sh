@@ -33,6 +33,15 @@ az consumption budget create-with-rg --resource-group "$RG" --budget-name nearby
 # 2. The Container Apps environment (consumption plan; the monthly free grant covers a small public tool).
 az containerapp env create -n "$ENV_NAME" -g "$RG" -l "$LOC" --logs-destination none -o none 2>/dev/null || true
 
+# 2b. Persistent storage for the SQLite cache: a 5 GB Azure Files share mounted at /data, so a deploy or a scale-to-zero
+#     does not empty the cache. SQLite cannot use WAL on a network share, so the app runs with NN_DB_JOURNAL=DELETE there.
+#     (Microsoft.Storage must be registered on the subscription once, by an Owner: az provider register -n Microsoft.Storage)
+SA="${STORAGE_ACCOUNT:-nearbynotices$(date +%s | tail -c 6)}"
+az storage account show -n "$SA" -g "$RG" -o none 2>/dev/null || az storage account create -n "$SA" -g "$RG" -l "$LOC" --sku Standard_LRS --kind StorageV2 --min-tls-version TLS1_2 --allow-blob-public-access false -o none
+SA_KEY=$(az storage account keys list -n "$SA" -g "$RG" --query '[0].value' -o tsv)
+az storage share-rm create --storage-account "$SA" -n data --quota 5 -o none 2>/dev/null || true
+az containerapp env storage set -n "$ENV_NAME" -g "$RG" --storage-name data --azure-file-account-name "$SA" --azure-file-account-key "$SA_KEY" --azure-file-share-name data --access-mode ReadWrite -o none
+
 # 3. The app: one replica at most, scale to zero when idle, the model settings and the registry token as secrets.
 az containerapp create -n "$APP" -g "$RG" --environment "$ENV_NAME" --image "$IMAGE" \
   --registry-server ghcr.io --registry-username "$GHCR_USER" --registry-password "$GHCR_TOKEN" \

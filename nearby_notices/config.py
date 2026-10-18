@@ -38,6 +38,7 @@ def discover_model() -> str:
 DAILY_CALL_CAP = int(os.environ.get("NN_DAILY_CALL_CAP", "2000"))
 
 DB_PATH = Path(os.environ.get("NN_DB_PATH", ROOT / "data" / "notices.sqlite"))
+DB_JOURNAL = "DELETE" if os.environ.get("NN_DB_JOURNAL", "WAL").upper() == "DELETE" else "WAL"
 USER_AGENT = os.environ.get("NN_USER_AGENT", "NearbyNotices/0.1 (open-source civic tool; contact via the repository)")
 GAZETTE_BASE = "https://www.thegazette.co.uk"
 POSTCODES_BASE = "https://api.postcodes.io"
