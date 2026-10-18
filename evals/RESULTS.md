@@ -1,22 +1,22 @@
 # Evaluation results
 
-Run 17/10/2026 21:49 UTC on openai/qwen3.8-27b-ablit (commit 461b5cc). Hand-labelled set: 30 notices across 10 Gazette categories, in `gold.jsonl`; the notices themselves are in `notices/`. Rerun with `uv run python evals/run.py`.
+Run 18/10/2026 17:34 UTC on azure/gpt-4.1-mini (commit 89d7e66). Hand-labelled set: 30 notices across 10 Gazette categories, in `gold.jsonl`; the notices themselves are in `notices/`. Rerun with `uv run python evals/run.py`.
 
 ## Extraction fields (per notice)
 
 | Field | Correct |
 |---|---|
-| Authority | 97% |
+| Authority | 90% |
 | Kind of notice | 100% |
-| Start date | 100% |
-| End date or deadline | 100% |
+| Start date | 93% |
+| End date or deadline | 97% |
 | How-to-object sentence present when the notice has one, absent when it does not | 100% |
 | Model's one-line heading passed the gate | 93% |
 | A gated heading shown (the model's, or the first gated summary sentence) | 100% |
-| Places affected found (recall) | 97% |
+| Places affected found (recall) | 92% |
 | Correspondence addresses wrongly listed as places | 0 |
 
-Summary sentences kept 74, removed by the gate 3; 0 of 30 notices ended with no summary sentence (the page then shows the facts and the notice only). 4.5 model calls and a median 45 s per notice. Errors: 0.
+Summary sentences kept 84, removed by the gate 8; 0 of 30 notices ended with no summary sentence (the page then shows the facts and the notice only). 5.0 model calls and a median 30 s per notice. Errors: 0.
 
 ## The gate (hand-written true and false sentences)
 

@@ -33,6 +33,10 @@ Authority 97%, kind 100%, dates 97% and 100%, objection sentence 100%, places re
 - **Six labels were stricter than the notice justified**: list notices where the model's eight-place cap could not reach a site I had chosen, a town name where the model correctly gave the street, and a junction used as a reference point. Relabelled under a stated rule (evals/README.md). This is label repair, not fitting: the rule is written down and applies to any future notice.
 - Left alone: one start date (the date of the notice rather than the date the order takes effect) and one authority (the deciding Ministers rather than the applicant company). Both are defensible readings; the labels stay strict so the number stays honest.
 
+## 18/10/2026, 18:34, evaluation on the live model
+
+Full run on the Azure OpenAI gpt-4.1-mini deployment the site uses (results/2026-10-18T18-08Z.json, commit 89d7e66): gate 60 of 60 and 60 of 60, adversarial 3 of 3 clean, consistency 25 of 25, authority 90%, kind 100%, starts 93%, ends 97%, objection 100%, places 92%, gated heading 30 of 30, 5.0 calls a notice. Against the local 27B run: same safety numbers, a few more field misses (authority and dates), 92% against 97% on places. The median 30 s a notice is the deployment's token-per-minute cap being hit by 300 calls in sequence; a single notice reads in about 5 s. The results page now names the model that is actually live.
+
 ## 18/10/2026, 00:30 to 01:55, first deployment to Azure
 
 - **The directory's security defaults block the Azure CLI's device-code login** (error 530035) even after a multi-factor sign-in to the portal. Rather than switch security defaults off, a service principal with Contributor on the one resource group was created from the portal's Cloud Shell and the CLI logs in as that; it is also what the deploy workflow uses. Least privilege and revocable in one click.
