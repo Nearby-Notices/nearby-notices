@@ -40,7 +40,9 @@ Authority 97%, kind 100%, dates 97% and 100%, objection sentence 100%, places re
 - **The budget command's date format**: `--time-period start-date=YYYY-MM-01T00:00:00Z end-date=...`; a bare date is rejected as "not the first of the month".
 - **The container re-synced packages at startup** because `uv run` syncs by default, pulling the dev group over the network on every cold start. Fixed with `UV_NO_SYNC=1` in the image.
 - **Model name case**: GitHub's registry requires lowercase image names; the first image workflow failed on the repository's mixed-case owner name.
-- Live check after creation: health, home, a first search (22 s, 9 notices), the Azure model reading them at about 5 s a notice against 16 to 45 s on the local model. The SQLite cache lives in the container's own disk, so it empties when the app scales to zero; a notice is re-read on the next search. Mounting a file share is the obvious next step if that ever matters.
+- Live check after creation: health, home, a first search (22 s, 9 notices), the Azure model reading them at about 5 s a notice against 16 to 45 s on the local model.
+- **The cache emptied on every deploy and every wake from zero**, because SQLite lived on the container's own disk. The author said it mattered. Fix: a 5 GB Azure Files share mounted at `/data`. First attempt crashed the container on start: SQLite's WAL mode needs shared memory and byte-range locks that an SMB share cannot give. Second attempt works: journal mode `DELETE` on that mount (`NN_DB_JOURNAL`) and the share mounted with `nobrl,cache=none`. Verified: the database file on the share grows with each search and a new revision serves cached notices without re-reading them.
+- **Registering a resource provider needs an Owner**, not the scoped service principal: Microsoft.Storage was registered from the portal's Cloud Shell before the share could be created.
 
 ## 17/10/2026, 22:44, the author's first search after the cache was cleared
 
