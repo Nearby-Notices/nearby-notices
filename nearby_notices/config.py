@@ -9,6 +9,7 @@ ROOT = Path(__file__).resolve().parent.parent
 MODEL = os.environ.get("NN_MODEL", "openai/local")
 MODEL_API_BASE = os.environ.get("NN_MODEL_API_BASE", "http://127.0.0.1:8696/v1")
 MODEL_API_KEY = os.environ.get("NN_MODEL_API_KEY", "local")
+MODEL_API_VERSION = os.environ.get("NN_MODEL_API_VERSION", "")   # Azure OpenAI needs one, for example 2024-10-21
 MODEL_DISCOVERED = False
 
 
@@ -43,3 +44,4 @@ POSTCODES_BASE = "https://api.postcodes.io"
 DEFAULT_DISTANCE_MILES = int(os.environ.get("NN_DEFAULT_DISTANCE", "3"))
 MAX_RESULTS = int(os.environ.get("NN_MAX_RESULTS", "12"))
 FEED_CACHE_SECONDS = int(os.environ.get("NN_FEED_CACHE_SECONDS", "3600"))
+SEARCHES_PER_MINUTE = int(os.environ.get("NN_SEARCHES_PER_MINUTE", "10"))   # per client; a public endpoint should keep this low

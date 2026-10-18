@@ -14,11 +14,11 @@ from datetime import date
 from pathlib import Path
 
 from fastapi import FastAPI, Form, HTTPException, Request
-from fastapi.responses import HTMLResponse, RedirectResponse
+from fastapi.responses import HTMLResponse, PlainTextResponse, RedirectResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 
-from . import config, geo, groups, places, search, store, worker
+from . import config, geo, groups, places, ratelimit, search, store, worker
 from .categories import ALLOWED, EXCLUDED
 
 logging.getLogger("uvicorn.access").disabled = True
@@ -26,6 +26,21 @@ ROOT = Path(__file__).resolve().parent.parent
 app = FastAPI(title="Nearby Notices", docs_url=None, redoc_url=None)
 app.mount("/static", StaticFiles(directory=ROOT / "static"), name="static")
 templates = Jinja2Templates(directory=ROOT / "templates")
+
+# Searches cost Gazette and model calls; the rest is cheap. Limits per client per minute, with no address kept (see ratelimit.py).
+LIMITS = {"/search": config.SEARCHES_PER_MINUTE, "/feedback": 30}
+
+
+@app.middleware("http")
+async def _limit(request: Request, call_next):
+    limit = LIMITS.get(request.url.path)
+    if limit is not None:
+        forwarded = request.headers.get("x-forwarded-for", "")
+        address = forwarded.split(",")[0].strip() if forwarded else (request.client.host if request.client else "")
+        if not ratelimit.allow(address, limit):
+            return PlainTextResponse("Too many requests from your connection in the last minute. Please wait a moment and try again.",
+                                     status_code=429, headers={"Retry-After": "60"})
+    return await call_next(request)
 
 DISCLAIMER = ("Not affiliated with The Gazette, the Government or any council. This tool shows public notices in plain "
               "English and does not give advice. Always read the notice itself. Notice data: The Gazette, "
