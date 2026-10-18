@@ -103,7 +103,16 @@ make test       # ruff + pytest, no network, no model
 make eval       # live evaluation, writes evals/RESULTS.md
 ```
 
+<!-- live-link -->
+<!-- /live-link -->
+
 Settings are environment variables; see [.env.example](.env.example). With a local OpenAI-compatible server (llama-server, Ollama) leave `NN_MODEL` unset and the served model's name is read from the server at startup, so the name recorded with each plain-English version is the model actually used. A `Dockerfile` builds the website; mount `/data` to keep the cache.
+
+## Deploy
+
+The public instance runs on Azure Container Apps, inside the consumption plan's monthly free grant, with the image published to GitHub's container registry (free) and pulled from there, so there is no registry bill. One script does it: [deploy/azure.sh](deploy/azure.sh), run as a service principal that holds Contributor on one resource group and nothing else. It creates the resource group, a £5 monthly budget with email alerts, the environment, and the app with the model settings as secrets, scale-to-zero when idle and one replica at most. On every push to `main` the `image` workflow builds and publishes the image and the `deploy` workflow rolls the app to it.
+
+Public-endpoint settings differ from a private run in two ways, both environment variables: a lower daily model-call cap (`NN_DAILY_CALL_CAP`) and a per-client searches-per-minute limit (`NN_SEARCHES_PER_MINUTE`) that keeps no addresses.
 
 ## Repository map
 
