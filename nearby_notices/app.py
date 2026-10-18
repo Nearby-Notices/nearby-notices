@@ -76,7 +76,7 @@ def home(request: Request):
 
 
 @app.get("/search", response_class=HTMLResponse)
-def search_page(request: Request, place: str = "", distance: float | None = None, unit: str = "mi", view: str = "all"):
+def search_page(request: Request, place: str = "", distance: float | None = None, unit: str = "mi", view: str = "map"):
     unit = geo.unit_key(unit)
     distance = geo.choose_distance(distance if distance is not None else config.DEFAULT_DISTANCE_MILES, unit)
     found = search.find(place, distance, unit)
@@ -98,7 +98,7 @@ def search_page(request: Request, place: str = "", distance: float | None = None
     return templates.TemplateResponse(request, "results.html", _ctx(
         request, place=where, distance=found.distance, unit=unit, distance_label=geo.fmt(found.asked_m, unit), asked_m=found.asked_m,
         results=results, grouped=grouped, counts=counts, pending_ids=found.pending, order=groups.ORDER, points=points,
-        view=view if view in ("all", "grouped", "map") else "all", back=back, card_query=card_query,
+        view=view if view in ("all", "grouped", "map") else "map", back=back, card_query=card_query,
         names={g: groups.group_name(g) for g in groups.ORDER}))
 
 

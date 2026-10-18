@@ -89,3 +89,10 @@ def test_warm_up_queues_cached_searches_that_lack_plain_english(client, monkeypa
         store.put_extraction(con, "1", config.MODEL, {"what": "x", "summary": [], "removed": []}, 0, 0, 0.0)
     queued.clear()
     assert worker.warm_up() == 2 and sorted(queued) == ["2", "3"]
+
+
+def test_the_map_is_the_default_view(client):
+    page = client.get("/search", params={"place": "Dudley", "distance": 3, "unit": "mi"}).text
+    assert 'id="map"' in page and "L.map('map'" in page, "no view parameter means the map view"
+    assert 'id="n1"' in page, "the list still follows the map"
+    assert 'id="map"' not in client.get("/search", params={"place": "Dudley", "distance": 3, "unit": "mi", "view": "all"}).text
