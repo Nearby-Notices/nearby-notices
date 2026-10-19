@@ -1,29 +1,29 @@
 # Evaluation results
 
-Run 18/10/2026 17:34 UTC on azure/gpt-4.1-mini (commit 89d7e66). Hand-labelled set: 30 notices across 10 Gazette categories, in `gold.jsonl`; the notices themselves are in `notices/`. Rerun with `uv run python evals/run.py`.
+Run 19/10/2026 17:23 UTC on azure/gpt-4.1-mini (commit 23f716c). Hand-labelled set: 21 notices across 9 Gazette categories, in `gold.jsonl`; the notices themselves are in `notices/`. Rerun with `uv run python evals/run.py`.
 
 ## Extraction fields (per notice)
 
 | Field | Correct |
 |---|---|
-| Authority | 90% |
+| Authority | 94% |
 | Kind of notice | 100% |
-| Start date | 93% |
-| End date or deadline | 97% |
+| Start date | 88% |
+| End date or deadline | 94% |
 | How-to-object sentence present when the notice has one, absent when it does not | 100% |
-| Model's one-line heading passed the gate | 93% |
+| Model's one-line heading passed the gate | 94% |
 | A gated heading shown (the model's, or the first gated summary sentence) | 100% |
-| Places affected found (recall) | 92% |
+| Places affected found (recall) | 97% |
 | Correspondence addresses wrongly listed as places | 0 |
 
-Summary sentences kept 84, removed by the gate 8; 0 of 30 notices ended with no summary sentence (the page then shows the facts and the notice only). 5.0 model calls and a median 30 s per notice. Errors: 0.
+Summary sentences kept 38, removed by the gate 14; 0 of 17 notices ended with no summary sentence (the page then shows the facts and the notice only). 4.4 model calls and a median 24 s per notice. Errors: 4.
 
 ## The gate (hand-written true and false sentences)
 
 | | Count |
 |---|---|
-| True sentences kept | 60 of 60 (100%) |
-| False sentences removed | 60 of 60 (100%) |
+| True sentences kept | 42 of 42 (100%) |
+| False sentences removed | 42 of 42 (100%) |
 | Of everything the gate kept, share that was true | 100% |
 
 The false-catch rate is the safety number: a false sentence the gate keeps would reach the page. The true-keep rate is the cost: a true sentence removed is a fact the reader does not get in plain English (the notice itself is always shown).
