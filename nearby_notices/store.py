@@ -4,7 +4,10 @@ It never stores what a user typed, and it refuses any notice outside the allowed
 """
 from __future__ import annotations
 
+import hashlib
+import hmac
 import json
+import os
 import sqlite3
 import time
 from contextlib import contextmanager
@@ -55,6 +58,8 @@ def _migrate(con: sqlite3.Connection) -> None:
     if "points" not in cols:
         con.execute("ALTER TABLE notices ADD COLUMN points TEXT")
         con.execute("DELETE FROM feed_cache")
+    # Before 19/10/2026 the feed cache was keyed on the searched postcode. Keys are now one-way codes; drop any old ones.
+    con.execute("DELETE FROM feed_cache WHERE key NOT LIKE 'h:%'")
 
 
 def put_notice(con: sqlite3.Connection, n) -> None:
@@ -92,6 +97,15 @@ def put_extraction(con: sqlite3.Connection, nid: str, model: str, payload: dict,
     )
 
 
+_KEY_SALT = os.urandom(32)   # new on every start: a key cannot be turned back into a postcode, even with the database
+
+
+def feed_key(postcode: str, radius: int) -> str:
+    """The cache key for a feed lookup: a keyed one-way code of the postcode, never the postcode itself."""
+    code = hmac.new(_KEY_SALT, (postcode or "").upper().replace(" ", "").encode(), hashlib.sha256).hexdigest()[:32]
+    return f"h:{code}|g{radius}"
+
+
 def cached_feed(con: sqlite3.Connection, key: str) -> list | None:
     row = con.execute("SELECT payload, fetched_at FROM feed_cache WHERE key=?", (key,)).fetchone()
     if row and time.time() - row["fetched_at"] < config.FEED_CACHE_SECONDS:
@@ -100,7 +114,9 @@ def cached_feed(con: sqlite3.Connection, key: str) -> list | None:
 
 
 def put_feed(con: sqlite3.Connection, key: str, ids: list[str]) -> None:
-    con.execute("INSERT OR REPLACE INTO feed_cache VALUES (?,?,?)", (key, json.dumps(ids), time.time()))
+    now = time.time()
+    con.execute("DELETE FROM feed_cache WHERE fetched_at < ?", (now - config.FEED_CACHE_SECONDS,))
+    con.execute("INSERT OR REPLACE INTO feed_cache VALUES (?,?,?)", (key, json.dumps(ids), now))
 
 
 def bump(con: sqlite3.Connection, name: str) -> int:

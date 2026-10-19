@@ -188,3 +188,27 @@ def test_store_uses_wal_so_readers_never_block_on_the_reader_thread(tmp_path, mo
     t.join()
     with store.db() as con:
         assert con.execute("SELECT up FROM feedback WHERE notice_id='1'").fetchone()[0] == 1
+
+
+def test_quote_check_matches_whole_words_only():
+    from nearby_notices import extract
+    tn = extract._norm("The closure runs until 21 May 2026 on High Street.")
+    assert extract._in_text("21 May 2026", tn)
+    assert not extract._in_text("1 May 2026", tn)
+    assert not extract._in_text("igh Street", tn)
+
+
+def test_passive_instructions_count_as_advice():
+    from nearby_notices import extract
+    assert extract.is_advice("Written comments should be made to the EPC within 21 days.")
+    assert extract.is_advice("Objections must be sent to the Council by 4 November.")
+    assert not extract.is_advice("Objections may be sent to the Council within 21 days.")
+
+
+def test_feed_cache_never_stores_the_postcode(tmp_path, monkeypatch):
+    from nearby_notices import config, store
+    monkeypatch.setattr(config, "DB_PATH", str(tmp_path / "t.db"), raising=False)
+    key = store.feed_key("IV2 3LA", 5)
+    assert key.startswith("h:") and "IV2" not in key.upper() and "3LA" not in key.upper()
+    assert key == store.feed_key("iv23la", 5)            # same postcode, same key within a run
+    assert key != store.feed_key("IV2 3LB", 5)

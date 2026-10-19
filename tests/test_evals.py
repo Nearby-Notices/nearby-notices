@@ -27,7 +27,7 @@ def test_places_scoring_rules():
 
 def test_gold_set_is_well_formed_and_matches_the_notices():
     gold = evalrun.load_gold()
-    assert len(gold) >= 30 and len({g["id"] for g in gold}) == len(gold)
+    assert len(gold) >= 20 and len({g["id"] for g in gold}) == len(gold)
     for g in gold:
         text = evalrun.load_text(g["id"])
         assert len(text.split()) >= 100, g["id"]

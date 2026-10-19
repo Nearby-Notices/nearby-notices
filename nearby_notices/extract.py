@@ -80,7 +80,8 @@ _INJECTION = re.compile(
 _ADVICE = re.compile(
     r"^(please |you (should|must|need to|ought to|are advised to) )?(contact|call|phone|ring|pay|visit|go to|send|submit|email|write to|"
     r"do not|don't|make sure|remember|apply|object|act)\b|\b(you|your|residents?|people|readers?|occupiers?|anyone) (should|must|need to|needs to|ought to|"
-    r"are advised|is advised|had better)\b|\b(we |i )?(recommend|advise|urge|suggest)\b", re.IGNORECASE)
+    r"are advised|is advised|had better)\b|\b(we |i )?(recommend|advise|urge|suggest)\b|"
+    r"\b(should|must|need to) be (made|sent|submitted|lodged|received|addressed|emailed|posted|delivered|given)\b", re.IGNORECASE)
 
 _calls_today: dict[str, int] = {}
 
@@ -116,7 +117,8 @@ def _norm(s: str) -> str:
 
 def _in_text(fragment: str, text_norm: str) -> bool:
     f = _norm(fragment)
-    return bool(f) and f in text_norm
+    # Whole words only: "1 May 2026" must not pass against "21 May 2026".
+    return bool(f) and f" {f} " in f" {text_norm} "
 
 
 def scrub(text: str) -> tuple[str, int]:

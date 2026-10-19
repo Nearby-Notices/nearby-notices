@@ -32,7 +32,7 @@ def within(m: float | None, asked_m: float) -> bool:
 def candidates(con, where: places.Place, radius: int) -> list[str]:
     """Every notice the Gazette lists within one of its honoured radii, cached for an hour under that radius so a
     change of distance or unit within it needs no new feed call."""
-    key = f"{where.postcode}|g{radius}"
+    key = store.feed_key(where.postcode, radius)
     ids = store.cached_feed(con, key)
     if ids is not None:
         return ids
