@@ -84,7 +84,7 @@ def select(con, where: places.Place, ids: list[str], asked_m: float) -> list[str
 
 def describe(con, row: dict, where: places.Place | None, unit: str, asked_m: float | None) -> dict:
     """One notice as the pages and the tools see it: record, plain-English version, group, feedback counts, where it sits."""
-    ex = store.get_extraction(con, row["id"], config.MODEL)
+    ex = extract.refilter(store.get_extraction(con, row["id"], config.MODEL))
     fb = con.execute("SELECT up, down FROM feedback WHERE notice_id=?", (row["id"],)).fetchone()
     pts = filed_points(row)
     near = geo.nearest(pts, where.lat, where.lon) if where and where.lat is not None and where.lon is not None and pts else None
@@ -115,7 +115,7 @@ def read(notice_id: str, make_now: bool = False) -> tuple[dict, dict | None] | N
         row = store.get_notice(con, notice_id)
         if not row:
             return None
-        ex = store.get_extraction(con, notice_id, config.MODEL)
+        ex = extract.refilter(store.get_extraction(con, notice_id, config.MODEL))
     if ex is None and make_now:
         r = extract.extract(row["text"])      # outside any transaction: this can take half a minute
         ex = r.to_dict()

@@ -15,5 +15,5 @@
   <li>Feedback: {{ stats.feedback_up }} accurate, {{ stats.feedback_down }} wrong or unclear</li>
   <li>Searches by day: {% for d in stats.searches_by_day %}{{ d.day }}: {{ d.n }}{% if not loop.last %}; {% endif %}{% endfor %}</li>
 </ul>
-<p class="small">Model in use: {{ model }}. Built with an AI coding assistant under the author's direction, in the author's own time, with open data. Source code and the evaluation are in the repository.</p>
+<p class="small">Model in use: {{ model }}. Built with an AI coding assistant under the author's direction, in the author's own time, with open data. The evaluation and its results are available on request.</p>
 {% endblock %}

@@ -6,7 +6,7 @@ Run it: `uv run python evals/run.py` (about 15 minutes on a local 24B model; it 
 
 ## The set
 
-30 notices in `notices/`, chosen to cover 10 Gazette categories (planning, road traffic orders, highways stopping-up, environmental protection, electricity consents, water, land drainage, clean air, forestry and plant health, flood prevention), three nations, and sizes from 120 to 2,700 words. They are public records reused under the Open Government Licence v3; the first line of each file is the id, category, date and Gazette link.
+21 notices in `notices/` (30 until 19 October 2026, when nine were removed for privacy), chosen to cover 9 Gazette categories (planning, road traffic orders, highways stopping-up, environmental protection, electricity consents, water, land drainage, clean air, forestry and plant health, flood prevention), three nations, and sizes from 120 to 2,700 words. They are public records reused under the Open Government Licence v3; the first line of each file is the id, category, date and Gazette link.
 
 `gold.jsonl` holds one line per notice with:
 

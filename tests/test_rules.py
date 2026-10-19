@@ -212,3 +212,14 @@ def test_feed_cache_never_stores_the_postcode(tmp_path, monkeypatch):
     assert key.startswith("h:") and "IV2" not in key.upper() and "3LA" not in key.upper()
     assert key == store.feed_key("iv23la", 5)            # same postcode, same key within a run
     assert key != store.feed_key("IV2 3LB", 5)
+
+
+def test_saved_readings_are_refiltered_when_shown():
+    from nearby_notices import extract
+    ex = {"what": "Written comments should be made to the EPC within 21 days.",
+          "summary": ["Written comments should be made to the EPC within 21 days.", "A wind farm of 21 turbines is proposed."],
+          "removed": [], "advice_removed": 0}
+    out = extract.refilter(ex)
+    assert out["summary"] == ["A wind farm of 21 turbines is proposed."]
+    assert out["what"] == "A wind farm of 21 turbines is proposed." and out["advice_removed"] == 1
+    assert extract.refilter(None) is None

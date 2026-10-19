@@ -29,23 +29,23 @@ The threat model, including what is not defended against, is in [docs/safety.md]
 
 ## Evaluation
 
-Measured, not asserted. `evals/` holds 30 hand-labelled notices across 10 Gazette categories, 120 hand-written true and false sentences for the gate, and 3 adversarial notices. `uv run python evals/run.py` runs everything live against the configured model and writes [evals/RESULTS.md](evals/RESULTS.md).
+Measured, not asserted. `evals/` holds 21 notices across 9 Gazette categories (labelled with an AI assistant and checked by hand against the notice text), 84 true and false sentences for the gate, and 3 adversarial notices. On 19 October 2026 nine notices were removed from the set for privacy; earlier runs used 30. `uv run python evals/run.py` runs everything live against the configured model and writes [evals/RESULTS.md](evals/RESULTS.md).
 
 <!-- results-summary -->
-Latest run, 18 October 2026, on the model the live site uses (Azure OpenAI gpt-4.1-mini), commit 89d7e66 (full table and caveats in [evals/RESULTS.md](evals/RESULTS.md)):
+Latest run, 19 October 2026, on the model the live site uses (Azure OpenAI gpt-4.1-mini), commit 23f716c (full table and caveats in [evals/RESULTS.md](evals/RESULTS.md)):
 
-| | gpt-4.1-mini (live) | Local 27B Qwen3 build, 17 October |
-|---|---|---|
-| Gate: false sentences caught | 60 of 60 | 60 of 60 |
-| Gate: true sentences kept | 60 of 60 | 60 of 60 |
-| Adversarial notices with nothing forbidden shown | 3 of 3 | 3 of 3 |
-| Authority, kind, start date, end date, objection sentence | 90%, 100%, 93%, 97%, 100% | 97%, 100%, 100%, 100%, 100% |
-| Places affected found | 92%, no correspondence addresses listed | 97%, none listed |
-| A gated heading shown | 30 of 30 (the model's own passed in 28) | 30 of 30 (28) |
-| Same notice twice, fields agreeing | 25 of 25 | 25 of 25 |
-| Model calls per notice | 5.0 | 4.5 |
+| | gpt-4.1-mini (live), 21-notice set |
+|---|---|
+| Gate: false sentences caught | 42 of 42 |
+| Gate: true sentences kept | 42 of 42 |
+| Adversarial notices with nothing forbidden shown | 3 of 3 |
+| Authority, kind, start date, end date, objection sentence | 94%, 100%, 88%, 94%, 100% (17 notices; 4 hit a model error at the start of the run) |
+| Places affected found | 97%, no correspondence addresses listed |
+| A gated heading shown | 17 of 17 |
+| Same notice twice, fields agreeing | 25 of 25 |
+| Model calls per notice | 4.4, median 24 s per notice under the deployment's throughput cap |
 
-The two models agree on the safety numbers and differ on the fields: the smaller cloud model names the authority and the dates slightly less often, and the per-notice time in the run (a median of 30 s against about 5 s for a single notice in isolation) reflects the deployment's throughput cap being hit by 300 calls in a row, not the model. The first run on 17 October scored 86% on places, kept 56 of 60 true sentences and showed a gated heading in 19 of 30; what changed between the runs, and why, is in [docs/incidents.md](docs/incidents.md).
+Earlier runs on the 30-notice set (17 and 18 October, local and Azure models) and what changed between them, and why, are in [docs/incidents.md](docs/incidents.md).
 <!-- /results-summary -->
 
 What the numbers mean, and the labelling rules, are in [evals/README.md](evals/README.md). The headline to watch is the gate's false-catch rate: a false sentence the gate keeps would reach the page.

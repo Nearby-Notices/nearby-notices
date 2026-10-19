@@ -139,6 +139,24 @@ def is_advice(sentence: str) -> bool:
     return bool(_ADVICE.search(sentence.strip()))
 
 
+def refilter(ex: dict | None) -> dict | None:
+    """Apply today's advice filter to a reading saved earlier, so a stored summary can never show a sentence the
+    current rules would remove. Used wherever a saved reading is shown."""
+    if not ex:
+        return ex
+    keep, dropped = [], []
+    for s in ex.get("summary") or []:
+        (dropped if is_advice(s) else keep).append(s)
+    if dropped:
+        ex["summary"] = keep
+        ex["removed"] = (ex.get("removed") or []) + dropped
+        ex["advice_removed"] = (ex.get("advice_removed") or 0) + len(dropped)
+    if ex.get("what") and is_advice(ex["what"]):
+        ex["what"] = keep[0] if keep else None
+        ex["heading_source"] = "summary" if keep else None
+    return ex
+
+
 def for_model(text: str) -> str:
     """The notice without the Gazette's catalogue line, capped to what the model reads. Pass scrubbed text."""
     t = _CATALOGUE.sub("", text, count=1)
