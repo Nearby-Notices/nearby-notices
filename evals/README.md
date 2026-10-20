@@ -34,7 +34,7 @@ Not measured here: whether the summary sentences the model chose to write are th
 
 ## Accuracy by subgroup
 
-`uv run python evals/subgroups.py` writes `SUBGROUPS.md`: does the tool work as well on every kind of notice? The tool reads notices, not people, so the groups are the notice's nation (assigned by hand in `subgroups.json`, with the evidence for each), its length and its type. For each group it gives the gate's result with the exact bound, and the share of notices with all five fields right, with a Wilson interval and a Fisher exact test against the rest; the notice is the unit, because one notice's fields are not independent. On the current runs no group differs from the rest at the 5% level (smallest p = 0.338 on Azure OpenAI, Scotland 8 of 12 against 8 of 9). The groups are small: only two notices are Welsh, so the gate's guarantee for Wales is only that the leak rate is below 52.7%. More Welsh notices are the first thing to add.
+`uv run python evals/subgroups.py` writes `SUBGROUPS.md`: does the tool work as well on every kind of notice? The tool reads notices, not people, so the groups are the notice's nation (assigned by hand in `subgroups.json`, with the evidence for each), its length and its type. For each group it gives the gate's result with the exact bound, and the share of notices with all five fields right, with a Wilson interval and a Fisher exact test against the rest; the notice is the unit, because one notice's fields are not independent. On the run of 20 October 2026 no group differs from the rest at the 5% level (smallest p = 0.262: notices over 700 words, 6 of 6 against 10 of 15). The groups are small: only two notices are Welsh, so the gate's guarantee for Wales is only that the leak rate is below 52.7%. More Welsh notices are the first thing to add.
 
 ## The gate as an Inspect task
 
@@ -45,6 +45,18 @@ uv run --group evals inspect eval evals/inspect_gate.py --model azureai/gpt-4.1-
 ```
 
 It needs `AZUREAI_API_KEY`, and `AZUREAI_BASE_URL` pointing at the deployment (`https://<resource>.openai.azure.com/openai/deployments/<deployment>`). The run of 20 October 2026 on Azure OpenAI gpt-4.1-mini scored 84 of 84: every true sentence kept and every false one removed, with no sample errors.
+
+## The pipeline (DVC)
+
+The whole evaluation is a [DVC](https://dvc.org) pipeline, defined in `dvc.yaml` at the repository root:
+
+```
+uv run --group evals dvc repro            # rerun whatever is out of date
+uv run --group evals dvc status           # what would rerun, and why
+uv run --group evals dvc metrics diff     # how the headline numbers moved since the last commit
+```
+
+Four stages. `evaluate` runs `run.py` on the live model and `inspect` runs the Inspect task; these two call the model. `statistics` (writing `STATISTICS.md` and `metrics.json`) and `subgroups` only read saved runs. DVC hashes every input, so a change to the labels, the notices or the extraction code reruns the model stages, and a change to a report reruns only that report. `dvc.lock` records the hash of every input and output of the last run, which ties each published number to the exact labels, code and model setting behind it. The model setting is in `params.yaml`; the endpoint and key come from the environment (`NN_MODEL_API_BASE`, `NN_MODEL_API_KEY`, and for Inspect `AZUREAI_BASE_URL`, `AZUREAI_API_KEY`), so no secret is versioned. Outputs stay in git (`cache: false`). The held-out set becomes a stage once its labels are checked.
 
 ## Changing the set
 
