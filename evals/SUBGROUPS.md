@@ -2,7 +2,7 @@
 
 Computed by `evals/subgroups.py`. Gold set: 21 notices. Does the tool work as well on every kind of notice? It reads notices, not people, so the groups are where a notice comes from and what it looks like. Nations are assigned by hand in `subgroups.json`, with the evidence for each.
 
-## The gate, by subgroup (19/10/2026 17:23 UTC, azure/gpt-4.1-mini)
+## The gate, by subgroup (20/10/2026 16:07 UTC, azure/gpt-4.1-mini)
 
 | Group | Notices | False sentences removed | True leak rate is below (95%, exact) | True sentences kept |
 |---|---|---|---|---|
@@ -17,7 +17,7 @@ Computed by `evals/subgroups.py`. Gold set: 21 notices. Does the tool work as we
 
 **Reading.** Across the set, 42 of 42 false sentences were removed and 42 of 42 true ones kept. No false sentence got through in any group. The guarantee is weakest where there are fewest notices: with 4 false sentences (nation: Wales), the leak rate is only shown to be below 52.7%.
 
-## All five fields right, by subgroup (Azure OpenAI, every notice scored: 18/10/2026 17:34 UTC, azure/gpt-4.1-mini)
+## All five fields right, by subgroup (the newest run: 20/10/2026 16:07 UTC, azure/gpt-4.1-mini)
 
 Fields: authority, kind, start date, end date, objection sentence. Fisher p tests each group against the rest of the set.
 
@@ -27,14 +27,14 @@ Fields: authority, kind, start date, end date, objection sentence. Fisher p test
 | Nation: Scotland | 12 | 8 | 39.1% to 86.2% | 0.338 |
 | Nation: Wales | 2 | 2 | 34.2% to 100.0% | 1.000 |
 | Length: Under 300 words | 7 | 5 | 35.9% to 91.8% | 1.000 |
-| Length: 300 to 700 words | 8 | 6 | 40.9% to 92.9% | 1.000 |
-| Length: Over 700 words | 6 | 5 | 43.6% to 97.0% | 1.000 |
+| Length: 300 to 700 words | 8 | 5 | 30.6% to 86.3% | 0.325 |
+| Length: Over 700 words | 6 | 6 | 61.0% to 100.0% | 0.262 |
 | Type: All other types | 14 | 11 | 52.4% to 92.4% | 1.000 |
 | Type: Roads and highways | 7 | 5 | 35.9% to 91.8% | 1.000 |
 
-**Reading.** 16 of 21 notices had all five fields right. The biggest gap is nation: Scotland: 8 of 12, against 8 of 9 for the rest (Fisher exact p = 0.338). No group differs from the rest at the 5% level.
+**Reading.** 16 of 21 notices had all five fields right. The biggest gap is length: Over 700 words: 6 of 6, against 10 of 15 for the rest (Fisher exact p = 0.262). No group differs from the rest at the 5% level.
 
-## All five fields right, by subgroup (local 27B model: 17/10/2026 21:49 UTC, openai/qwen3.8-27b-ablit)
+## All five fields right, by subgroup (for comparison, the local 27B model: 17/10/2026 21:49 UTC, openai/qwen3.8-27b-ablit)
 
 Fields: authority, kind, start date, end date, objection sentence. Fisher p tests each group against the rest of the set.
 

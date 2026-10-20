@@ -1,0 +1,67 @@
+# The evaluation as a DVC pipeline: `uv run --group evals dvc repro` reruns only the stages whose inputs changed,
+# and dvc.lock records the hash of every input and output of the last run, so a result can be traced to the exact
+# labels, notices, code and model that produced it. `dvc metrics diff` compares the headline numbers between commits.
+#
+# Stages: evaluate (the live model on the labelled set) and inspect (the gate in Inspect) call the model; statistics
+# and subgroups only read saved runs, so a change to the reports never pays for a model run. For the same reason
+# evals/stats.py is not an input of evaluate, although run.py borrows its interval functions to word RESULTS.md.
+# Outputs stay in git (cache: false); DVC adds the hashes, not a second copy.
+stages:
+  evaluate:
+    cmd: NN_MODEL=${eval.model} NN_MODEL_API_VERSION=${eval.api_version} python evals/run.py --quiet
+    deps:
+      - evals/run.py
+      - evals/gold.jsonl
+      - evals/notices
+      - evals/adversarial.jsonl
+      - nearby_notices/extract.py
+      - nearby_notices/config.py
+    params:
+      - eval.model
+      - eval.api_version
+    outs:
+      - evals/RESULTS.md:
+          cache: false
+      - evals/results:
+          cache: false
+          persist: true    # earlier runs stay; the reports compare against them
+
+  inspect:
+    cmd: inspect eval evals/inspect_gate.py --model ${inspect.model} --log-dir evals/inspect_logs
+    deps:
+      - evals/inspect_gate.py
+      - evals/gold.jsonl
+      - evals/notices
+      - nearby_notices/extract.py
+    params:
+      - inspect.model
+    outs:
+      - evals/inspect_logs:
+          cache: false
+          persist: true
+
+  statistics:
+    cmd: python evals/stats.py
+    deps:
+      - evals/stats.py
+      - evals/gold.jsonl
+      - evals/results
+    outs:
+      - evals/STATISTICS.md:
+          cache: false
+    metrics:
+      - evals/metrics.json:
+          cache: false
+
+  subgroups:
+    cmd: python evals/subgroups.py
+    deps:
+      - evals/subgroups.py
+      - evals/subgroups.json
+      - evals/stats.py
+      - evals/gold.jsonl
+      - evals/notices
+      - evals/results
+    outs:
+      - evals/SUBGROUPS.md:
+          cache: false

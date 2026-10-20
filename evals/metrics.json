@@ -1,0 +1,21 @@
+{
+ "notices_scored": 21,
+ "extraction_errors": 0,
+ "all_five_fields_right": 16,
+ "fields": {
+  "authority": 0.9048,
+  "kind": 1.0,
+  "starts": 0.9048,
+  "ends": 0.9048,
+  "objection": 1.0
+ },
+ "gate": {
+  "false_removed": 42,
+  "false_total": 42,
+  "true_kept": 42,
+  "true_total": 42,
+  "leak_rate_below_95": 0.0688
+ },
+ "adversarial_leaks": 0,
+ "consistency": 1.0
+}

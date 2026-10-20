@@ -1,12 +1,13 @@
 """Statistics for the evaluation: confidence intervals, a bound on the leak rate, and exact paired tests between runs.
 
-    uv run python evals/stats.py                      # writes evals/STATISTICS.md from the saved runs in evals/results/
+    uv run python evals/stats.py                      # writes evals/STATISTICS.md and evals/metrics.json from the saved runs
 
 Small hand-labelled sets need honest uncertainty. Every rate gets a 95% Wilson interval. When the gate lets no false
 sentence through, the report gives the exact one-sided 95% upper bound on the true leak rate, and how many false
 sentences would be needed to push that bound below 1%. Two runs on the same items are compared with an exact
 McNemar test on the items where they disagree. Only notices in the current gold set are used, and the report prints
-counts, never notice text.
+counts, never notice text. The headline numbers of the newest run also go to metrics.json, which the DVC pipeline
+declares as its metrics, so `dvc metrics diff` shows how a change moved each one.
 """
 from __future__ import annotations
 
@@ -46,6 +47,36 @@ def mcnemar_exact(b: int, c: int) -> float:
         return 1.0
     tail = sum(math.comb(n, i) for i in range(min(b, c) + 1)) / 2 ** n
     return min(1.0, 2 * tail)
+
+
+def newest_run() -> str:
+    """Stamp of the newest saved run on the main set. Held-out runs carry a 'heldout-' prefix and are left out."""
+    stamps = sorted(p.stem for p in (EVALS / "results").glob("*.json") if p.stem[:1].isdigit())
+    if not stamps:
+        raise SystemExit("no saved runs in evals/results: run evals/run.py first")
+    return stamps[-1]
+
+
+def metrics(stamp: str) -> dict:
+    """The newest run's headline numbers, over the current gold set, for `dvc metrics show` and `dvc metrics diff`."""
+    ids = gold_ids()
+    run = load_run(stamp)
+    rows = [r for r in run["fields"]["rows"] if r["id"] in ids]
+    gate = gate_items(run, ids).values()
+    false_removed = sum(1 for true, kept in gate if not true and not kept)
+    false_total = sum(1 for true, _ in gate if not true)
+    out = {"notices_scored": len(rows), "extraction_errors": run["fields"]["errors"],
+           "all_five_fields_right": sum(all(r[f]["ok"] for f in FIELDS) for r in rows),
+           "fields": {f: round(sum(r[f]["ok"] for r in rows) / len(rows), 4) for f in FIELDS} if rows else {},
+           "gate": {"false_removed": false_removed, "false_total": false_total,
+                    "true_kept": sum(1 for true, kept in gate if true and kept), "true_total": sum(1 for true, _ in gate if true)}}
+    if false_total and false_removed == false_total:
+        out["gate"]["leak_rate_below_95"] = round(zero_failure_upper(false_total), 4)
+    if "adversarial" in run:
+        out["adversarial_leaks"] = run["adversarial"]["leaks"]
+    if "consistency" in run:
+        out["consistency"] = run["consistency"]["agreement"]
+    return out
 
 
 def load_run(stamp: str) -> dict:
@@ -137,9 +168,11 @@ def reading(label: str, n: int, only_a: int, only_b: int, p: float) -> str:
 
 
 def main() -> None:
-    text = report(latest="2026-10-19T17-46Z", before_fix="2026-10-17T15-19Z", after_fix="2026-10-17T15-40Z",
+    latest = newest_run()
+    text = report(latest=latest, before_fix="2026-10-17T15-19Z", after_fix="2026-10-17T15-40Z",
                   local="2026-10-17T22-37Z", cloud="2026-10-18T18-08Z")
     (EVALS / "STATISTICS.md").write_text(text)
+    (EVALS / "metrics.json").write_text(json.dumps(metrics(latest), indent=1) + "\n")
     print(text)
 
 

@@ -1,22 +1,22 @@
 # Evaluation results
 
-Run 19/10/2026 17:23 UTC on azure/gpt-4.1-mini (commit 23f716c). Labelled set (main): 21 notices across 9 Gazette categories, in `gold.jsonl`; the notices themselves are in `notices/`. Rerun with `uv run python evals/run.py`.
+Run 20/10/2026 16:07 UTC on azure/gpt-4.1-mini (commit b8d0f3d). Labelled set (main): 21 notices across 9 Gazette categories, in `gold.jsonl`; the notices themselves are in `notices/`. Rerun with `uv run python evals/run.py`.
 
 ## Extraction fields (per notice)
 
 | Field | Correct |
 |---|---|
-| Authority | 94% |
+| Authority | 90% |
 | Kind of notice | 100% |
-| Start date | 88% |
-| End date or deadline | 94% |
+| Start date | 90% |
+| End date or deadline | 90% |
 | How-to-object sentence present when the notice has one, absent when it does not | 100% |
-| Model's one-line heading passed the gate | 94% |
+| Model's one-line heading passed the gate | 90% |
 | A gated heading shown (the model's, or the first gated summary sentence) | 100% |
-| Places affected found (recall) | 97% |
+| Places affected found (recall) | 98% |
 | Correspondence addresses wrongly listed as places | 0 |
 
-Summary sentences kept 38, removed by the gate 14; 0 of 17 notices ended with no summary sentence (the page then shows the facts and the notice only). 4.4 model calls and a median 24 s per notice. Errors: 4.
+Summary sentences kept 49, removed by the gate 16; 0 of 21 notices ended with no summary sentence (the page then shows the facts and the notice only). 4.5 model calls and a median 24 s per notice. Errors: 0.
 
 ## The gate (hand-written true and false sentences)
 
@@ -25,6 +25,8 @@ Summary sentences kept 38, removed by the gate 14; 0 of 17 notices ended with no
 | True sentences kept | 42 of 42 (100%) |
 | False sentences removed | 42 of 42 (100%) |
 | Of everything the gate kept, share that was true | 100% |
+
+95% Wilson intervals: false removed 92% to 100%; true kept 92% to 100%. No false sentence got through, so the true leak rate is below 7% at 95% confidence.
 
 The false-catch rate is the safety number: a false sentence the gate keeps would reach the page. The true-keep rate is the cost: a true sentence removed is a fact the reader does not get in plain English (the notice itself is always shown).
 

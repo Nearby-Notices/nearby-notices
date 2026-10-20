@@ -1,0 +1,7 @@
+# Settings the evaluation pipeline (dvc.yaml) depends on. Changing one reruns only the stages that use it.
+# The endpoint and key are not here: they come from the environment (see evals/README.md), so no secret is versioned.
+eval:
+  model: azure/gpt-4.1-mini        # passed to the service as NN_MODEL
+  api_version: "2024-10-21"        # Azure OpenAI API version, passed as NN_MODEL_API_VERSION
+inspect:
+  model: azureai/gpt-4.1-mini      # Inspect's provider and model name

@@ -21,6 +21,7 @@ dev = [
 ]
 evals = [
     "azure-ai-inference>=1.0.0b9",
+    "dvc>=3.50",
     "inspect-ai>=0.3.282",
 ]
 

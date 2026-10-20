@@ -146,9 +146,8 @@ def report(gate_run: str, field_runs: tuple[tuple[str, str], ...]) -> str:
 
 
 def main() -> None:
-    text = report(gate_run="2026-10-19T17-46Z",
-                  field_runs=(("Azure OpenAI, every notice scored", "2026-10-18T18-08Z"),
-                              ("local 27B model", "2026-10-17T22-37Z")))
+    latest = stats.newest_run()
+    text = report(gate_run=latest, field_runs=(("the newest run", latest), ("for comparison, the local 27B model", "2026-10-17T22-37Z")))
     (EVALS / "SUBGROUPS.md").write_text(text)
     print(text)
 
