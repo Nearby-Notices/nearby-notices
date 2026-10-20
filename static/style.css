@@ -10,7 +10,11 @@ a { color: var(--link); } a:focus, button:focus, input:focus, select:focus, summ
 .wrap { max-width: 960px; margin: 0 auto; padding: 0 15px; }
 header.site { background: var(--ink); color: #fff; border-bottom: 10px solid #2b7a78; }
 header.site .wrap { display: flex; justify-content: space-between; align-items: center; height: 60px; }
-.brand { color: #fff; font-weight: 700; font-size: 1.3rem; text-decoration: none; letter-spacing: .01em; }
+.brand { color: #fff; font-weight: 700; font-size: 1.3rem; text-decoration: none; letter-spacing: .01em; display: inline-flex; align-items: center; gap: .55rem; }
+.brand img { width: 30px; height: 30px; flex: none; }
+.brand { white-space: nowrap; }
+@media (max-width: 30rem) { .brand { font-size: 1.15rem; gap: .4rem; } .brand img { width: 26px; height: 26px; } header.site nav a { margin-left: 1rem; } }
+@media (max-width: 22rem) { .brand { font-size: 1rem; gap: .35rem; } .brand img { width: 22px; height: 22px; } header.site nav a { margin-left: .75rem; font-size: .95rem; } }
 .brand:hover { text-decoration: underline; text-underline-offset: .2em; }
 header.site nav a { color: #fff; margin-left: 1.5rem; text-decoration: none; font-weight: 700; } header.site nav a:hover { text-decoration: underline; }
 .phase { border-bottom: 1px solid var(--line); padding: .6rem 0; font-size: .95rem; }
