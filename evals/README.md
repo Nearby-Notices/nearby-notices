@@ -28,6 +28,20 @@ Labelling rules: a value counts as correct if it matches an accepted value after
 
 Not measured here: whether the summary sentences the model chose to write are the most useful ones (a human judgement; the thumbs on each card collect it), and the Gazette feed's own recall (it is the record; the tool shows what it returns).
 
+## Statistics
+
+`uv run python evals/stats.py` writes `STATISTICS.md` from the saved runs. The labelled set is small, so every rate carries a 95% Wilson interval. When no false sentence gets through, it gives the exact upper bound on the true leak rate: below 6.9% for 0 of 42, and about 299 false sentences would be needed to show it is below 1%. Runs on the same items are compared with an exact McNemar test on the items where they disagree. The quote-rule fix: 4 of 84 disagree, p = 0.125. Local model against Azure OpenAI: the gate agrees on all 84; the fields disagree on 5 of 105, all in the local model's favour, p = 0.062. Neither difference is significant at the 5% level.
+
+## The gate as an Inspect task
+
+`evals/inspect_gate.py` runs the gate in [Inspect](https://inspect.aisi.org.uk/). Inspect sends the live prompt to the model through its own provider. A custom scorer applies the same code check the service applies (`extract.gate_decision`) and scores each decision against its label, with accuracy grouped by label. Inspect needs the `evals` dependency group, which the service image does not install:
+
+```
+uv run --group evals inspect eval evals/inspect_gate.py --model azureai/gpt-4.1-mini --log-dir evals/inspect_logs
+```
+
+It needs `AZUREAI_API_KEY`, and `AZUREAI_BASE_URL` pointing at the deployment (`https://<resource>.openai.azure.com/openai/deployments/<deployment>`). The run of 20 October 2026 on Azure OpenAI gpt-4.1-mini scored 84 of 84: every true sentence kept and every false one removed, with no sample errors.
+
 ## Changing the set
 
 Add a notice: save its text to `notices/<id>.txt` with the header line, add a gold line, add four claims. Keep the two-true-two-false shape so the gate numbers stay comparable. The labels were written by the author with an AI assistant and checked against the notice text by hand; if you find one wrong, fix the label and say so in the commit.

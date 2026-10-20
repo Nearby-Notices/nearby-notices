@@ -230,6 +230,12 @@ def gate(text: str, sentence: str, ask=_ask) -> tuple[bool, list[str]]:
         d = _json(ask(GATE_SYSTEM, GATE_USER.format(text=for_model(text), sentence=sentence.replace('"', "'")), 300))
     except Exception:  # noqa: BLE001 (any model failure degrades to "unsupported", never to a guess)
         return False, []
+    return gate_decision(text, d)
+
+
+def gate_decision(text: str, d: dict) -> tuple[bool, list[str]]:
+    """The code half of the gate, given the scrubbed notice and the model's parsed reply. Shared with the Inspect
+    evaluation (evals/inspect_gate.py) so the evaluation scores exactly the rule the live service applies."""
     quotes = d.get("quotes")
     if not isinstance(quotes, list):
         quotes = [d.get("quote")] if d.get("quote") else []

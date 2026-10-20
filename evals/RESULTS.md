@@ -1,6 +1,6 @@
 # Evaluation results
 
-Run 19/10/2026 17:23 UTC on azure/gpt-4.1-mini (commit 23f716c). Hand-labelled set: 21 notices across 9 Gazette categories, in `gold.jsonl`; the notices themselves are in `notices/`. Rerun with `uv run python evals/run.py`.
+Run 19/10/2026 17:23 UTC on azure/gpt-4.1-mini (commit 23f716c). Labelled set (main): 21 notices across 9 Gazette categories, in `gold.jsonl`; the notices themselves are in `notices/`. Rerun with `uv run python evals/run.py`.
 
 ## Extraction fields (per notice)
 
@@ -43,5 +43,5 @@ Same notice extracted twice, 5 notices, 25 field comparisons: 100% agreed.
 ## How to read this
 
 - Every number comes from one run on one model; rerun before quoting. Results for other models go in `results/` with the model name.
-- The gold labels were written by hand from the notice text (see `README.md` for the labelling rules). Where a notice is ambiguous, several values are accepted.
+- The gold labels were written with an AI assistant and checked by hand against the notice text (see `README.md` for the labelling rules). Where a notice is ambiguous, several values are accepted.
 - Sentences that count or summarise a list ("ten applications") are usually removed by the gate, because no single span of the notice says so. That is the safe side of the trade.

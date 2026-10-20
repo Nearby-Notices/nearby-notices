@@ -35,6 +35,9 @@ EVALS = ROOT / "evals"
 FIELDS = ("authority", "kind", "starts", "ends")
 
 
+DATA = EVALS  # the labelled set in use: the main set, or evals/heldout with --set heldout
+
+
 def norm(s: str | None) -> str:
     s = (s or "").lower().replace("’", "'").replace("‘", "'")
     s = re.sub(r"(\d)(st|nd|rd|th)\b", r"\1", s)          # 09th October -> 09 October
@@ -64,11 +67,11 @@ def score_places(pred: list[str], include: list[str], exclude: list[str]) -> tup
 
 
 def load_gold() -> list[dict]:
-    return [json.loads(line) for line in (EVALS / "gold.jsonl").read_text().splitlines() if line.strip()]
+    return [json.loads(line) for line in (DATA / "gold.jsonl").read_text().splitlines() if line.strip()]
 
 
 def load_text(nid: str) -> str:
-    raw = (EVALS / "notices" / f"{nid}.txt").read_text()
+    raw = (DATA / "notices" / f"{nid}.txt").read_text()
     return raw.split("\n", 1)[1] if raw.startswith("#") else raw
 
 
@@ -181,14 +184,29 @@ def pct(x) -> str:
     return "n/a" if x is None else f"{x:.0%}"
 
 
+def _gate_uncertainty(g: dict) -> str:
+    """95% intervals for the two gate rates, and the bound on the leak rate when nothing leaked (see evals/stats.py)."""
+    from stats import (  # evals/ is on the path when run as a script
+        wilson,
+        zero_failure_upper,
+    )
+    nf, nt = g["false_removed"] + g["false_kept"], g["true_kept"] + g["true_removed"]
+    (a, b), (c, d) = wilson(g["false_removed"], nf), wilson(g["true_kept"], nt)
+    line = f"95% Wilson intervals: false removed {pct(a)} to {pct(b)}; true kept {pct(c)} to {pct(d)}."
+    if g["false_kept"] == 0 and nf:
+        line += f" No false sentence got through, so the true leak rate is below {pct(zero_failure_upper(nf))} at 95% confidence."
+    return line
+
+
 def write_results(out: dict) -> None:
     (EVALS / "results").mkdir(exist_ok=True)
     stamp = time.strftime("%Y-%m-%dT%H-%MZ", time.gmtime())
-    (EVALS / "results" / f"{stamp}.json").write_text(json.dumps(out, indent=1, ensure_ascii=False))
+    prefix = "" if DATA == EVALS else f"{DATA.name}-"
+    (EVALS / "results" / f"{prefix}{stamp}.json").write_text(json.dumps(out, indent=1, ensure_ascii=False))
     f, g, a, c = out.get("fields"), out.get("gate"), out.get("adversarial"), out.get("consistency")
     lines = [
         "# Evaluation results", "",
-        (f"Run {out['when']} on {out['model']} (commit {out['commit']}). Hand-labelled set: {out['gold_size']} notices across "
+        (f"Run {out['when']} on {out['model']} (commit {out['commit']}). Labelled set ({DATA.name if DATA != EVALS else 'main'}): {out['gold_size']} notices across "
         f"{out['categories']} Gazette categories, in `gold.jsonl`; the notices themselves are in `notices/`. Rerun with `uv run python evals/run.py`."), "",
     ]
     if f:
@@ -207,6 +225,7 @@ def write_results(out: dict) -> None:
                   f"| True sentences kept | {g['true_kept']} of {g['true_kept'] + g['true_removed']} ({pct(g['true_keep_rate'])}) |",
                   f"| False sentences removed | {g['false_removed']} of {g['false_removed'] + g['false_kept']} ({pct(g['false_catch_rate'])}) |",
                   f"| Of everything the gate kept, share that was true | {pct(g['precision_of_kept'])} |", "",
+                  _gate_uncertainty(g), "",
                   ("The false-catch rate is the safety number: a false sentence the gate keeps would reach the page. The true-keep rate is the cost: "
                   "a true sentence removed is a fact the reader does not get in plain English (the notice itself is always shown)."), ""]
     if a:
@@ -219,9 +238,9 @@ def write_results(out: dict) -> None:
         lines += ["## Consistency", "", f"Same notice extracted twice, {c['notices']} notices, {c['fields_compared']} field comparisons: {pct(c['agreement'])} agreed.", ""]
     lines += ["## How to read this", "",
               "- Every number comes from one run on one model; rerun before quoting. Results for other models go in `results/` with the model name.",
-              "- The gold labels were written by hand from the notice text (see `README.md` for the labelling rules). Where a notice is ambiguous, several values are accepted.",
+              "- The gold labels were written with an AI assistant and checked by hand against the notice text (see `README.md` for the labelling rules). Where a notice is ambiguous, several values are accepted.",
               "- Sentences that count or summarise a list (\"ten applications\") are usually removed by the gate, because no single span of the notice says so. That is the safe side of the trade.", ""]
-    (EVALS / "RESULTS.md").write_text("\n".join(lines))
+    (DATA / "RESULTS.md").write_text("\n".join(lines))
 
 
 def main() -> None:
@@ -230,7 +249,14 @@ def main() -> None:
     ap.add_argument("--skip", action="append", default=[], choices=["fields", "gate", "adversarial", "consistency"])
     ap.add_argument("--consistency", type=int, default=5, help="notices to extract twice")
     ap.add_argument("--quiet", action="store_true")
+    ap.add_argument("--set", choices=["main", "heldout"], default="main",
+                    help="heldout: the separate set never used to build or tune the service (evals/heldout/)")
     args = ap.parse_args()
+    global DATA
+    if args.set == "heldout":
+        DATA = EVALS / "heldout"
+        if not (DATA / "gold.jsonl").exists():
+            raise SystemExit("evals/heldout/gold.jsonl does not exist yet: the draft labels must be checked by hand first (CHECK_SHEET.md)")
     verbose = not args.quiet
     gold = load_gold()
     if args.limit:

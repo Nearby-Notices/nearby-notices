@@ -1,0 +1,140 @@
+[
+ {
+  "id": "5231745",
+  "town": "Inverness",
+  "category": "Town and Country Planning",
+  "words": 208
+ },
+ {
+  "id": "5222868",
+  "town": "Inverness",
+  "category": "Electricity",
+  "words": 649
+ },
+ {
+  "id": "5217894",
+  "town": "Inverness",
+  "category": "Environmental Protection",
+  "words": 474
+ },
+ {
+  "id": "5216274",
+  "town": "Aberdeen",
+  "category": "Environmental Protection",
+  "words": 359
+ },
+ {
+  "id": "5210236",
+  "town": "Aberdeen",
+  "category": "Pipe-Lines",
+  "words": 399
+ },
+ {
+  "id": "5233131",
+  "town": "Glasgow",
+  "category": "Electricity",
+  "words": 612
+ },
+ {
+  "id": "5227841",
+  "town": "Leeds",
+  "category": "Town and Country Planning",
+  "words": 193
+ },
+ {
+  "id": "5204520",
+  "town": "Leeds",
+  "category": "Clean Air",
+  "words": 697
+ },
+ {
+  "id": "5203186",
+  "town": "Leeds",
+  "category": "Highways",
+  "words": 266
+ },
+ {
+  "id": "5230596",
+  "town": "Cardiff",
+  "category": "Road Traffic Acts",
+  "words": 470
+ },
+ {
+  "id": "5208898",
+  "town": "Cardiff",
+  "category": "Town and Country Planning",
+  "words": 622
+ },
+ {
+  "id": "5208867",
+  "town": "Cardiff",
+  "category": "Water Resources",
+  "words": 166
+ },
+ {
+  "id": "5232197",
+  "town": "Birmingham",
+  "category": "Town and Country Planning",
+  "words": 380
+ },
+ {
+  "id": "5231320",
+  "town": "Birmingham",
+  "category": "Road Traffic Acts",
+  "words": 364
+ },
+ {
+  "id": "5202034",
+  "town": "Norwich",
+  "category": "Road Traffic Acts",
+  "words": 258
+ },
+ {
+  "id": "5184822",
+  "town": "Norwich",
+  "category": "Pipe-Lines",
+  "words": 341
+ },
+ {
+  "id": "5168189",
+  "town": "Norwich",
+  "category": "Town and Country Planning",
+  "words": 268
+ },
+ {
+  "id": "5224671",
+  "town": "Exeter",
+  "category": "Water Resources",
+  "words": 393
+ },
+ {
+  "id": "5169221",
+  "town": "Exeter",
+  "category": "Highways",
+  "words": 278
+ },
+ {
+  "id": "5074894",
+  "town": "Exeter",
+  "category": "Harbours",
+  "words": 505
+ },
+ {
+  "id": "5207800",
+  "town": "York",
+  "category": "Town and Country Planning",
+  "words": 215
+ },
+ {
+  "id": "5076379",
+  "town": "York",
+  "category": "Land Drainage",
+  "words": 380
+ },
+ {
+  "id": "5049077",
+  "town": "York",
+  "category": "Pipe-Lines",
+  "words": 442
+ }
+]
