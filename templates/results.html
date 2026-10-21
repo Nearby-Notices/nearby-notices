@@ -7,15 +7,20 @@
 <div class="results-head">
   <div>
     <h1>Notices near {{ place.name }}</h1>
-    <p class="caption">Within {{ distance_label }} of {{ place.postcode }}, newest first. {{ results|length }} notice{{ '' if results|length == 1 else 's' }}. <span class="reading" id="reading" {% if not pending_ids %}hidden{% endif %}>Reading <span id="reading-count">{{ pending_ids|length }}</span> in plain English; each will appear here when ready.</span></p>
+    <p class="caption">Within {{ distance_label }} of {{ place.postcode }}, newest first. {{ results|length }} notice{{ '' if results|length == 1 else 's' }}.</p>
   </div>
   <form action="/search" method="get" class="refine">
     <input type="hidden" name="place" value="{{ place.query }}">
     <input type="hidden" name="view" value="{{ view }}">
     <label for="distance">Within</label>
-    <select class="select" id="distance" name="distance" onchange="this.form.submit()">{% for d in units[unit].choices %}<option value="{{ d }}" {% if d == distance %}selected{% endif %}>{{ d }}</option>{% endfor %}</select>
-    <select class="select" id="unit" name="unit" aria-label="Unit of distance" onchange="this.form.submit()">{% for u, spec in units.items() %}<option value="{{ u }}" {% if u == unit %}selected{% endif %}>{{ spec.name }}</option>{% endfor %}</select>
+    <select class="select" id="distance" name="distance" onchange="this.form.requestSubmit ? this.form.requestSubmit() : this.form.submit()">{% for d in units[unit].choices %}<option value="{{ d }}" {% if d == distance %}selected{% endif %}>{{ d }}</option>{% endfor %}</select>
+    <select class="select" id="unit" name="unit" aria-label="Unit of distance" onchange="this.form.requestSubmit ? this.form.requestSubmit() : this.form.submit()">{% for u, spec in units.items() %}<option value="{{ u }}" {% if u == unit %}selected{% endif %}>{{ spec.name }}</option>{% endfor %}</select>
   </form>
+</div>
+<div class="progress progress-reading" id="reading" role="status" {% if not pending_ids %}hidden{% endif %}>
+  <p class="progress-label" id="reading-label" aria-live="polite">Reading in plain English: 0 of {{ pending_ids|length }} ready</p>
+  <div class="progress-track" id="reading-track" role="progressbar" aria-label="Plain-English reading progress" aria-valuemin="0" aria-valuemax="{{ pending_ids|length }}" aria-valuenow="0"><span class="progress-fill" id="reading-fill"></span></div>
+  <p class="progress-note">Each notice is read and checked in turn. Its card updates here as soon as it is ready, so you can start reading the others now.</p>
 </div>
 
 {% if not results %}
@@ -159,10 +164,18 @@
       if (mk) { mk.point.title = fresh.querySelector('h2').textContent; mk.marker.setPopupContent(mk.popup(mk.point)); }
     });
   }
+  var total = pending.length;
   function tick() {
-    var count = document.getElementById('reading-count'), box = document.getElementById('reading');
-    if (count) { count.textContent = pending.length; }
-    if (box) { box.hidden = pending.length === 0; }
+    var box = document.getElementById('reading'), label = document.getElementById('reading-label'),
+        fill = document.getElementById('reading-fill'), track = document.getElementById('reading-track');
+    var done = total - pending.length;
+    if (box && total) {
+      fill.style.width = Math.round(100 * done / total) + '%';
+      track.setAttribute('aria-valuenow', String(done));
+      label.textContent = pending.length ? 'Reading in plain English: ' + done + ' of ' + total + ' ready'
+                                         : 'All ' + total + ' read in plain English';
+      if (!pending.length) { setTimeout(function () { box.hidden = true; }, 4000); }
+    }
     if (!pending.length) { return; }
     fetch('/status?ids=' + pending.join(',')).then(function (r) { return r.json(); }).then(function (s) {
       s.ready.forEach(swap);
@@ -170,7 +183,7 @@
       setTimeout(tick, pending.length ? 5000 : 0);
     }).catch(function () { setTimeout(tick, 15000); });
   }
-  if (pending.length) { setTimeout(tick, 4000); }
+  if (pending.length) { tick(); setTimeout(tick, 4000); }
 })();
 </script>
 {% endblock %}

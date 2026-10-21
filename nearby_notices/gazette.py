@@ -117,10 +117,12 @@ def _parse_entry(e: dict) -> Notice | None:
     )
 
 
-def search_near(postcode: str, distance_miles: int, page_size: int = 10, client: httpx.Client | None = None) -> list[Notice]:
+def search_near(postcode: str, distance_miles: int, page_size: int = 10, client: httpx.Client | None = None,
+                on_category=None) -> list[Notice]:
     """Latest notices in every allowed category within the distance of the postcode (the Gazette's own filter).
 
-    distance_miles must be one of the radii the Gazette honours (see geo.gazette_radius); others are silently rounded down by the Gazette."""
+    distance_miles must be one of the radii the Gazette honours (see geo.gazette_radius); others are silently rounded down by the Gazette.
+    on_category(done, total) is called as each category's answer is taken in, for a progress bar."""
     own = client is None
     client = client or httpx.Client()
 
@@ -139,8 +141,10 @@ def search_near(postcode: str, distance_miles: int, page_size: int = 10, client:
     out: list[Notice] = []
     try:
         with ThreadPoolExecutor(max_workers=PARALLEL) as pool:
-            for batch in pool.map(one, ALLOWED):
+            for i, batch in enumerate(pool.map(one, ALLOWED), 1):
                 out.extend(batch)
+                if on_category:
+                    on_category(i, len(ALLOWED))
     finally:
         if own:
             client.close()

@@ -71,6 +71,16 @@ h2 { font-size: 1.5rem; line-height: 1.25; font-weight: 700; margin: 0 0 .5rem; 
 @media (max-width: 40rem) { .facts { grid-template-columns: 1fr; } .facts dt { margin-top: .4rem; } h1 { font-size: 2rem; } }
 .summary { background: var(--light); border-left: 10px solid #2b7a78; padding: .8rem 1rem; margin: .8rem 0; }
 .reading { color: var(--muted); font-style: italic; }
+.progress { margin: 1rem 0 1.5rem; max-width: 38rem; }
+.progress-label { font-weight: 700; margin: 0 0 .45rem; }
+.progress-track { height: 14px; background: var(--light); border: 1px solid var(--line); overflow: hidden; }
+.progress-fill { display: block; height: 100%; width: 0; background-color: #2b7a78; transition: width .5s ease;
+  background-image: linear-gradient(45deg, rgba(255,255,255,.22) 25%, transparent 25%, transparent 50%, rgba(255,255,255,.22) 50%, rgba(255,255,255,.22) 75%, transparent 75%);
+  background-size: 28px 28px; animation: nn-stripes 1s linear infinite; }
+@keyframes nn-stripes { from { background-position: 0 0; } to { background-position: 28px 0; } }
+.progress-note { color: var(--muted); font-size: .95rem; margin: .5rem 0 0; }
+.button:disabled { opacity: .7; cursor: progress; }
+@media (prefers-reduced-motion: reduce) { .progress-fill { animation: none; transition: none; } }
 .preview { color: var(--muted); font-size: 1rem; border-left: 4px solid var(--line); padding-left: .8rem; margin: .4rem 0 .8rem; }
 .verbatim { white-space: pre-wrap; font: .95rem/1.5 "Helvetica Neue", Arial, sans-serif; background: var(--light); padding: 1rem; border-left: 4px solid var(--line); max-height: 24rem; overflow: auto; margin: .5rem 0; }
 details summary { cursor: pointer; color: var(--link); text-decoration: underline; text-underline-offset: .2em; margin: .4rem 0; }

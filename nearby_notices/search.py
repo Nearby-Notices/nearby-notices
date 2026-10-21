@@ -29,7 +29,11 @@ def within(m: float | None, asked_m: float) -> bool:
     return m is None or m <= asked_m * TOLERANCE + 50
 
 
-def candidates(con, where: places.Place, radius: int) -> list[str]:
+def _quiet(stage: str, done: int = 0, total: int = 0) -> None:
+    """The default progress reporter: the MCP server and the tests do not show a bar."""
+
+
+def candidates(con, where: places.Place, radius: int, report=_quiet) -> list[str]:
     """Every notice the Gazette lists within one of its honoured radii, cached for an hour under that radius so a
     change of distance or unit within it needs no new feed call."""
     key = store.feed_key(where.postcode, radius)
@@ -38,10 +42,19 @@ def candidates(con, where: places.Place, radius: int) -> list[str]:
         return ids
     # All network first, then one short burst of writes: a transaction must never wait on the Gazette.
     with httpx.Client() as client:
-        notices = gazette.search_near(where.postcode, radius, page_size=PAGE_SIZE, client=client)
-        for n in notices:
-            if len(n.text.split()) < 60:
-                n.text = gazette.full_text(n.id, client)
+        report("feed", 0, len(gazette.ALLOWED))
+        notices = gazette.search_near(where.postcode, radius, page_size=PAGE_SIZE, client=client,
+                                      on_category=lambda d, t: report("feed", d, t))
+        # Most feed entries are short summaries. Their full texts are fetched a few side by side: the Gazette's
+        # fair-use gap (two request starts a second, shared by every thread) still holds, but one slow answer
+        # no longer holds up the rest.
+        short = [n for n in notices if len(n.text.split()) < 60]
+        if short:
+            report("text", 0, len(short))
+            with ThreadPoolExecutor(max_workers=gazette.PARALLEL) as pool:
+                for i, (n, text) in enumerate(zip(short, pool.map(lambda x: gazette.full_text(x.id, client), short)), 1):
+                    n.text = text
+                    report("text", i, len(short))
     ids = []
     for n in notices:
         cached = store.get_notice(con, n.id)
@@ -58,7 +71,7 @@ def filed_points(row: dict) -> list[dict]:
     return row["points"] or ([{"postcode": None, "lat": row["lat"], "lon": row["lon"]}] if row.get("lat") is not None else [])
 
 
-def select(con, where: places.Place, ids: list[str], asked_m: float) -> list[str]:
+def select(con, where: places.Place, ids: list[str], asked_m: float, report=_quiet) -> list[str]:
     """Measure each candidate against the nearest postcode it is filed under and keep those inside the asked distance."""
     if where.lat is None or where.lon is None:
         return ids[: config.MAX_RESULTS]
@@ -71,8 +84,13 @@ def select(con, where: places.Place, ids: list[str], asked_m: float) -> list[str
     # postcode it is filed under (one small request each, a few side by side, kept with the notice for good).
     unsure = [nid for nid, row in rows.items() if not row["points"] and (near := measured(row)) and not within(near["m"], asked_m)]
     if unsure:
+        ask = unsure[:MAX_POINT_FETCHES]
+        fetched = []
+        report("points", 0, len(ask))
         with httpx.Client() as client, ThreadPoolExecutor(max_workers=gazette.PARALLEL) as pool:
-            fetched = list(zip(unsure[:MAX_POINT_FETCHES], pool.map(lambda i: gazette.points(i, client), unsure[:MAX_POINT_FETCHES])))
+            for nid, pts in zip(ask, pool.map(lambda i: gazette.points(i, client), ask)):
+                fetched.append((nid, pts))
+                report("points", len(fetched), len(ask))
         for nid, pts in fetched:          # writes only after every lookup has returned
             if pts:
                 store.put_points(con, nid, pts)
@@ -93,10 +111,12 @@ def describe(con, row: dict, where: places.Place | None, unit: str, asked_m: flo
             "outside": bool(near and asked_m is not None and not within(near["m"], asked_m))}
 
 
-def find(place_query: str, distance: float | None, unit: str) -> Found | None:
-    """Notices near a postcode or town, within the distance, newest first. None when the place is not found."""
+def find(place_query: str, distance: float | None, unit: str, report=_quiet) -> Found | None:
+    """Notices near a postcode or town, within the distance, newest first. None when the place is not found.
+    report(stage, done, total) is told each step, for the page's progress bar (see progress.py)."""
     unit = geo.unit_key(unit)
     distance = geo.choose_distance(distance if distance is not None else config.DEFAULT_DISTANCE_MILES, unit)
+    report("place")
     where = places.resolve(place_query)
     if not where:
         return None
@@ -104,7 +124,9 @@ def find(place_query: str, distance: float | None, unit: str) -> Found | None:
     with store.db() as con:
         store.bump(con, "search")
         con.commit()                      # the counter is its own tiny transaction; nothing waits behind it
-        ids = select(con, where, candidates(con, where, geo.gazette_radius(geo.to_miles(distance, unit))), asked_m)
+        found_ids = candidates(con, where, geo.gazette_radius(geo.to_miles(distance, unit)), report)
+        ids = select(con, where, found_ids, asked_m, report)
+        report("done")
         results = [describe(con, row, where, unit, asked_m) for nid in ids if (row := store.get_notice(con, nid))]
     return Found(where, distance, unit, asked_m, results, [r["n"]["id"] for r in results if r["x"] is None])
 

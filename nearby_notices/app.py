@@ -18,7 +18,7 @@ from fastapi.responses import HTMLResponse, PlainTextResponse, RedirectResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 
-from . import config, geo, groups, places, ratelimit, search, store, worker
+from . import config, geo, groups, places, progress, ratelimit, search, store, worker
 from .categories import ALLOWED, EXCLUDED
 
 logging.getLogger("uvicorn.access").disabled = True
@@ -79,7 +79,7 @@ def home(request: Request):
 def search_page(request: Request, place: str = "", distance: float | None = None, unit: str = "mi", view: str = "map"):
     unit = geo.unit_key(unit)
     distance = geo.choose_distance(distance if distance is not None else config.DEFAULT_DISTANCE_MILES, unit)
-    found = search.find(place, distance, unit)
+    found = search.find(place, distance, unit, report=progress.reporter(place))
     if not found:
         return templates.TemplateResponse(request, "home.html", _ctx(
             request, distance=distance, unit=unit, error="I could not find that place. Try a full postcode or a town name."))
@@ -100,6 +100,12 @@ def search_page(request: Request, place: str = "", distance: float | None = None
         results=results, grouped=grouped, counts=counts, pending_ids=found.pending, order=groups.ORDER, points=points,
         view=view if view in ("all", "grouped", "map") else "map", back=back, card_query=card_query,
         names={g: groups.group_name(g) for g in groups.ORDER}))
+
+
+@app.get("/progress")
+def search_progress(place: str = ""):
+    """How far the search for this place has got, polled by the page while /search is still working."""
+    return progress.get(progress.key(place)) or {"stage": None}
 
 
 @app.get("/status")

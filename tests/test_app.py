@@ -25,7 +25,7 @@ def client(tmp_path, monkeypatch):
     feed = [notice("1", 52.5122, -2.0843),      # filed 0.3 km away
             notice("2", 52.1853, -2.1797),      # feed point is a Worcester office, but also filed under a Dudley postcode
             notice("3", 52.0, -2.0)]            # genuinely far, nothing nearer
-    monkeypatch.setattr(gazette, "search_near", lambda postcode, miles, page_size=10, client=None: asked.append(miles) or list(feed))
+    monkeypatch.setattr(gazette, "search_near", lambda postcode, miles, page_size=10, client=None, on_category=None: asked.append(miles) or list(feed))
     jsonld = {"2": [{"postcode": "WR5 2QT", "lat": 52.1853, "lon": -2.1797}, {"postcode": "DY1 1RY", "lat": 52.5097, "lon": -2.0879}],
               "3": [{"postcode": "GL1 1AA", "lat": 52.0, "lon": -2.0}]}
     looked_up = []
@@ -96,3 +96,21 @@ def test_the_map_is_the_default_view(client):
     assert 'id="map"' in page and "L.map('map'" in page, "no view parameter means the map view"
     assert 'id="n1"' in page, "the list still follows the map"
     assert 'id="map"' not in client.get("/search", params={"place": "Dudley", "distance": 3, "unit": "mi", "view": "all"}).text
+
+
+def test_progress_reports_each_step_without_keeping_what_was_typed(client):
+    from nearby_notices import progress
+    assert client.get("/progress", params={"place": "nowhere yet"}).json() == {"stage": None}
+    r = client.get("/search", params={"place": "DY1 1HF", "distance": 3, "unit": "mi"})
+    assert r.status_code == 200
+    s = client.get("/progress", params={"place": "  dy1   1hf "}).json()      # same place however it is typed
+    assert s["stage"] == "done" and s["percent"] == 100
+    assert all("DY1" not in k.upper() for k in progress._entries)            # only a hash is kept
+
+
+def test_progress_percent_fills_each_stage_in_order():
+    from nearby_notices import progress
+    assert progress.percent("place") == 0
+    assert progress.percent("feed", 3, 6) == 22
+    assert progress.percent("text", 0, 0) == 40 and progress.percent("points", 4, 4) == 95
+    assert progress.percent("done") == 100
