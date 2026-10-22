@@ -25,6 +25,7 @@
   {% endif %}
   <details><summary>The notice as published</summary><pre class="verbatim">{{ r.n.text }}</pre></details>
   <div class="actions">
+    {% if view == 'map' and r.near %}<button type="button" class="show-on-map" data-id="{{ r.n.id }}">Show on map</button>{% endif %}
     <a href="{{ r.n.url }}" rel="noopener">Read on The Gazette</a>
     <form class="inline" method="post" action="/feedback"><input type="hidden" name="notice_id" value="{{ r.n.id }}"><input type="hidden" name="back" value="{{ back }}">
       <span class="small">Was the plain English right?</span>

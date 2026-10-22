@@ -34,14 +34,23 @@
 </nav>
 
 {% if view == 'map' %}
+<div class="map-layout"><div class="map-col">
 <link rel="stylesheet" href="/static/vendor/leaflet/leaflet.css">
 <div id="map" class="map" role="region" aria-label="Map of notices"></div>
+<div class="food-controls">
+  <label><input type="checkbox" id="food-on"> Food hygiene ratings</label>
+  <label id="food-poor-label" hidden><input type="checkbox" id="food-poor"> Only poor ratings</label>
+  <span class="food-key" id="food-key" hidden><span class="dot dot-good"></span>Good (4 to 5, Pass) <span class="dot dot-fair"></span>Satisfactory (3) <span class="dot dot-poor"></span>Poor (0 to 2, Improvement Required) <span class="dot dot-other"></span>Awaiting inspection or exempt</span>
+  <span class="small muted" id="food-status" aria-live="polite"></span>
+</div>
 <ul class="map-legend" aria-label="Map key">
   {% for g in order %}{% if counts[g] %}<li><span class="pin pin-{{ g }}">{{ icon(g) }}</span>{{ group_name(g) }}</li>{% endif %}{% endfor %}
   <li><span class="pin pin-centre"></span>Your search point</li>
 </ul>
+<details class="map-notes"><summary>How the map works</summary>
 <p class="small muted">Pins that would sit on top of each other are spread in a ring around their shared point, each joined to it by a short line. Zoom in to separate them.</p>
 <p class="small muted">Each pin sits at the nearest postcode the notice is filed under. For a council order that is often the council's address rather than the street affected; the notice itself names the places. The circle is your chosen distance. Map tiles come from OpenStreetMap, so opening this view means your browser requests them from OpenStreetMap's servers. Map data &copy; OpenStreetMap contributors.</p>
+</details>
 <script src="/static/vendor/leaflet/leaflet.js"></script>
 <script>
 (function () {
@@ -119,6 +128,44 @@
   layout();
   map.on('zoomend', layout);
 
+  // Food hygiene ratings: an optional layer from the Food Standards Agency, fetched only when switched on.
+  var foodOn = document.getElementById('food-on'), foodPoor = document.getElementById('food-poor'),
+      foodStatus = document.getElementById('food-status'), foodItems = null, foodLayer = null,
+      dots = L.canvas({padding: 0.5}), colours = {good: '#00703c', fair: '#b58105', poor: '#d4351c', other: '#6f777b'};
+  var foodPopup = function (f) {
+    var scheme = f.scheme === 'FHIS' ? 'Food Hygiene Information Scheme' : 'Food Hygiene Rating';
+    var shown = /^[0-5]$/.test(f.rating) ? f.rating + ' out of 5' : f.rating;
+    return '<div class="popup"><p class="popup-title">' + esc(f.name) + '</p>' +
+      '<p class="popup-meta"><strong>' + esc(shown) + '</strong> &middot; ' + esc(scheme) + (f.date ? ' &middot; inspected ' + esc(f.date) : '') + '</p>' +
+      '<p class="popup-meta">' + esc(f.type) + '<br>' + esc(f.address) + '</p>' +
+      '<p class="popup-links"><a href="' + esc(f.url) + '" rel="noopener">Food Standards Agency</a></p></div>';
+  };
+  var drawFood = function () {
+    if (foodLayer) { map.removeLayer(foodLayer); }
+    if (!foodOn.checked || !foodItems) { return; }
+    var list = foodPoor.checked ? foodItems.filter(function (f) { return f.band === 'poor'; }) : foodItems;
+    foodLayer = L.layerGroup(list.map(function (f) {
+      return L.circleMarker([f.lat, f.lon], {renderer: dots, radius: 6, weight: 1, color: '#fff', fillColor: colours[f.band], fillOpacity: 0.9})
+        .bindPopup(foodPopup(f), {maxWidth: 280});
+    })).addTo(map);
+    var poor = foodItems.filter(function (f) { return f.band === 'poor'; }).length;
+    foodStatus.textContent = foodPoor.checked ? poor + ' with a poor rating' : foodItems.length + ' food businesses, ' + poor + ' with a poor rating';
+  };
+  foodOn.addEventListener('change', function () {
+    document.getElementById('food-poor-label').hidden = !foodOn.checked;
+    document.getElementById('food-key').hidden = !foodOn.checked;
+    if (foodOn.checked) { map.attributionControl.addAttribution('Food hygiene ratings: Food Standards Agency'); }
+    else { map.attributionControl.removeAttribution('Food hygiene ratings: Food Standards Agency'); foodStatus.textContent = ''; }
+    if (!foodOn.checked || foodItems) { drawFood(); return; }
+    foodStatus.textContent = 'Loading food hygiene ratings';
+    fetch('/food?lat=' + centre[0] + '&lon=' + centre[1] + '&distance={{ distance }}&unit={{ unit }}')
+      .then(function (r) { return r.json(); })
+      .then(function (d) { if (d.error) { foodStatus.textContent = d.error; return; } foodItems = d.items; drawFood(); })
+      .catch(function () { foodStatus.textContent = 'Food hygiene ratings could not be loaded just now.'; });
+  });
+  foodPoor.addEventListener('change', drawFood);
+  if (centre[0] === null) { document.querySelector('.food-controls').hidden = true; }
+
   // Zoomed out past the search circle: offer the next distance that covers what is on screen. A button, not an
   // automatic search, because a wider search can take half a minute and reloads the page under the reader.
   var choices = {{ units[unit].choices|tojson }}, unitM = {{ units[unit].metres }}, unitName = {{ units[unit].name|tojson }};
@@ -146,8 +193,21 @@
       if (show) { b.dataset.d = next; b.textContent = 'Show notices within ' + next + ' ' + unitName; }
     });
   }
+
+  // "Show on map" on a card in the side list: bring its pin into view and open it.
+  document.addEventListener('click', function (e) {
+    var b = e.target.closest && e.target.closest('.show-on-map');
+    var mk = b && window.nnMarkers[b.dataset.id];
+    if (!mk) { return; }
+    var open = function () { mk.marker.openPopup(); };
+    var zoom = Math.max(map.getZoom(), 15);
+    if (zoom !== map.getZoom()) { map.once('zoomend', function () { setTimeout(open, 50); }); map.setView([mk.point.lat, mk.point.lon], zoom); }
+    else { map.panTo([mk.point.lat, mk.point.lon]); setTimeout(open, 300); }
+    document.getElementById('map').scrollIntoView({block: 'nearest', behavior: 'smooth'});
+  });
 })();
 </script>
+</div><div class="list-col" id="list-col" aria-label="Notices on this map">
 {% endif %}
 
 {% if view == 'grouped' %}
@@ -160,6 +220,7 @@
 {% else %}
   {% for r in results %}{{ card(r) }}{% endfor %}
 {% endif %}
+{% if view == 'map' %}</div></div>{% endif %}
 {% endif %}
 <script>
 (function () {

@@ -15,12 +15,18 @@ from pathlib import Path
 
 import httpx
 from fastapi import FastAPI, Form, HTTPException, Request
-from fastapi.responses import HTMLResponse, PlainTextResponse, RedirectResponse
+from fastapi.responses import (
+    HTMLResponse,
+    JSONResponse,
+    PlainTextResponse,
+    RedirectResponse,
+)
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 
 from . import (
     config,
+    food,
     gazette,
     geo,
     groups,
@@ -40,7 +46,7 @@ app.mount("/static", StaticFiles(directory=ROOT / "static"), name="static")
 templates = Jinja2Templates(directory=ROOT / "templates")
 
 # Searches cost Gazette and model calls; the rest is cheap. Limits per client per minute, with no address kept (see ratelimit.py).
-LIMITS = {"/search": config.SEARCHES_PER_MINUTE, "/feedback": 30}
+LIMITS = {"/search": config.SEARCHES_PER_MINUTE, "/feedback": 30, "/food": 20}
 
 
 @app.middleware("http")
@@ -114,12 +120,25 @@ def search_page(request: Request, place: str = "", distance: float | None = None
                "postcode": r["near"].get("postcode"), "outside": r["outside"]}
               for r in results if r["near"]]
     back = f"{request.url.path}?{request.url.query}"
-    card_query = {"back": back, "unit": unit, "lat": where.lat, "lon": where.lon}
+    card_query = {"back": back, "unit": unit, "lat": where.lat, "lon": where.lon, "view": view}
     return templates.TemplateResponse(request, "results.html", _ctx(
         request, place=where, distance=found.distance, unit=unit, distance_label=geo.fmt(found.asked_m, unit), asked_m=found.asked_m,
         results=results, grouped=grouped, counts=counts, pending_ids=found.pending, order=groups.ORDER, points=points,
         view=view if view in ("all", "grouped", "map") else "map", back=back, card_query=card_query,
         names={g: groups.group_name(g) for g in groups.ORDER}))
+
+
+@app.get("/food")
+def food_near(lat: float, lon: float, distance: float = 3, unit: str = "mi"):
+    """Rated food businesses around the search point, for the map's optional layer (see food.py)."""
+    if not (49.5 <= lat <= 61.0 and -8.7 <= lon <= 2.0):
+        raise HTTPException(400, "outside the UK")
+    miles = min(geo.to_miles(geo.choose_distance(distance, unit), unit), 15)
+    try:
+        items = food.near(lat, lon, miles)
+    except (httpx.HTTPError, ValueError):
+        return JSONResponse({"items": [], "error": "The Food Standards Agency is not answering just now."}, status_code=503)
+    return {"items": items, "count": len(items)}
 
 
 @app.get("/progress")
@@ -141,7 +160,8 @@ def status(ids: str = ""):
 
 
 @app.get("/card/{notice_id}", response_class=HTMLResponse)
-def card(request: Request, notice_id: str, back: str = "/", unit: str = "mi", lat: float | None = None, lon: float | None = None):
+def card(request: Request, notice_id: str, back: str = "/", unit: str = "mi", lat: float | None = None, lon: float | None = None,
+         view: str = ""):
     """One notice's card, rendered by the same template as the results page, for the page to swap in."""
     if not _ID.match(notice_id):
         raise HTTPException(404)
@@ -151,7 +171,8 @@ def card(request: Request, notice_id: str, back: str = "/", unit: str = "mi", la
             raise HTTPException(404)
         where = places.Place("", "", "", lat, lon) if lat is not None and lon is not None else None
         r = search.describe(con, row, where, geo.unit_key(unit), None)
-    return templates.TemplateResponse(request, "card.html", _ctx(request, r=r, back=back if back.startswith("/") else "/"))
+    return templates.TemplateResponse(request, "card.html", _ctx(request, r=r, back=back if back.startswith("/") else "/",
+                                                                 view=view if view in ("all", "grouped", "map") else ""))
 
 
 @app.post("/feedback")

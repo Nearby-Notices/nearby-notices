@@ -103,6 +103,24 @@ form.inline { display: inline-flex; align-items: center; gap: .5rem; } form.inli
 .pin-ring .pin { pointer-events: auto; cursor: pointer; }
 .map-wider { font: inherit; font-weight: 700; background: #fff; color: var(--ink); border: 2px solid var(--ink); padding: .45rem .8rem; cursor: pointer; box-shadow: 0 2px 0 rgba(0,0,0,.35); }
 .map-wider:hover { background: var(--light); } .map-wider:focus { outline: 3px solid var(--focus); }
+.food-controls { display: flex; flex-wrap: wrap; align-items: center; gap: .4rem 1.2rem; margin: .7rem 0 .2rem; }
+.food-controls label { font-weight: 700; cursor: pointer; } .food-controls input { width: 1.1rem; height: 1.1rem; vertical-align: -2px; margin-right: .3rem; }
+.food-key { font-size: .9rem; color: var(--muted); }
+.dot { display: inline-block; width: 11px; height: 11px; border-radius: 50%; border: 1px solid #fff; box-shadow: 0 0 0 1px #888; margin: 0 .3rem 0 .6rem; vertical-align: -1px; }
+.dot-good { background: #00703c; } .dot-fair { background: #b58105; } .dot-poor { background: #d4351c; } .dot-other { background: #6f777b; }
+.show-on-map { font: inherit; font-size: .95rem; font-weight: 700; color: var(--link); background: none; border: 2px solid var(--link); padding: .15rem .55rem; margin-right: .8rem; cursor: pointer; }
+.show-on-map:hover { background: var(--light); }
+.map-notes { margin: .3rem 0 0; } .map-notes summary { cursor: pointer; color: var(--link); font-size: .95rem; } .map-notes p { margin: .4rem 0; }
+.card:target { background: #fff7d6; box-shadow: -8px 0 0 #fff7d6, 8px 0 0 #fff7d6; }
+@media (min-width: 64rem) {
+  .map-layout { display: grid; grid-template-columns: minmax(0, 3fr) minmax(0, 2fr); gap: 1.5rem; align-items: start;
+    width: min(1400px, calc(100vw - 30px)); margin-left: calc(50% - min(700px, 50vw - 15px)); }
+  .map-col { position: sticky; top: 3.7rem; }
+  .map-layout .map { height: calc(100vh - 14rem); min-height: 24rem; }
+  .list-col { position: sticky; top: 3.7rem; max-height: calc(100vh - 4.4rem); overflow-y: auto; padding: 0 .4rem 0 0; }
+  .list-col .card:first-child { border-top: 0; padding-top: 0; }
+  .list-col .card h2 { font-size: 1.2rem; }
+}
 footer { border-top: 1px solid var(--line); background: var(--light); margin-top: 3rem; padding: 1.5rem 0 2.5rem; font-size: 1rem; }
 .small, .muted { color: var(--muted); font-size: 1rem; }
 .disclaimer { font-weight: 700; }
