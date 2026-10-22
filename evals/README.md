@@ -32,6 +32,15 @@ Not measured here: whether the summary sentences the model chose to write are th
 
 `uv run python evals/stats.py` writes `STATISTICS.md` from the saved runs. The labelled set is small, so every rate carries a 95% Wilson interval. When no false sentence gets through, it gives the exact upper bound on the true leak rate: below 6.9% for 0 of 42, and about 299 false sentences would be needed to show it is below 1%. Runs on the same items are compared with an exact McNemar test on the items where they disagree. The quote-rule fix: 4 of 84 disagree, p = 0.125. Local model against Azure OpenAI: the gate agrees on all 84; the fields disagree on 5 of 105, all in the local model's favour, p = 0.062. Neither difference is significant at the 5% level.
 
+## Leak test (pre-registered)
+
+`evals/leak_test.py` asks whether a sentence the notice does not support can get past the gate, at a size the labelled set cannot reach. Each test sentence is a true sentence with exactly one fact changed (a number with its unit, a date, or a place or organisation) to a value that appears nowhere in the notice, so it needs no hand label. The design of each test is filed before it is built or run (`evals/leak/PREREGISTRATION.md`, `evals/leak/confirm/PREREGISTRATION.md`).
+
+- **First test, 330 sentences from 86 notices:** 2 of 329 got through, both number changes in one long traffic order where the model accepted a quote with a different distance (`evals/leak/LEAK_TEST.md`; incident of 22/10/2026). Exact upper bound 1.9%.
+- **The fix:** every number in a sentence must also be in its quotes. The main set is unchanged by it (84 of 84).
+- **Confirmation on fresh notices, 330 sentences from 141 notices never used before:** 0 got through, so the leak rate is below 0.9% at 95% confidence (`evals/leak/confirm/LEAK_TEST.md`).
+- **Limit:** a sentence that joins a number from one row of a table to a place from another row can still pass when that number is quoted elsewhere (1 such case in the first set after the fix).
+
 ## Accuracy by subgroup
 
 `uv run python evals/subgroups.py` writes `SUBGROUPS.md`: does the tool work as well on every kind of notice? The tool reads notices, not people, so the groups are the notice's nation (assigned by hand in `subgroups.json`, with the evidence for each), its length and its type. For each group it gives the gate's result with the exact bound, and the share of notices with all five fields right, with a Wilson interval and a Fisher exact test against the rest; the notice is the unit, because one notice's fields are not independent. On the run of 20 October 2026 no group differs from the rest at the 5% level (smallest p = 0.262: notices over 700 words, 6 of 6 against 10 of 15). The groups are small: only two notices are Welsh, so the gate's guarantee for Wales is only that the leak rate is below 52.7%. More Welsh notices are the first thing to add.

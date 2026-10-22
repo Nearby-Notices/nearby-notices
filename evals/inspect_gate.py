@@ -52,7 +52,8 @@ def samples() -> list[Sample]:
                 id=f"{g['id']}-{i}",
                 input=[ChatMessageSystem(content=extract.GATE_SYSTEM), ChatMessageUser(content=user)],
                 target="kept" if c["true"] else "removed",
-                metadata={"notice": g["id"], "label": "true sentences kept" if c["true"] else "false sentences removed", "text": text},
+                metadata={"notice": g["id"], "label": "true sentences kept" if c["true"] else "false sentences removed", "text": text,
+                          "sentence": c["s"]},
             ))
     return out
 
@@ -60,7 +61,8 @@ def samples() -> list[Sample]:
 @scorer(metrics=[accuracy(), stderr(), grouped(accuracy(), "label", all=False)])
 def gate_decision():
     async def score(state: TaskState, target: Target) -> Score:
-        ok, quotes = extract.gate_decision(state.metadata["text"], extract._json(state.output.completion))
+        ok, quotes = extract.gate_decision(state.metadata["text"], extract._json(state.output.completion),
+                                             state.metadata.get("sentence", ""))
         decision = "kept" if ok else "removed"
         return Score(value=CORRECT if decision == target.text else INCORRECT, answer=decision,
                      explanation="quotes: " + json.dumps(quotes, ensure_ascii=False))

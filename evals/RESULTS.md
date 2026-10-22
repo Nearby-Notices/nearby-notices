@@ -1,6 +1,6 @@
 # Evaluation results
 
-Run 20/10/2026 16:07 UTC on azure/gpt-4.1-mini (commit b8d0f3d). Labelled set (main): 21 notices across 9 Gazette categories, in `gold.jsonl`; the notices themselves are in `notices/`. Rerun with `uv run python evals/run.py`.
+Run 22/10/2026 18:54 UTC on azure/gpt-4.1-mini (commit ed60b31). Labelled set (main): 21 notices across 9 Gazette categories, in `gold.jsonl`; the notices themselves are in `notices/`. Rerun with `uv run python evals/run.py`.
 
 ## Extraction fields (per notice)
 
@@ -9,14 +9,14 @@ Run 20/10/2026 16:07 UTC on azure/gpt-4.1-mini (commit b8d0f3d). Labelled set (m
 | Authority | 90% |
 | Kind of notice | 100% |
 | Start date | 90% |
-| End date or deadline | 90% |
+| End date or deadline | 95% |
 | How-to-object sentence present when the notice has one, absent when it does not | 100% |
 | Model's one-line heading passed the gate | 90% |
 | A gated heading shown (the model's, or the first gated summary sentence) | 100% |
 | Places affected found (recall) | 98% |
 | Correspondence addresses wrongly listed as places | 0 |
 
-Summary sentences kept 49, removed by the gate 16; 0 of 21 notices ended with no summary sentence (the page then shows the facts and the notice only). 4.5 model calls and a median 24 s per notice. Errors: 0.
+Summary sentences kept 50, removed by the gate 15; 0 of 21 notices ended with no summary sentence (the page then shows the facts and the notice only). 4.6 model calls and a median 5 s per notice. Errors: 0.
 
 ## The gate (hand-written true and false sentences)
 
@@ -40,7 +40,7 @@ The false-catch rate is the safety number: a false sentence the gate keeps would
 
 ## Consistency
 
-Same notice extracted twice, 5 notices, 25 field comparisons: 100% agreed.
+Same notice extracted twice, 5 notices, 25 field comparisons: 92% agreed.
 
 ## How to read this
 

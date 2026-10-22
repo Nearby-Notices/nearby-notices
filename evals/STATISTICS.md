@@ -2,7 +2,7 @@
 
 Computed by `evals/stats.py` from the saved runs. Gold set: 21 notices. Intervals are 95% Wilson intervals.
 
-## The latest run (20/10/2026 16:07 UTC, azure/gpt-4.1-mini)
+## The latest run (22/10/2026 18:54 UTC, azure/gpt-4.1-mini)
 
 | Measure | Result | 95% interval |
 |---|---|---|
@@ -11,7 +11,7 @@ Computed by `evals/stats.py` from the saved runs. Gold set: 21 notices. Interval
 | Authority correct | 19 of 21 notices | 71.1% to 97.3% |
 | Kind correct | 21 of 21 notices | 84.5% to 100.0% |
 | Starts correct | 19 of 21 notices | 71.1% to 97.3% |
-| Ends correct | 19 of 21 notices | 71.1% to 97.3% |
+| Ends correct | 20 of 21 notices | 77.3% to 99.2% |
 | Objection correct | 21 of 21 notices | 84.5% to 100.0% |
 
 No false sentence got through, so the true leak rate is below **6.9%** at 95% confidence (exact one-sided bound). Showing it is below 1% would need about **299** false sentences with none getting through; below 2%, about 149.

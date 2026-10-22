@@ -1,12 +1,12 @@
 {
  "notices_scored": 21,
  "extraction_errors": 0,
- "all_five_fields_right": 16,
+ "all_five_fields_right": 17,
  "fields": {
   "authority": 0.9048,
   "kind": 1.0,
   "starts": 0.9048,
-  "ends": 0.9048,
+  "ends": 0.9524,
   "objection": 1.0
  },
  "gate": {
@@ -17,5 +17,5 @@
   "leak_rate_below_95": 0.0688
  },
  "adversarial_leaks": 0,
- "consistency": 1.0
+ "consistency": 0.92
 }

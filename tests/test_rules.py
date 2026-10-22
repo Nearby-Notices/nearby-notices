@@ -223,3 +223,15 @@ def test_saved_readings_are_refiltered_when_shown():
     assert out["summary"] == ["A wind farm of 21 turbines is proposed."]
     assert out["what"] == "A wind farm of 21 turbines is proposed." and out["advice_removed"] == 1
     assert extract.refilter(None) is None
+
+
+def test_gate_needs_every_number_in_the_quotes():
+    """Leak test, 22/10/2026: a quote of "68m" was accepted as support for "75m" in a long traffic order."""
+    text = ("The Council intends to prohibit waiting on Ednam Road from a point 35m south east of the junction of Ednam Road "
+            "to a point 68m south east of the junction with Ednam Road, and on Tower Street for 29m.")
+    reply = json.dumps({"supported": True, "quotes": ["from a point 35m south east of the junction of Ednam Road to a point 68m south east of the junction with Ednam Road"]})
+    ok, _ = extract.gate(text, "Waiting is prohibited up to 75m south east of the junction with Ednam Road.", ask=lambda *a: reply)
+    assert not ok
+    ok, _ = extract.gate(text, "Waiting is prohibited up to 68m south east of the junction with Ednam Road.", ask=lambda *a: reply)
+    assert ok
+    assert extract._numbers("1,000 homes by 9th October 2026, 4.3 hours") == {"1000", "9", "2026", "4.3"}

@@ -23,16 +23,15 @@ stages:
       hash: md5
       md5: ec898bc56bfc4a4de0caf210e15693b7
       size: 15875
+      isexec: true
     - path: nearby_notices/config.py
       hash: md5
-      md5: c2cd84c91a5a175e8d8cb728e9272759
-      size: 2588
-      isexec: true
+      md5: 1327198dda011ce918747fca51f3c145
+      size: 3691
     - path: nearby_notices/extract.py
       hash: md5
-      md5: 88faf37f64224f647b6712eecfab0e21
-      size: 15608
-      isexec: true
+      md5: a7a8b2b6d10f738da42d81896b686390
+      size: 17478
     params:
       params.yaml:
         eval.api_version: '2024-10-21'
@@ -40,13 +39,13 @@ stages:
     outs:
     - path: evals/RESULTS.md
       hash: md5
-      md5: 0ab60ef08d0502a0b1b6300ed349f72b
-      size: 2521
+      md5: aa49da0fec3d8dc2280b96b8a73b1c23
+      size: 2519
     - path: evals/results
       hash: md5
-      md5: 39ba1fbd59981664ca77865d07616d02.dir
-      size: 413300
-      nfiles: 6
+      md5: fa45cf4e8d61afd4c010a3037a82a5ff.dir
+      size: 469170
+      nfiles: 7
   inspect:
     cmd: inspect eval evals/inspect_gate.py --model azureai/gpt-4.1-mini 
       --log-dir evals/inspect_logs
@@ -58,8 +57,8 @@ stages:
       isexec: true
     - path: evals/inspect_gate.py
       hash: md5
-      md5: 1928068d2eab5484387885f210dfa89d
-      size: 3185
+      md5: 2fbbb52abaee7fe0c3249ed537cff4d4
+      size: 3312
     - path: evals/notices
       hash: md5
       md5: bd890c42bb257972177ad585e875ebb5.dir
@@ -67,18 +66,17 @@ stages:
       nfiles: 21
     - path: nearby_notices/extract.py
       hash: md5
-      md5: 88faf37f64224f647b6712eecfab0e21
-      size: 15608
-      isexec: true
+      md5: a7a8b2b6d10f738da42d81896b686390
+      size: 17478
     params:
       params.yaml:
         inspect.model: azureai/gpt-4.1-mini
     outs:
     - path: evals/inspect_logs
       hash: md5
-      md5: 4cd9094ae412b3bca656792c6e269996.dir
-      size: 951790
-      nfiles: 2
+      md5: d369983fd35e58ba316e70850f11b95b.dir
+      size: 1424521
+      nfiles: 3
   statistics:
     cmd: python evals/stats.py
     deps:
@@ -89,22 +87,23 @@ stages:
       isexec: true
     - path: evals/results
       hash: md5
-      md5: 39ba1fbd59981664ca77865d07616d02.dir
-      size: 413300
-      nfiles: 6
+      md5: fa45cf4e8d61afd4c010a3037a82a5ff.dir
+      size: 469170
+      nfiles: 7
     - path: evals/stats.py
       hash: md5
       md5: 98dec37457281bd4a69e2b45a3a81be8
       size: 9129
+      isexec: true
     outs:
     - path: evals/STATISTICS.md
       hash: md5
-      md5: 06a1aa8e67e5325b2fbe94e03de78731
+      md5: 1d08cbe10ea119663a1d149cf7b600e1
       size: 2116
     - path: evals/metrics.json
       hash: md5
-      md5: 5d53458372afdc7e559baf1e625a87a0
-      size: 368
+      md5: b510bf053b319352049926223df3a58c
+      size: 369
   subgroups:
     cmd: python evals/subgroups.py
     deps:
@@ -120,23 +119,26 @@ stages:
       nfiles: 21
     - path: evals/results
       hash: md5
-      md5: 39ba1fbd59981664ca77865d07616d02.dir
-      size: 413300
-      nfiles: 6
+      md5: fa45cf4e8d61afd4c010a3037a82a5ff.dir
+      size: 469170
+      nfiles: 7
     - path: evals/stats.py
       hash: md5
       md5: 98dec37457281bd4a69e2b45a3a81be8
       size: 9129
+      isexec: true
     - path: evals/subgroups.json
       hash: md5
       md5: 948197732e65d796d55323354297110a
       size: 2328
+      isexec: true
     - path: evals/subgroups.py
       hash: md5
       md5: 6e4c687e983585997d827d86508bd9a3
       size: 9068
+      isexec: true
     outs:
     - path: evals/SUBGROUPS.md
       hash: md5
-      md5: dc919a7d76772ebf7a7cfc9398d5b549
+      md5: 0b0cfd6c9194198035599e32158476c5
       size: 3833

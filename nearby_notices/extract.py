@@ -244,12 +244,22 @@ def gate(text: str, sentence: str, ask=_ask) -> tuple[bool, list[str]]:
         d = _json(ask(GATE_SYSTEM, GATE_USER.format(text=for_model(text), sentence=sentence.replace('"', "'")), 300))
     except Exception:  # noqa: BLE001 (any model failure degrades to "unsupported", never to a guess)
         return False, []
-    return gate_decision(text, d)
+    return gate_decision(text, d, sentence)
 
 
-def gate_decision(text: str, d: dict) -> tuple[bool, list[str]]:
+_NUMBER = re.compile(r"\d+(?:[.,]\d+)*")
+
+
+def _numbers(s: str) -> set[str]:
+    """The numbers in a string, as digits: '29m' -> '29', '1,000' -> '1000', '9th October 2026' -> '9', '2026'."""
+    return {n.replace(",", "") for n in _NUMBER.findall(s or "")}
+
+
+def gate_decision(text: str, d: dict, sentence: str = "") -> tuple[bool, list[str]]:
     """The code half of the gate, given the scrubbed notice and the model's parsed reply. Shared with the Inspect
-    evaluation (evals/inspect_gate.py) so the evaluation scores exactly the rule the live service applies."""
+    evaluation (evals/inspect_gate.py) so the evaluation scores exactly the rule the live service applies.
+    Given the sentence, every number in it must also be in its quotes: the leak test of 22/10/2026 found the model
+    accepting a quote of "68m" as support for "75m" in a long traffic order."""
     quotes = d.get("quotes")
     if not isinstance(quotes, list):
         quotes = [d.get("quote")] if d.get("quote") else []
@@ -258,6 +268,8 @@ def gate_decision(text: str, d: dict) -> tuple[bool, list[str]]:
     spans = [s.strip() for q in quotes for s in re.split(r"\.{3}|…", q) if len(s.split()) >= 2]
     tn = _norm(text)
     ok = bool(d.get("supported")) and bool(spans) and all(_in_text(s, tn) for s in spans)
+    if ok and sentence:
+        ok = _numbers(sentence) <= set().union(*(_numbers(q) for q in quotes))
     return ok, quotes
 
 
