@@ -61,14 +61,15 @@ def enqueue(ids: list[str], priority: int = SOON) -> None:
 
 
 def warm_up(limit: int = 60) -> int:
-    """At startup, queue the notices of every cached search that lack a plain-English version under the current
-    model, so a restart (or a model change) never leaves a page of "reading..." for a place someone has searched."""
+    """At startup, queue the first few notices of every recent search that lack a summary under the current model,
+    the same few a new search queues, so a restart never leaves the top of a recent search unwritten. The rest wait
+    until someone looks at them, as on any search."""
     import json
 
     ids: list[str] = []
     with store.db() as con:
         for row in con.execute("SELECT payload FROM feed_cache ORDER BY fetched_at DESC"):
-            for nid in json.loads(row["payload"]):
+            for nid in json.loads(row["payload"])[:config.FIRST_SUMMARIES]:
                 if nid not in ids and store.get_extraction(con, nid, config.MODEL) is None and store.get_notice(con, nid):
                     ids.append(nid)
                 if len(ids) >= limit:
