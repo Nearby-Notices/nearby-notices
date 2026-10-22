@@ -50,6 +50,14 @@ LIMITS = {"/search": config.SEARCHES_PER_MINUTE, "/feedback": 30, "/food": 20}
 
 
 @app.middleware("http")
+async def _frame_rule(request: Request, call_next):
+    """Only this site and its GitHub Pages front may show these pages in a frame, so no other site can wrap them."""
+    response = await call_next(request)
+    response.headers["Content-Security-Policy"] = f"frame-ancestors 'self' {config.PAGES_FRONT}"
+    return response
+
+
+@app.middleware("http")
 async def _limit(request: Request, call_next):
     limit = LIMITS.get(request.url.path)
     if limit is not None:

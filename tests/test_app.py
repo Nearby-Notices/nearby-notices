@@ -167,3 +167,8 @@ def test_the_full_text_fetch_failing_keeps_the_summary(client, monkeypatch):
     from nearby_notices import search
     monkeypatch.setattr(gazette, "full_text", lambda nid, client=None: (_ for _ in ()).throw(httpx.ConnectError("down")))
     assert search.full_text_for({"id": "9", "text": "A short summary."}) == "A short summary."
+
+
+def test_only_the_site_and_its_github_front_may_frame_it(client):
+    rule = client.get("/").headers["content-security-policy"]
+    assert rule == "frame-ancestors 'self' https://nearby-notices.github.io"

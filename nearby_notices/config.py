@@ -46,4 +46,7 @@ DEFAULT_DISTANCE_MILES = int(os.environ.get("NN_DEFAULT_DISTANCE", "3"))
 MAX_RESULTS = int(os.environ.get("NN_MAX_RESULTS", "12"))
 FEED_CACHE_SECONDS = int(os.environ.get("NN_FEED_CACHE_SECONDS", "3600"))
 SEARCHES_PER_MINUTE = int(os.environ.get("NN_SEARCHES_PER_MINUTE", "10"))   # per client; a public endpoint should keep this low
+# The GitHub Pages front, which shows this site in a frame for networks that block newly registered domains.
+# It is the only other site allowed to frame this one.
+PAGES_FRONT = os.environ.get("NN_PAGES_FRONT", "https://nearby-notices.github.io")
 COUNTER_URL = os.environ.get("NN_COUNTER_URL", "")   # daily totals that survive restarts (see counter.py); off when empty

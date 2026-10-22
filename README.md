@@ -105,7 +105,7 @@ make eval       # live evaluation, writes evals/RESULTS.md
 ```
 
 <!-- live-link -->
-**Live:** https://nearby-notices.bluesea-79d4ea2e.uksouth.azurecontainerapps.io on Azure Container Apps (UK South), reading notices with an Azure OpenAI gpt-4.1-mini deployment. It scales to zero when idle, so the first visit after a quiet spell takes a few seconds to wake, and the first search of a new place takes 20 to 30 seconds while the Gazette answers.
+**Live:** https://nearbynotices.co.uk, also at https://nearby-notices.github.io (a GitHub Pages front that shows the same site, for networks that block newly registered domains) and https://nearby-notices.bluesea-79d4ea2e.uksouth.azurecontainerapps.io. It runs on Azure Container Apps (UK South), reading notices with an Azure OpenAI gpt-4.1-mini deployment. It scales to zero when idle, so the first visit after a quiet spell takes a few seconds to wake, and the first search of a new place takes about 5 seconds while the Gazette answers.
 <!-- /live-link -->
 
 Settings are environment variables; see [.env.example](.env.example). With a local OpenAI-compatible server (llama-server, Ollama) leave `NN_MODEL` unset and the served model's name is read from the server at startup, so the name recorded with each plain-English version is the model actually used. A `Dockerfile` builds the website; mount `/data` to keep the cache.
@@ -130,7 +130,7 @@ docs/             safety.md, decisions.md, incidents.md, screenshots/
 
 ## Limitations
 
-To be written by the author in his own words after the first week of use. Known today: sentences that count or summarise a list are usually removed by the gate, because no single span of the notice says so; a notice whose prose is itself wrong will be reflected faithfully; the first search of a new place takes 20 to 30 seconds while the Gazette answers.
+To be written by the author in his own words after the first week of use. Known today: sentences that count or summarise a list are usually removed by the gate, because no single span of the notice says so; a notice whose prose is itself wrong will be reflected faithfully; the first search of a new place takes about 5 seconds while the Gazette answers.
 
 ## Licence
 
