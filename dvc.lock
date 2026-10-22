@@ -47,7 +47,7 @@ stages:
       size: 469170
       nfiles: 7
   inspect:
-    cmd: inspect eval evals/inspect_gate.py --model azureai/gpt-4.1-mini 
+    cmd: inspect eval evals/inspect_gate.py@gate --model azureai/gpt-4.1-mini 
       --log-dir evals/inspect_logs
     deps:
     - path: evals/gold.jsonl
@@ -57,8 +57,8 @@ stages:
       isexec: true
     - path: evals/inspect_gate.py
       hash: md5
-      md5: 2fbbb52abaee7fe0c3249ed537cff4d4
-      size: 3312
+      md5: 25172078d1cea7312e17085ffbbcfc05
+      size: 5584
     - path: evals/notices
       hash: md5
       md5: bd890c42bb257972177ad585e875ebb5.dir
@@ -74,9 +74,9 @@ stages:
     outs:
     - path: evals/inspect_logs
       hash: md5
-      md5: d369983fd35e58ba316e70850f11b95b.dir
-      size: 1424521
-      nfiles: 3
+      md5: 0f8d355790372972b2ee817c2e71162d.dir
+      size: 1888915
+      nfiles: 4
   statistics:
     cmd: python evals/stats.py
     deps:
@@ -142,3 +142,36 @@ stages:
       hash: md5
       md5: 0b0cfd6c9194198035599e32158476c5
       size: 3833
+  inspect_leak:
+    cmd: inspect eval evals/inspect_gate.py@leak --model azureai/gpt-4.1-mini 
+      --log-dir evals/inspect_logs_leak
+    deps:
+    - path: evals/inspect_gate.py
+      hash: md5
+      md5: 25172078d1cea7312e17085ffbbcfc05
+      size: 5584
+    - path: evals/leak/confirm/unsupported.jsonl
+      hash: md5
+      md5: db4b8a52f2dba881a47e47d19a699b4d
+      size: 143810
+    - path: evals/leak/excluded.json
+      hash: md5
+      md5: 0de006d6f1823d3cd1c35e81afc8fb89
+      size: 54
+    - path: evals/leak/unsupported.jsonl
+      hash: md5
+      md5: 572c7f371f9efa94df3d1efc5d6f7fa1
+      size: 136066
+    - path: nearby_notices/extract.py
+      hash: md5
+      md5: a7a8b2b6d10f738da42d81896b686390
+      size: 17478
+    params:
+      params.yaml:
+        inspect.model: azureai/gpt-4.1-mini
+    outs:
+    - path: evals/inspect_logs_leak
+      hash: md5
+      md5: 1e9a59e4bc123ea47403819335627aaf.dir
+      size: 4286361
+      nfiles: 1

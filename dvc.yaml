@@ -2,7 +2,8 @@
 # and dvc.lock records the hash of every input and output of the last run, so a result can be traced to the exact
 # labels, notices, code and model that produced it. `dvc metrics diff` compares the headline numbers between commits.
 #
-# Stages: evaluate (the live model on the labelled set) and inspect (the gate in Inspect) call the model; statistics
+# Stages: evaluate (the live model on the labelled set), inspect (the gate in Inspect) and inspect_leak (the leak tests
+# in Inspect) call the model; statistics
 # and subgroups only read saved runs, so a change to the reports never pays for a model run. For the same reason
 # evals/stats.py is not an input of evaluate, although run.py borrows its interval functions to word RESULTS.md.
 # Outputs stay in git (cache: false); DVC adds the hashes, not a second copy.
@@ -27,7 +28,7 @@ stages:
           persist: true    # earlier runs stay; the reports compare against them
 
   inspect:
-    cmd: inspect eval evals/inspect_gate.py --model ${inspect.model} --log-dir evals/inspect_logs
+    cmd: inspect eval evals/inspect_gate.py@gate --model ${inspect.model} --log-dir evals/inspect_logs
     deps:
       - evals/inspect_gate.py
       - evals/gold.jsonl
@@ -37,6 +38,23 @@ stages:
       - inspect.model
     outs:
       - evals/inspect_logs:
+          cache: false
+          persist: true
+
+  inspect_leak:
+    # The two pre-registered leak tests (evals/leak/) through the same scorer: 659 unsupported sentences, all should be
+    # removed. Needs the fetched notices, which stay out of the public copy; leak_test.py fetch and make rebuild a set.
+    cmd: inspect eval evals/inspect_gate.py@leak --model ${inspect.model} --log-dir evals/inspect_logs_leak
+    deps:
+      - evals/inspect_gate.py
+      - evals/leak/unsupported.jsonl
+      - evals/leak/confirm/unsupported.jsonl
+      - evals/leak/excluded.json
+      - nearby_notices/extract.py
+    params:
+      - inspect.model
+    outs:
+      - evals/inspect_logs_leak:
           cache: false
           persist: true
 

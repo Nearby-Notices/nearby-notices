@@ -50,10 +50,16 @@ Not measured here: whether the summary sentences the model chose to write are th
 `evals/inspect_gate.py` runs the gate in [Inspect](https://inspect.aisi.org.uk/). Inspect sends the live prompt to the model through its own provider. A custom scorer applies the same code check the service applies (`extract.gate_decision`) and scores each decision against its label, with accuracy grouped by label. Inspect needs the `evals` dependency group, which the service image does not install:
 
 ```
-uv run --group evals inspect eval evals/inspect_gate.py --model azureai/gpt-4.1-mini --log-dir evals/inspect_logs
+uv run --group evals inspect eval evals/inspect_gate.py@gate --model azureai/gpt-4.1-mini --log-dir evals/inspect_logs
+uv run --group evals inspect eval evals/inspect_gate.py@leak --model azureai/gpt-4.1-mini --log-dir evals/inspect_logs_leak
 ```
 
 It needs `AZUREAI_API_KEY`, and `AZUREAI_BASE_URL` pointing at the deployment (`https://<resource>.openai.azure.com/openai/deployments/<deployment>`). The run of 20 October 2026 on Azure OpenAI gpt-4.1-mini scored 84 of 84: every true sentence kept and every false one removed, with no sample errors.
+
+Two tasks, both DVC stages:
+
+- **`gate`, the 84 hand-labelled sentences.** 84 of 84 on 20 October 2026 and again on 22 October with the numbers rule; 83 of 84 on the rerun of 22 October, when the model offered, for a true sentence about a bilingual notice's deadline, a "quote" it had half translated from the Welsh ("to reach by 13 Mawrth 2015"). That is not in the notice, so the code check refused it and the true sentence was removed: the safe side, and the same notice has kept it on every other run. Run to run, the model's quotes vary even at temperature 0.
+- **`leak`, the 659 unsupported sentences of the two leak tests.** 658 of 659 removed on 22 October: 330 of 330 in the fresh confirmation set, and 328 of 329 in the first set, where the one let through is the known "29m" case (the number is quoted, but for another street). Its logs hold the full notice texts, so they stay out of the public copy with the notices.
 
 ## The pipeline (DVC)
 

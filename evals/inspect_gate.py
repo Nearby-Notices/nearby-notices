@@ -8,6 +8,13 @@ offers quotes; code keeps the sentence only if every quote is really in the noti
 live service sends, applies the same code check (extract.gate_decision), and scores the decision against the label
 of each hand-written true and false sentence in gold.jsonl. Metrics: accuracy with its standard error, and accuracy
 grouped by label (true sentences kept; false sentences removed).
+
+A second task, `leak`, runs the two pre-registered leak tests (evals/leak/) through the same scorer: 659 sentences the
+notices do not support, each a true sentence with one fact changed, all of which should be removed. Grouped by set,
+because the first set was used to design the numbers rule and only the fresh confirmation set measures it fairly.
+    uv run --group evals inspect eval evals/inspect_gate.py@leak --model azureai/gpt-4.1-mini --log-dir evals/inspect_logs
+It needs the fetched notices and generated sentences, which stay out of the public copy (many notices are signed by
+named officials); `evals/leak_test.py fetch` and `make` rebuild a set of the same design.
 """
 import json
 import sys
@@ -34,7 +41,11 @@ from nearby_notices import extract
 
 
 def notice_text(nid: str) -> str:
-    raw = (ROOT / "evals" / "notices" / f"{nid}.txt").read_text()
+    for d in ("notices", "leak/notices", "leak/confirm/notices"):
+        path = ROOT / "evals" / d / f"{nid}.txt"
+        if path.exists():
+            break
+    raw = path.read_text()
     return raw.split("\n", 1)[1] if raw.startswith("#") else raw
 
 
@@ -72,4 +83,33 @@ def gate_decision():
 @task
 def gate() -> Task:
     return Task(dataset=MemoryDataset(samples()), solver=generate(), scorer=gate_decision(),
+                config=GenerateConfig(temperature=0, max_tokens=300))
+
+
+def leak_samples() -> list[Sample]:
+    out = []
+    excluded = set(json.loads((ROOT / "evals" / "leak" / "excluded.json").read_text()))
+    for label, path in (("first leak test (used to design the numbers rule)", ROOT / "evals" / "leak" / "unsupported.jsonl"),
+                        ("fresh confirmation set", ROOT / "evals" / "leak" / "confirm" / "unsupported.jsonl")):
+        for i, line in enumerate(path.read_text().splitlines()):
+            if not line.strip():
+                continue
+            it = json.loads(line)
+            if it["sentence"] in excluded:                # the one item review found the notice did support
+                continue
+            text, _ = extract.scrub(notice_text(it["id"]))
+            user = extract.GATE_USER.format(text=extract.for_model(text), sentence=it["sentence"].replace('"', "'"))
+            user = user.replace("\n/no_think", "")
+            out.append(Sample(
+                id=f"{'confirm' if 'fresh' in label else 'first'}-{i}",
+                input=[ChatMessageSystem(content=extract.GATE_SYSTEM), ChatMessageUser(content=user)],
+                target="removed",
+                metadata={"label": label, "kind": it["change_kind"], "text": text, "sentence": it["sentence"]},
+            ))
+    return out
+
+
+@task
+def leak() -> Task:
+    return Task(dataset=MemoryDataset(leak_samples()), solver=generate(), scorer=gate_decision(),
                 config=GenerateConfig(temperature=0, max_tokens=300))
