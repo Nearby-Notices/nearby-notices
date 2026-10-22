@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{% block title %}Nearby Notices{% endblock %}</title>
-<link rel="stylesheet" href="/static/style.css?v=8">
+<link rel="stylesheet" href="/static/style.css?v=9">
 <link rel="icon" href="/static/favicon.ico" sizes="any">
 <link rel="icon" href="/static/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/static/apple-touch-icon.png">
@@ -18,8 +18,11 @@
   </div>
 </header>
 <div class="phase"><div class="wrap"><span class="tag-phase">Independent</span><span class="phase-text">Not an official service. Public information from government sources, made easier to read. Always check the original.</span></div></div>
-<main class="wrap">
+<main>
+{% block hero %}{% endblock %}
+<div class="wrap page">
 {% block body %}{% endblock %}
+</div>
 </main>
 <footer>
   <div class="wrap">

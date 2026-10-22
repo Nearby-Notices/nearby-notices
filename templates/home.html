@@ -1,10 +1,12 @@
 {% extends "base.html" %}
 {% from "_ui.html" import tag with context %}
-{% block body %}
-<section class="hero">
+{% block hero %}
+<section class="hero-band">
+<div class="wrap">
+<div class="hero-text">
   <h1>Find public information near you</h1>
   <p class="lead">Road closures, parking changes, planning and environmental notices are published by councils and public bodies in legal language. Enter a postcode or a town to read the ones near you in plain English, each linked to the original. The map can also show food hygiene ratings.</p>
-</section>
+</div>
 {% if error %}<div class="error-summary" role="alert"><h2>There is a problem</h2><p>{{ error }}</p></div>{% endif %}
 <form action="/search" method="get" class="search-panel">
   <div class="search-row">
@@ -30,6 +32,10 @@
     </div>
   </div>
 </form>
+</div>
+</section>
+{% endblock %}
+{% block body %}
 <script>
 (function () {
   var choices = {{ unit_choices|tojson }};
@@ -45,11 +51,11 @@
 <section class="covers" aria-labelledby="covers-title">
   <h2 id="covers-title">What it covers</h2>
   <ul class="cover-grid">
-    <li class="cover">{{ tag('roads') }}<p>Closures, parking and waiting, speed limits, one-way orders</p><p class="source">Source: The Gazette</p></li>
-    <li class="cover">{{ tag('planning') }}<p>Applications, orders, stopping-up of roads for development</p><p class="source">Source: The Gazette</p></li>
-    <li class="cover">{{ tag('environment') }}<p>Permits, smoke control, drainage, forestry</p><p class="source">Source: The Gazette</p></li>
-    <li class="cover">{{ tag('energy') }}<p>Electricity and pipeline notices</p><p class="source">Source: The Gazette</p></li>
-    <li class="cover cover-food"><span class="tag tag-food"><span class="dot dot-good"></span>Food hygiene</span><p>Food Standards Agency ratings for cafes, restaurants, shops and takeaways, shown on the map</p><p class="source">Source: Food Standards Agency</p></li>
+    <li class="cover">{{ tag('roads') }}<p>Closures, parking and waiting, speed limits, one-way orders</p></li>
+    <li class="cover">{{ tag('planning') }}<p>Applications, orders, stopping-up of roads for development</p></li>
+    <li class="cover">{{ tag('environment') }}<p>Permits, smoke control, drainage, forestry</p></li>
+    <li class="cover">{{ tag('energy') }}<p>Electricity and pipeline notices</p></li>
+    <li class="cover cover-food"><span class="tag tag-food"><span class="dot dot-good"></span>Food hygiene</span><p>Food Standards Agency ratings for cafes, restaurants, shops and takeaways, shown on the map</p></li>
   </ul>
   <p class="small">It does not cover notices about people (insolvency, estates, appointments), by design. The first search of a place takes a little while: each notice is read and checked before it is shown.</p>
 </section>
