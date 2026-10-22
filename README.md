@@ -2,11 +2,11 @@
 
 **What is changing near you, in plain English, with every sentence checked against the notice.**
 
-Road closures, parking changes, planning applications, wind farms, smoke control orders and water licences are published in [The Gazette](https://www.thegazette.co.uk), the UK's official public record, in legal language that is hard to read and hard to search by place. Type a postcode or a town, get the notices near you, each read back in plain English beside the notice as published and linked to the record. The same index is an MCP server, so an AI agent can ask the same questions and cite the same record.
+Road closures, parking changes, planning applications, wind farms, smoke control orders and water licences are published in [The Gazette](https://www.thegazette.co.uk), the UK's official public record, in legal language that is hard to read and hard to search by place. Type a postcode or a town, get the notices near you, each read back in plain English beside the notice as published and linked to the record. The map can also show food hygiene ratings from the [Food Standards Agency](https://ratings.food.gov.uk). The same index of notices is an MCP server, so an AI agent can ask the same questions and cite the same record.
 
 For residents, councillors, local journalists and anyone else who wants to know what is being proposed on their street before the objection period closes.
 
-Built with an AI coding assistant under the author's direction, in the author's own time, on open data. Not affiliated with The Gazette, the Government or any council. It shows public notices and does not give advice.
+Built with an AI coding assistant under the author's direction, in the author's own time, on open data. Not affiliated with The Gazette, the Food Standards Agency, the Government or any council. It shows public information and does not give advice.
 
 ![The results list: each notice as a card with its kind, date, distance, the facts, the checked plain-English summary and the notice as published](docs/screenshots/list.png)
 
@@ -68,6 +68,7 @@ flowchart LR
 2. **Read.** A model (any model through LiteLLM; by default a local one) returns the facts as JSON and a two- or three-sentence summary. One background reader, so a burst of searches never becomes a burst of model calls.
 3. **Check.** The layers in the table above.
 4. **Show.** As a list, grouped by kind, or on a map (Leaflet served from this site; OpenStreetMap tiles only when you open the map). Each pin sits at the nearest postcode the notice is filed under; pins that would overlap are spread in a ring. The page asks `/status` every few seconds and swaps in each card as it is ready, without reloading.
+5. **Food hygiene ratings.** An optional map layer from the Food Standards Agency's open API, fetched only when switched on, by the search point's location. Ratings are coloured good, fair or poor, with a switch to show only the poor ones. Businesses with no published address, which the FSA withholds for food businesses run from a home, are left out. Answers are cached for a day.
 
 ## Use it from an AI agent (MCP)
 
@@ -118,7 +119,7 @@ Public-endpoint settings differ from a private run in two ways, both environment
 ## Repository map
 
 ```
-nearby_notices/   gazette.py (feed, linked data, fair use)  places.py (postcodes.io)  geo.py (units, radii, distance)
+nearby_notices/   gazette.py (feed, linked data, fair use)  places.py (postcodes.io)  food.py (FSA ratings)  geo.py (units, radii, distance)
                   search.py (the pipeline)  extract.py (model, checks, gate)  worker.py (one reader)  store.py (SQLite)
                   app.py (FastAPI pages)  mcp_server.py (MCP tools)  categories.py  groups.py  config.py
 templates/ static/  GOV.UK Design System patterns without the reserved marks; Leaflet vendored
@@ -133,4 +134,4 @@ To be written by the author in his own words after the first week of use. Known 
 
 ## Licence
 
-Code: MIT. Notice data: The Gazette, Open Government Licence v3. Place data: postcodes.io, Open Government Licence. Map tiles: OpenStreetMap contributors.
+Code: MIT. Notice data: The Gazette, Open Government Licence v3. Food hygiene ratings: Food Standards Agency open data. Place data: postcodes.io, Open Government Licence. Map tiles: OpenStreetMap contributors.

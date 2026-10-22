@@ -3,7 +3,7 @@
 {% from "_ui.html" import icon with context %}
 {% block title %}Notices near {{ place.name }}{% endblock %}
 {% block body %}
-<p class="crumb"><a href="/">Search again</a></p>
+<p class="crumb"><a href="/">New search</a></p>
 <div class="results-head">
   <div>
     <h1>Notices near {{ place.name }}</h1>
@@ -30,7 +30,7 @@
   <button class="chip active" data-group="all">All <span>({{ results|length }})</span></button>
   {% for g in order %}{% if counts[g] %}<button class="chip chip-{{ g }}" data-group="{{ g }}">{{ icon(g) }}{{ group_name(g) }} <span>({{ counts[g] }})</span></button>{% endif %}{% endfor %}
   {% set q = "?place=" ~ (place.query|urlencode) ~ "&distance=" ~ distance ~ "&unit=" ~ unit %}
-  <span class="viewtoggle"><a href="{{ q }}&view=all" {% if view == 'all' %}class="on"{% endif %}>List</a> &middot; <a href="{{ q }}&view=grouped" {% if view == 'grouped' %}class="on"{% endif %}>Grouped</a> &middot; <a href="{{ q }}&view=map" {% if view == 'map' %}class="on"{% endif %}>Map</a></span>
+  <span class="viewtoggle" role="group" aria-label="View"><a href="{{ q }}&view=all" {% if view == 'all' %}class="on" aria-current="page"{% endif %}>List</a><a href="{{ q }}&view=grouped" {% if view == 'grouped' %}class="on" aria-current="page"{% endif %}>Grouped</a><a href="{{ q }}&view=map" {% if view == 'map' %}class="on" aria-current="page"{% endif %}>Map</a></span>
 </nav>
 
 {% if view == 'map' %}

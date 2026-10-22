@@ -1,8 +1,16 @@
 {% extends "base.html" %}
 {% block title %}About{% endblock %}
 {% block body %}
+<div class="prose">
 <h1>About</h1>
-<p>Public notices that affect where people live are published in The Gazette in legal language that is hard to read and hard to search by place. This tool finds the notices near a postcode or town and reads them back in plain English, each linked to the notice as published.</p>
+<p>Public notices that affect where people live are published in The Gazette in legal language that is hard to read and hard to search by place. This tool finds the notices near a postcode or town and reads them back in plain English, each linked to the notice as published. The map can also show the food hygiene ratings of businesses nearby.</p>
+<h2>Where the information comes from</h2>
+<ul>
+  <li><strong>Public notices:</strong> The Gazette, the UK's official public record, reused under the Open Government Licence v3.</li>
+  <li><strong>Food hygiene ratings:</strong> the Food Standards Agency's open data, shown only when you switch the layer on. Businesses run from a private home are left out.</li>
+  <li><strong>Place lookup:</strong> postcodes.io, built on ONS and Ordnance Survey open data.</li>
+  <li><strong>Map:</strong> OpenStreetMap contributors.</li>
+</ul>
 <h2>How the plain English is made, and checked</h2>
 <p>A language model reads the notice and returns the facts (what is changing, where, from when, who published it, how to object) and a two- or three-sentence summary. Every place name must appear word for word in the notice or it is dropped. Every summary sentence is then checked against the notice by a second step that must return a supporting quote that really is in the text; a sentence that fails is removed and counted. The model never writes advice: where a notice says how to object, that sentence is quoted, not composed.</p>
 <h2>What it covers, and what it refuses</h2>
@@ -16,4 +24,5 @@
   <li>Searches by day: {% for d in stats.searches_by_day %}{{ d.day }}: {{ d.n }}{% if not loop.last %}; {% endif %}{% endfor %}</li>
 </ul>
 <p class="small">Model in use: {{ model }}. Built with an AI coding assistant under the author's direction, in the author's own time, with open data. The evaluation and its results are available on request.</p>
+</div>
 {% endblock %}

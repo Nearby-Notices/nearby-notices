@@ -60,9 +60,8 @@ async def _limit(request: Request, call_next):
                                      status_code=429, headers={"Retry-After": "60"})
     return await call_next(request)
 
-DISCLAIMER = ("Not affiliated with The Gazette, the Government or any council. This tool shows public notices in plain "
-              "English and does not give advice. Always read the notice itself. Notice data: The Gazette, "
-              "Open Government Licence v3.")
+DISCLAIMER = ("Not affiliated with The Gazette, the Food Standards Agency, the Government or any council. This tool shows "
+              "public information in plain English and does not give advice. Always check the original.")
 _ID = re.compile(r"^\d{1,12}$")
 
 

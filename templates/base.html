@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{% block title %}Nearby Notices{% endblock %}</title>
-<link rel="stylesheet" href="/static/style.css?v=6">
+<link rel="stylesheet" href="/static/style.css?v=7">
 <link rel="icon" href="/static/favicon.ico" sizes="any">
 <link rel="icon" href="/static/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/static/apple-touch-icon.png">
@@ -17,14 +17,14 @@
     <nav><a href="/about">About</a><a href="/privacy">Privacy</a></nav>
   </div>
 </header>
-<div class="phase"><div class="wrap"><span class="tag-phase">Independent</span>Not an official service. Public notices from The Gazette, read in plain English. Always read the notice itself.</div></div>
+<div class="phase"><div class="wrap"><span class="tag-phase">Independent</span><span class="phase-text">Not an official service. Public information from government sources, made easier to read. Always check the original.</span></div></div>
 <main class="wrap">
 {% block body %}{% endblock %}
 </main>
 <footer>
   <div class="wrap">
     <p class="disclaimer">{{ disclaimer }}</p>
-    <p class="small">Place lookup: postcodes.io (ONS and Ordnance Survey open data). No cookies. Nothing you type is stored. Built with an AI coding assistant under the author's direction, in the author's own time.</p>
+    <p class="small">Sources: public notices from The Gazette (Open Government Licence v3); food hygiene ratings from the Food Standards Agency's open data; place lookup from postcodes.io (ONS and Ordnance Survey open data); map from OpenStreetMap contributors. No cookies. Nothing you type is stored. Built with an AI coding assistant under the author's direction, in the author's own time.</p>
   </div>
 </footer>
 <script src="/static/progress.js?v=2" defer></script>
