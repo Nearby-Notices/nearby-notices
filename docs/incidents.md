@@ -68,4 +68,4 @@ Full run on the Azure OpenAI gpt-4.1-mini deployment the site uses (results/2026
 - **Fix: every number in a sentence must also be in its quotes** (`extract.gate_decision`, test in `tests/test_rules.py`). On the main set nothing was lost: 42 of 42 true sentences kept, 42 of 42 false removed, Inspect 84 of 84, summary sentences kept 50 against 49 before.
 - **Checked on fresh notices, not on the set the fix was shaped on.** A second pre-registered set of 330 sentences from 141 new notices (`evals/leak/confirm/`): 0 got through, so the leak rate is below 0.9% at 95% confidence.
 - **Known limit.** On the first set after the fix, 1 of 329 still gets through: the "29m" sentence, because 29m is in a quote, just about another street. A sentence that joins a number from one row of a table to a place from another row needs the model's judgement; the code cannot see it.
-- Not yet live: the fix is in the working copy (not yet committed) and goes live with the next deploy.
+- Live from commit f7efb87, deployed 22/10/2026 22:38 (BST).
