@@ -104,7 +104,7 @@ make eval       # live evaluation, writes evals/RESULTS.md
 ```
 
 <!-- live-link -->
-**Live:** https://nearbynotices.co.uk on Azure Container Apps (UK South), reading notices with an Azure OpenAI gpt-4.1-mini deployment. It scales to zero when idle, so the first visit after a quiet spell takes a few seconds to wake, and the first search of a new place takes 20 to 30 seconds while the Gazette answers.
+**Live:** https://nearby-notices.bluesea-79d4ea2e.uksouth.azurecontainerapps.io on Azure Container Apps (UK South), reading notices with an Azure OpenAI gpt-4.1-mini deployment. It scales to zero when idle, so the first visit after a quiet spell takes a few seconds to wake, and the first search of a new place takes 20 to 30 seconds while the Gazette answers.
 <!-- /live-link -->
 
 Settings are environment variables; see [.env.example](.env.example). With a local OpenAI-compatible server (llama-server, Ollama) leave `NN_MODEL` unset and the served model's name is read from the server at startup, so the name recorded with each plain-English version is the model actually used. A `Dockerfile` builds the website; mount `/data` to keep the cache.
