@@ -35,15 +35,20 @@
       track.setAttribute('aria-valuenow', String(Math.round(shown)));
       if (text) { label.textContent = text; }
     }
+    var seen = false;
     function poll() {
+      // Stop on our own after three minutes, and as soon as the server has finished (the next page is on its way),
+      // so a search that never moves on can never leave this asking the server forever.
+      if (Date.now() - began > 180000) { label.textContent = 'This is taking longer than usual. Try again in a moment.'; return; }
       fetch('/progress?place=' + encodeURIComponent(place), {cache: 'no-store'})
         .then(function (r) { return r.json(); })
         .then(function (s) {
-          if (s.stage) { show(s.percent, s.label); }
+          if (s.stage) { seen = true; show(s.percent, s.label); }
+          else if (seen) { show(100, 'Preparing your results'); return 'finished'; }
           else { show(Math.min(8, (Date.now() - began) / 400), 'Starting the search'); }
         })
         .catch(function () {})
-        .then(function () { timer = setTimeout(poll, 600); });
+        .then(function (state) { if (state !== 'finished') { timer = setTimeout(poll, 600); } });
     }
     show(2, 'Starting the search');
     timer = setTimeout(poll, 300);
