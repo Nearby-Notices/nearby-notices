@@ -79,7 +79,10 @@ def home(request: Request):
 def search_page(request: Request, place: str = "", distance: float | None = None, unit: str = "mi", view: str = "map"):
     unit = geo.unit_key(unit)
     distance = geo.choose_distance(distance if distance is not None else config.DEFAULT_DISTANCE_MILES, unit)
-    found = search.find(place, distance, unit, report=progress.reporter(place))
+    try:
+        found = search.find(place, distance, unit, report=progress.reporter(place))
+    finally:
+        progress.clear(place)
     if not found:
         return templates.TemplateResponse(request, "home.html", _ctx(
             request, distance=distance, unit=unit, error="I could not find that place. Try a full postcode or a town name."))

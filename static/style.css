@@ -99,6 +99,10 @@ form.inline { display: inline-flex; align-items: center; gap: .5rem; } form.inli
 .popup-links { margin: 0; } .popup-links a { margin-right: 1rem; font-weight: 700; }
 #map .leaflet-popup-close-button { font-size: 20px; }
 .pin-spoke { stroke: #555; stroke-width: 1.5; }
+.leaflet-marker-icon.pin-ring { pointer-events: none !important; }
+.pin-ring .pin { pointer-events: auto; cursor: pointer; }
+.map-wider { font: inherit; font-weight: 700; background: #fff; color: var(--ink); border: 2px solid var(--ink); padding: .45rem .8rem; cursor: pointer; box-shadow: 0 2px 0 rgba(0,0,0,.35); }
+.map-wider:hover { background: var(--light); } .map-wider:focus { outline: 3px solid var(--focus); }
 footer { border-top: 1px solid var(--line); background: var(--light); margin-top: 3rem; padding: 1.5rem 0 2.5rem; font-size: 1rem; }
 .small, .muted { color: var(--muted); font-size: 1rem; }
 .disclaimer { font-weight: 700; }

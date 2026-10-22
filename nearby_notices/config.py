@@ -46,3 +46,4 @@ DEFAULT_DISTANCE_MILES = int(os.environ.get("NN_DEFAULT_DISTANCE", "3"))
 MAX_RESULTS = int(os.environ.get("NN_MAX_RESULTS", "12"))
 FEED_CACHE_SECONDS = int(os.environ.get("NN_FEED_CACHE_SECONDS", "3600"))
 SEARCHES_PER_MINUTE = int(os.environ.get("NN_SEARCHES_PER_MINUTE", "10"))   # per client; a public endpoint should keep this low
+COUNTER_URL = os.environ.get("NN_COUNTER_URL", "")   # daily totals that survive restarts (see counter.py); off when empty

@@ -60,7 +60,9 @@
     var S = 2 * spread + PIN, c = S / 2;
     html = '<svg class="spoke" width="' + S + '" height="' + S + '" style="position:absolute;left:0;top:0" aria-hidden="true"><line class="pin-spoke" x1="' + c + '" y1="' + c + '" x2="' + (c + dx) + '" y2="' + (c + dy) + '"/><circle cx="' + c + '" cy="' + c + '" r="2.5" fill="#555"/></svg>' +
            '<span style="position:absolute;left:' + (c + dx - PIN / 2) + 'px;top:' + (c + dy - PIN / 2) + 'px">' + html + '</span>';
-    return L.divIcon({className: '', iconSize: [S, S], iconAnchor: [c, c], popupAnchor: [dx, dy - 14], html: html});
+    // The box is as wide as the whole ring, so it must not take clicks: only the pin inside it does (style.css),
+    // or the top marker's box would catch every click meant for the pins beneath it.
+    return L.divIcon({className: 'pin-ring', iconSize: [S, S], iconAnchor: [c, c], popupAnchor: [dx, dy - 14], html: html});
   };
   var layout = function () {
     var zoom = map.getZoom(), clusters = [];
@@ -116,6 +118,34 @@
   if (bounds.length) { map.fitBounds(bounds, {padding: [30, 30], maxZoom: 14}); } else { map.setView([54.5, -3], 5); }
   layout();
   map.on('zoomend', layout);
+
+  // Zoomed out past the search circle: offer the next distance that covers what is on screen. A button, not an
+  // automatic search, because a wider search can take half a minute and reloads the page under the reader.
+  var choices = {{ units[unit].choices|tojson }}, unitM = {{ units[unit].metres }}, unitName = {{ units[unit].name|tojson }};
+  var current = {{ distance }}, refine = document.getElementById('distance');
+  var wider = L.control({position: 'topright'});
+  wider.onAdd = function () {
+    var b = L.DomUtil.create('button', 'map-wider');
+    b.type = 'button'; b.hidden = true;
+    L.DomEvent.disableClickPropagation(b);
+    b.addEventListener('click', function () {
+      refine.value = b.dataset.d;
+      if (refine.form.requestSubmit) { refine.form.requestSubmit(); } else { refine.form.submit(); }
+    });
+    return b;
+  };
+  if (centre[0] !== null && refine) {
+    wider.addTo(map);
+    map.on('zoomend', function () {
+      var b = wider.getContainer(), v = map.getBounds(), mid = v.getCenter();
+      var seen = Math.max(mid.distanceTo([mid.lat, v.getEast()]), mid.distanceTo([v.getNorth(), mid.lng]));   // the longer side
+      var bigger = choices.filter(function (d) { return d > current; });
+      var next = bigger.filter(function (d) { return d * unitM >= seen * 0.75; })[0] || bigger[bigger.length - 1];
+      var show = next && seen > {{ asked_m }} * 1.15;
+      b.hidden = !show;
+      if (show) { b.dataset.d = next; b.textContent = 'Show notices within ' + next + ' ' + unitName; }
+    });
+  }
 })();
 </script>
 {% endif %}

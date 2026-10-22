@@ -8,7 +8,7 @@ from dataclasses import dataclass, field
 
 import httpx
 
-from . import config, extract, gazette, geo, groups, places, store
+from . import config, counter, extract, gazette, geo, groups, places, store
 
 MAX_POINT_FETCHES = 16     # linked-data lookups per search, so one search can never hammer the Gazette
 PAGE_SIZE = 6              # latest notices per category asked of the Gazette; six categories, so at most 36 candidates
@@ -123,6 +123,7 @@ def find(place_query: str, distance: float | None, unit: str, report=_quiet) -> 
     asked_m = geo.to_metres(distance, unit)
     with store.db() as con:
         store.bump(con, "search")
+        counter.count("search")
         con.commit()                      # the counter is its own tiny transaction; nothing waits behind it
         found_ids = candidates(con, where, geo.gazette_radius(geo.to_miles(distance, unit)), report)
         ids = select(con, where, found_ids, asked_m, report)

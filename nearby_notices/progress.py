@@ -55,6 +55,12 @@ def get(k: str) -> dict | None:
         return {x: e[x] for x in ("stage", "done", "total", "percent", "label")}
 
 
+def clear(place: str) -> None:
+    """Forget a search once its page is built, so a repeat search of the same place starts its bar from zero."""
+    with _lock:
+        _entries.pop(key(place), None)
+
+
 def reporter(place: str):
     """A step function bound to one search, for search.find."""
     k = key(place)

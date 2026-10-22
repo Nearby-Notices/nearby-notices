@@ -103,8 +103,11 @@ def test_progress_reports_each_step_without_keeping_what_was_typed(client):
     assert client.get("/progress", params={"place": "nowhere yet"}).json() == {"stage": None}
     r = client.get("/search", params={"place": "DY1 1HF", "distance": 3, "unit": "mi"})
     assert r.status_code == 200
+    assert client.get("/progress", params={"place": "DY1 1HF"}).json() == {"stage": None}   # cleared once the page is built
+    report = progress.reporter("DY1 1HF")
+    report("text", 3, 6)
     s = client.get("/progress", params={"place": "  dy1   1hf "}).json()      # same place however it is typed
-    assert s["stage"] == "done" and s["percent"] == 100
+    assert s["stage"] == "text" and s["label"] == "Fetching notices: 3 of 6" and s["percent"] == 50
     assert all("DY1" not in k.upper() for k in progress._entries)            # only a hash is kept
 
 
