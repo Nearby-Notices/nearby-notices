@@ -8,7 +8,7 @@
   <div class="form-group">
     <label class="label" for="place">Postcode or town</label>
     <p class="hint">For example DY1 1HF, or Dudley</p>
-    <input class="input" id="place" name="place" type="text" required autocomplete="off" spellcheck="false">
+    <input class="input" id="place" name="place" type="text" required autocomplete="off" spellcheck="false" value="{{ place_value or '' }}">
   </div>
   <div class="form-group">
     <label class="label" for="distance">Within</label>

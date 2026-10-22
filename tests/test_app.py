@@ -105,15 +105,59 @@ def test_progress_reports_each_step_without_keeping_what_was_typed(client):
     assert r.status_code == 200
     assert client.get("/progress", params={"place": "DY1 1HF"}).json() == {"stage": None}   # cleared once the page is built
     report = progress.reporter("DY1 1HF")
-    report("text", 3, 6)
+    report("points", 3, 6)
     s = client.get("/progress", params={"place": "  dy1   1hf "}).json()      # same place however it is typed
-    assert s["stage"] == "text" and s["label"] == "Fetching notices: 3 of 6" and s["percent"] == 50
+    assert s["stage"] == "points" and s["label"] == "Checking where each notice is: 3 of 6" and s["percent"] == 70
     assert all("DY1" not in k.upper() for k in progress._entries)            # only a hash is kept
 
 
 def test_progress_percent_fills_each_stage_in_order():
     from nearby_notices import progress
     assert progress.percent("place") == 0
-    assert progress.percent("feed", 3, 6) == 22
-    assert progress.percent("text", 0, 0) == 40 and progress.percent("points", 4, 4) == 95
+    assert progress.percent("feed", 3, 6) == 25
+    assert progress.percent("points", 0, 4) == 45 and progress.percent("points", 4, 4) == 95
     assert progress.percent("done") == 100
+
+
+def test_one_slow_location_lookup_does_not_fail_the_search(client, monkeypatch):
+    import httpx
+    def points(nid, client=None):
+        if nid == "2":
+            raise httpx.ReadTimeout("the Gazette took too long")
+        return [{"postcode": "GL1 1AA", "lat": 52.0, "lon": -2.0}]
+    monkeypatch.setattr(gazette, "points", points)
+    r = client.get("/search", params={"place": "Dudley", "distance": 3, "unit": "mi"})
+    assert r.status_code == 200 and "Notices near" in r.text
+
+
+def test_a_gazette_outage_shows_a_plain_message_and_keeps_what_was_typed(client, monkeypatch):
+    def down(*a, **k):
+        raise gazette.GazetteUnavailable("all category requests failed")
+    monkeypatch.setattr(gazette, "search_near", down)
+    r = client.get("/search", params={"place": "Dudley", "distance": 3, "unit": "mi"})
+    assert r.status_code == 503 and "not answering just now" in r.text and 'value="Dudley"' in r.text
+
+
+def test_the_search_fetches_no_full_texts_and_the_reader_fetches_and_keeps_one(client, monkeypatch):
+    from nearby_notices import search
+    monkeypatch.setattr(gazette, "full_text", lambda nid, client=None: (_ for _ in ()).throw(AssertionError("fetched during search")))
+    assert client.get("/search", params={"place": "Dudley", "distance": 3, "unit": "mi"}).status_code == 200
+    long = " ".join(["word"] * 200)
+    monkeypatch.setattr(gazette, "full_text", lambda nid, client=None: long)
+    with store.db() as con:
+        store.put_text(con, "1", "A short summary.")
+        row = store.get_notice(con, "1")
+    assert search.full_text_for(row) == long
+    with store.db() as con:
+        assert store.get_notice(con, "1")["text"] == long
+    client.get("/search", params={"place": "Dudley", "distance": 5, "unit": "mi"})    # the feed again, with its own text
+    with store.db() as con:
+        assert store.get_notice(con, "1")["text"] == long, "a feed refresh must not replace the full text with the summary"
+
+
+def test_the_full_text_fetch_failing_keeps_the_summary(client, monkeypatch):
+    import httpx
+
+    from nearby_notices import search
+    monkeypatch.setattr(gazette, "full_text", lambda nid, client=None: (_ for _ in ()).throw(httpx.ConnectError("down")))
+    assert search.full_text_for({"id": "9", "text": "A short summary."}) == "A short summary."

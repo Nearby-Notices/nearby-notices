@@ -23,7 +23,7 @@ from . import config
 from .categories import ALLOWED, is_allowed
 
 POSTCODE_ID = "https://www.thegazette.co.uk/id/postcode/"
-PARALLEL = 3   # category feeds fetched side by side; the Gazette answers each in 2 to 4 s, so one at a time felt slow
+PARALLEL = 6   # requests side by side (six categories at once); the Gazette answers each in 2 to 4 s
 
 _TAG = re.compile(r"<[^>]+>")
 _WS = re.compile(r"\s+")
@@ -69,15 +69,19 @@ def _geo(e: dict) -> tuple[float | None, float | None]:
         return None, None
 
 
-def _polite_get(client: httpx.Client, url: str, params: dict | None = None) -> httpx.Response:
-    """Fair use: requests start at most two a second across every thread, a named user agent, no retry storms."""
+class GazetteUnavailable(RuntimeError):
+    """Every category request failed: the Gazette is down or unreachable, so there is nothing to show."""
+
+
+def _polite_get(client: httpx.Client, url: str, params: dict | None = None, timeout: float = 20) -> httpx.Response:
+    """Fair use: requests start at most four a second across every thread, a named user agent, no retry storms."""
     global _last_call
     with _gap_lock:
         gap = time.monotonic() - _last_call
-        if gap < 0.5:
-            time.sleep(0.5 - gap)
+        if gap < 0.25:
+            time.sleep(0.25 - gap)
         _last_call = time.monotonic()
-    r = client.get(url, params=params, headers={"User-Agent": config.USER_AGENT}, timeout=30)
+    r = client.get(url, params=params, headers={"User-Agent": config.USER_AGENT}, timeout=timeout)
     r.raise_for_status()
     return r
 
@@ -126,6 +130,8 @@ def search_near(postcode: str, distance_miles: int, page_size: int = 10, client:
     own = client is None
     client = client or httpx.Client()
 
+    failed: list[int] = []
+
     def one(cat: int) -> list[Notice]:
         params = {
             "categorycode": cat,
@@ -135,8 +141,12 @@ def search_near(postcode: str, distance_miles: int, page_size: int = 10, client:
             "results-page-size": page_size,
             "results-page": 1,
         }
-        r = _polite_get(client, f"{config.GAZETTE_BASE}/all-notices/notice/data.json", params)
-        return [n for n in (_parse_entry(e) for e in _entries(r.json())) if n]
+        try:
+            r = _polite_get(client, f"{config.GAZETTE_BASE}/all-notices/notice/data.json", params)
+            return [n for n in (_parse_entry(e) for e in _entries(r.json())) if n]
+        except (httpx.HTTPError, ValueError):     # one slow or failed category is skipped, not the whole search
+            failed.append(cat)
+            return []
 
     out: list[Notice] = []
     try:
@@ -148,6 +158,8 @@ def search_near(postcode: str, distance_miles: int, page_size: int = 10, client:
     finally:
         if own:
             client.close()
+    if len(failed) == len(ALLOWED):
+        raise GazetteUnavailable(f"all {len(ALLOWED)} category requests failed")
     out.sort(key=lambda n: n.published, reverse=True)
     return out
 
@@ -178,7 +190,7 @@ def points(notice_id: str, client: httpx.Client | None = None) -> list[dict]:
     own = client is None
     client = client or httpx.Client()
     try:
-        r = _polite_get(client, f"{config.GAZETTE_BASE}/notice/{notice_id}/data.jsonld")
+        r = _polite_get(client, f"{config.GAZETTE_BASE}/notice/{notice_id}/data.jsonld", timeout=10)
         return points_from_jsonld(json.loads(r.text))
     finally:
         if own:
@@ -190,7 +202,7 @@ def full_text(notice_id: str, client: httpx.Client | None = None) -> str:
     own = client is None
     client = client or httpx.Client()
     try:
-        r = _polite_get(client, f"{config.GAZETTE_BASE}/notice/{notice_id}/data.xml")
+        r = _polite_get(client, f"{config.GAZETTE_BASE}/notice/{notice_id}/data.xml", timeout=15)
         m = re.search(r"<content[^>]*>(.*?)</content>", r.text, re.DOTALL | re.IGNORECASE)
         body = m.group(1) if m else r.text
         return clean_text(html.unescape(body))

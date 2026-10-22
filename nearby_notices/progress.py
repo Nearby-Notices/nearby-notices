@@ -14,7 +14,7 @@ import time
 TTL = 120  # seconds an entry is kept after its last step
 
 # Each stage owns a slice of the bar; its own count fills the slice. "done" is the page being built.
-STAGES = {"place": (0, 5), "feed": (5, 40), "text": (40, 60), "points": (60, 95), "done": (100, 100)}
+STAGES = {"place": (0, 5), "feed": (5, 45), "text": (45, 45), "points": (45, 95), "done": (100, 100)}
 LABELS = {
     "place": "Finding the place",
     "feed": "Searching The Gazette: {done} of {total} kinds of notice",

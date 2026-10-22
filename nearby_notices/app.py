@@ -13,12 +13,24 @@ import re
 from datetime import date
 from pathlib import Path
 
+import httpx
 from fastapi import FastAPI, Form, HTTPException, Request
 from fastapi.responses import HTMLResponse, PlainTextResponse, RedirectResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 
-from . import config, geo, groups, places, progress, ratelimit, search, store, worker
+from . import (
+    config,
+    gazette,
+    geo,
+    groups,
+    places,
+    progress,
+    ratelimit,
+    search,
+    store,
+    worker,
+)
 from .categories import ALLOWED, EXCLUDED
 
 logging.getLogger("uvicorn.access").disabled = True
@@ -81,6 +93,11 @@ def search_page(request: Request, place: str = "", distance: float | None = None
     distance = geo.choose_distance(distance if distance is not None else config.DEFAULT_DISTANCE_MILES, unit)
     try:
         found = search.find(place, distance, unit, report=progress.reporter(place))
+    except (gazette.GazetteUnavailable, httpx.HTTPError):
+        return templates.TemplateResponse(request, "home.html", _ctx(
+            request, distance=distance, unit=unit, place_value=place,
+            error="The Gazette or the place lookup is not answering just now, so the search could not finish. Please try again in a minute."),
+            status_code=503)
     finally:
         progress.clear(place)
     if not found:

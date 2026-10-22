@@ -5,7 +5,7 @@ from __future__ import annotations
 import queue
 import threading
 
-from . import config, extract, store
+from . import config, extract, search, store
 
 _q: queue.Queue[str] = queue.Queue()
 _pending: set[str] = set()
@@ -20,7 +20,7 @@ def _run() -> None:
             with store.db() as con:       # a short read, then the connection is released before the model is called
                 row = None if store.get_extraction(con, nid, config.MODEL) is not None else store.get_notice(con, nid)
             if row:
-                r = extract.extract(row["text"])
+                r = extract.extract(search.full_text_for(row))     # the full text, fetched now if the feed held a summary
                 with store.db() as con:
                     store.put_extraction(con, nid, config.MODEL, r.to_dict(), len(r.summary), len(r.removed), r.seconds)
         except Exception as e:  # noqa: BLE001 the worker must survive any single failure; the page shows "reading" until retried

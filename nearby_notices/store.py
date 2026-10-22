@@ -72,6 +72,10 @@ def put_notice(con: sqlite3.Connection, n) -> None:
     )
 
 
+def put_text(con: sqlite3.Connection, nid: str, text: str) -> None:
+    con.execute("UPDATE notices SET text=? WHERE id=?", (text, nid))
+
+
 def put_points(con: sqlite3.Connection, nid: str, points: list[dict]) -> None:
     con.execute("UPDATE notices SET points=? WHERE id=?", (json.dumps(points), nid))
 

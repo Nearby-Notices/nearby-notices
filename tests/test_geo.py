@@ -61,3 +61,18 @@ def test_every_group_has_an_icon():
     from nearby_notices import groups
     assert set(groups.ICONS) == set(groups.ORDER)
     assert all(d.startswith("M") for d in groups.ICONS.values())
+
+
+def test_search_near_skips_a_failed_category_and_raises_only_if_all_fail(monkeypatch):
+    import httpx
+
+    from nearby_notices import gazette
+    monkeypatch.setattr(gazette, "_polite_get", lambda client, url, params=None, timeout=20: (_ for _ in ()).throw(httpx.ReadTimeout("slow"))
+                        if params["categorycode"] == next(iter(gazette.ALLOWED)) else httpx.Response(200, json={"entry": []}, request=httpx.Request("GET", url)))
+    assert gazette.search_near("DY1 1HF", 5, client=httpx.Client()) == []
+    monkeypatch.setattr(gazette, "_polite_get", lambda *a, **k: (_ for _ in ()).throw(httpx.ConnectError("down")))
+    try:
+        gazette.search_near("DY1 1HF", 5, client=httpx.Client())
+        raise AssertionError("expected GazetteUnavailable")
+    except gazette.GazetteUnavailable:
+        pass

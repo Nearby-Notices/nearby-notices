@@ -13,6 +13,7 @@ from . import config, counter, extract, gazette, geo, groups, places, store
 MAX_POINT_FETCHES = 16     # linked-data lookups per search, so one search can never hammer the Gazette
 PAGE_SIZE = 6              # latest notices per category asked of the Gazette; six categories, so at most 36 candidates
 TOLERANCE = 1.02           # measured distance may exceed the asked distance by 2% plus 50 m before a notice is dropped
+SHORT_WORDS = 60           # a feed entry shorter than this is a summary; its full text is fetched before it is read
 
 
 @dataclass
@@ -45,21 +46,16 @@ def candidates(con, where: places.Place, radius: int, report=_quiet) -> list[str
         report("feed", 0, len(gazette.ALLOWED))
         notices = gazette.search_near(where.postcode, radius, page_size=PAGE_SIZE, client=client,
                                       on_category=lambda d, t: report("feed", d, t))
-        # Most feed entries are short summaries. Their full texts are fetched a few side by side: the Gazette's
-        # fair-use gap (two request starts a second, shared by every thread) still holds, but one slow answer
-        # no longer holds up the rest.
-        short = [n for n in notices if len(n.text.split()) < 60]
-        if short:
-            report("text", 0, len(short))
-            with ThreadPoolExecutor(max_workers=gazette.PARALLEL) as pool:
-                for i, (n, text) in enumerate(zip(short, pool.map(lambda x: gazette.full_text(x.id, client), short)), 1):
-                    n.text = text
-                    report("text", i, len(short))
+        # Most feed entries are short summaries. Their full texts are NOT fetched here: the search does not need
+        # them, and fetching 20 to 30 of them was most of a first search's wait. The background reader fetches
+        # each one just before reading it (full_text_for), and the card is swapped in when it is ready.
     ids = []
     for n in notices:
         cached = store.get_notice(con, n.id)
         if cached and cached["points"]:
             n.points = cached["points"]
+        if cached and len(cached["text"]) > len(n.text):      # never replace a fetched full text with the summary
+            n.text = cached["text"]
         store.put_notice(con, n)
         ids.append(n.id)
     store.put_feed(con, key, ids)
@@ -88,7 +84,7 @@ def select(con, where: places.Place, ids: list[str], asked_m: float, report=_qui
         fetched = []
         report("points", 0, len(ask))
         with httpx.Client() as client, ThreadPoolExecutor(max_workers=gazette.PARALLEL) as pool:
-            for nid, pts in zip(ask, pool.map(lambda i: gazette.points(i, client), ask)):
+            for nid, pts in zip(ask, pool.map(lambda i: _points_or_none(i, client), ask)):
                 fetched.append((nid, pts))
                 report("points", len(fetched), len(ask))
         for nid, pts in fetched:          # writes only after every lookup has returned
@@ -98,6 +94,31 @@ def select(con, where: places.Place, ids: list[str], asked_m: float, report=_qui
         con.commit()
     kept = [nid for nid, row in rows.items() if (near := measured(row)) is None or within(near["m"], asked_m)]
     return kept[: config.MAX_RESULTS]
+
+
+def _points_or_none(nid: str, client: httpx.Client) -> list[dict]:
+    """A notice's filed postcodes, or none if the Gazette is slow or fails: the notice is then measured by the
+    feed's own point, which only risks keeping one that is a little further away. It never fails the search."""
+    try:
+        return gazette.points(nid, client)
+    except (httpx.HTTPError, ValueError):
+        return []
+
+
+def full_text_for(row: dict) -> str:
+    """The notice's full text: fetched once from the Gazette when the feed held only a short summary, then kept.
+    Called by the background reader before a notice is read, and by read(); on any failure the summary stands."""
+    if len(row["text"].split()) >= SHORT_WORDS:
+        return row["text"]
+    try:
+        text = gazette.full_text(row["id"])
+    except (httpx.HTTPError, ValueError):
+        return row["text"]
+    if len(text) > len(row["text"]):
+        with store.db() as con:
+            store.put_text(con, row["id"], text)
+        return text
+    return row["text"]
 
 
 def describe(con, row: dict, where: places.Place | None, unit: str, asked_m: float | None) -> dict:
@@ -140,6 +161,7 @@ def read(notice_id: str, make_now: bool = False) -> tuple[dict, dict | None] | N
             return None
         ex = extract.refilter(store.get_extraction(con, notice_id, config.MODEL))
     if ex is None and make_now:
+        row = {**row, "text": full_text_for(row)}
         r = extract.extract(row["text"])      # outside any transaction: this can take half a minute
         ex = r.to_dict()
         with store.db() as con:
