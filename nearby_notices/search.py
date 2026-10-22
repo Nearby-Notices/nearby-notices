@@ -4,6 +4,7 @@ filed under, and describe what is left. Nothing typed by the user is stored."""
 from __future__ import annotations
 
 import datetime
+import re
 from concurrent.futures import ThreadPoolExecutor
 from dataclasses import dataclass, field
 
@@ -25,6 +26,31 @@ class Found:
     since_days: int = 30
     results: list[dict] = field(default_factory=list)
     pending: list[str] = field(default_factory=list)   # notice ids with no plain-English version yet
+
+
+# A notice is often filed under an office far from the place it is about: a Scottish wind farm under its developer's
+# London office, so it appeared 0.2 miles from Trafalgar Square (22/10/2026). The notice's own law says where it
+# applies, so a notice made under Scottish or Northern Irish law is shown only for places in that country, and one
+# under an England-and-Wales-only Act only for places there. A notice with markers of more than one, or none, is kept.
+_SCOTLAND = re.compile(r"\(Scotland\)|Scottish Ministers|Scottish Government|Scottish Executive|Energy Consents Unit|"
+                       r"Court of Session|Sheriff Court|Edinburgh Gazette", re.IGNORECASE)
+_NORTHERN_IRELAND = re.compile(r"\(Northern Ireland\)|Northern Ireland Executive|Belfast Gazette|Department for Infrastructure", re.IGNORECASE)
+_ENGLAND_WALES = re.compile(r"Town and Country Planning Act 1990|Highways Act 1980|Planning Act 2008|\((?:England|Wales|England and Wales)\)|"
+                            r"Greater London Authority|London Borough of|Welsh Ministers", re.IGNORECASE)
+_COUNTRY_GROUP = {"England": "England and Wales", "Wales": "England and Wales", "Scotland": "Scotland", "Northern Ireland": "Northern Ireland"}
+
+
+def jurisdiction(text: str) -> str | None:
+    """Where a notice's law applies, read from its own words: Scotland, Northern Ireland, England and Wales, or None."""
+    found = {name for name, rx in (("Scotland", _SCOTLAND), ("Northern Ireland", _NORTHERN_IRELAND), ("England and Wales", _ENGLAND_WALES))
+             if rx.search(text or "")}
+    return found.pop() if len(found) == 1 else None
+
+
+def same_country(row: dict, where: places.Place) -> bool:
+    group = _COUNTRY_GROUP.get(where.country or "")
+    law = jurisdiction(f"{row.get('title') or ''} {row.get('text') or ''}")
+    return group is None or law is None or law == group
 
 
 def within(m: float | None, asked_m: float) -> bool:
@@ -101,7 +127,8 @@ def select(con, where: places.Place, ids: list[str], asked_m: float, report=_qui
                 store.put_points(con, nid, pts)
                 rows[nid]["points"] = pts
         con.commit()
-    kept = [nid for nid, row in rows.items() if (near := measured(row)) is None or within(near["m"], asked_m)]
+    kept = [nid for nid, row in rows.items()
+            if ((near := measured(row)) is None or within(near["m"], asked_m)) and same_country(row, where)]
     return kept
 
 

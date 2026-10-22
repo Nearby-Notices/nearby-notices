@@ -103,3 +103,18 @@ def test_a_summary_that_failed_when_the_model_was_busy_is_tried_again_later(tmp_
         con.execute("UPDATE extractions SET created_at = created_at - 3600")
         assert store.get_extraction(con, "9", "m") is None, "an hour later it counts as not written, so it is written again"
         assert store.get_extraction(con, "8", "m") == {"error": "no usable text"}, "a notice with no usable text is not retried"
+
+
+def test_a_notice_under_another_countrys_law_is_not_shown_for_a_place_it_was_only_filed_near():
+    from nearby_notices import search
+    london = places.Place("London", "WC2N 5DU", "London", 51.5074, -0.1278, "England")
+    perth = places.Place("Perth", "PH1 5PH", "Perth", 56.3960, -3.4370, "Scotland")
+    wind = {"title": "Electricity", "text": "ENERGIEKONTOR UK LTD ELECTRICITY ACT 1989 TOWN AND COUNTRY PLANNING (SCOTLAND) ACT 1997 ... the Scottish Ministers"}
+    road = {"title": "Road Traffic Acts", "text": "Westminster City Council ... Road Traffic Regulation Act 1984"}
+    planning = {"title": "Town and Country Planning", "text": "notice under section 247 of the Town and Country Planning Act 1990"}
+    assert search.jurisdiction(wind["text"]) == "Scotland"
+    assert not search.same_country(wind, london), "a Scottish wind farm filed under a London office stays out of a London search"
+    assert search.same_country(wind, perth)
+    assert search.same_country(road, london) and search.same_country(road, perth), "a UK-wide Act says nothing about the country"
+    assert not search.same_country(planning, perth) and search.same_country(planning, london)
+    assert search.same_country(wind, places.Place("x", "", "x", 1, 1)), "an unknown country filters nothing"
