@@ -113,7 +113,7 @@
   };
   var bounds = [];
   if (centre[0] !== null) {
-    L.circle(centre, {radius: {{ asked_m }}, color: '#2b7a78', weight: 1, fillOpacity: 0.05}).addTo(map);
+    L.circle(centre, {radius: {{ asked_m }}, color: '#2b7a78', weight: 1, fillOpacity: 0.05, interactive: false}).addTo(map);   // takes no clicks, so nothing under it is blocked
     L.circleMarker(centre, {radius: 6, color: '#2b7a78', fillColor: '#2b7a78', fillOpacity: 1}).addTo(map).bindPopup('Your search point');
     bounds.push(centre);
   }
@@ -131,7 +131,11 @@
   // Food hygiene ratings: an optional layer from the Food Standards Agency, fetched only when switched on.
   var foodOn = document.getElementById('food-on'), foodPoor = document.getElementById('food-poor'),
       foodStatus = document.getElementById('food-status'), foodItems = null, foodLayer = null,
-      dots = L.canvas({padding: 0.5}), colours = {good: '#00703c', fair: '#b58105', poor: '#d4351c', other: '#6f777b'};
+      dots = null, colours = {good: '#00703c', fair: '#b58105', poor: '#d4351c', other: '#6f777b'};
+  // The dots get their own pane above the radius circle's layer and below the notice pins, so every dot can be
+  // clicked; a few pixels of tolerance make them easier to tap on a phone.
+  map.createPane('food'); map.getPane('food').style.zIndex = 450;
+  dots = L.canvas({padding: 0.5, pane: 'food', tolerance: 6});
   var foodPopup = function (f) {
     var scheme = f.scheme === 'FHIS' ? 'Food Hygiene Information Scheme' : 'Food Hygiene Rating';
     var shown = /^[0-5]$/.test(f.rating) ? f.rating + ' out of 5' : f.rating;

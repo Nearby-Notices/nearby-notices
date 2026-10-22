@@ -98,6 +98,12 @@ def test_the_map_is_the_default_view(client):
     assert 'id="map"' not in client.get("/search", params={"place": "Dudley", "distance": 3, "unit": "mi", "view": "all"}).text
 
 
+def test_the_radius_circle_never_blocks_clicks_on_the_food_dots(client):
+    page = client.get("/search", params={"place": "Dudley", "distance": 3, "unit": "mi"}).text
+    assert "fillOpacity: 0.05, interactive: false" in page, "the search circle must take no clicks"
+    assert "map.createPane('food')" in page and "pane: 'food'" in page, "food dots draw in their own pane above the circle"
+
+
 def test_progress_reports_each_step_without_keeping_what_was_typed(client):
     from nearby_notices import progress
     assert client.get("/progress", params={"place": "nowhere yet"}).json() == {"stage": None}
