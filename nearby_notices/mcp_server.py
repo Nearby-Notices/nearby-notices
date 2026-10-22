@@ -45,6 +45,9 @@ def _summary(r: dict) -> dict:
     }
 
 
+AGENT_RESULTS = 12   # notices per answer to an agent, newest first, published in the past month
+
+
 def find_notices_near(place: str, distance: float = 3, unit: str = "mi") -> dict:
     """Find public notices near a UK postcode or town. `place` is a postcode (for example "DY1 1HF") or a town
     ("Dudley"). `distance` is snapped to the offered choices: miles 1, 3, 5, 10, 15 or kilometres 2, 5, 10, 15, 25;
@@ -55,14 +58,16 @@ def find_notices_near(place: str, distance: float = 3, unit: str = "mi") -> dict
     found = search.find(place, distance, unit)
     if not found:
         return {"error": "place not found; give a full UK postcode or a town name", "notices": []}
-    if found.pending:
-        worker.enqueue(found.pending)   # start reading in the background so read_notice is quick
+    shown = found.results[:AGENT_RESULTS]      # the website shows every notice; an agent gets the newest few
+    pending = [r["n"]["id"] for r in shown if r["x"] is None]
+    if pending:
+        worker.enqueue(pending)   # start writing summaries in the background so read_notice is quick
     return {
         "place": found.where.name,
         "postcode": found.where.postcode,
         "within": geo.fmt(found.asked_m, unit),
-        "count": len(found.results),
-        "notices": [_summary(r) for r in found.results],
+        "count": len(shown),
+        "notices": [_summary(r) for r in shown],
         "note": "Pins and distances refer to the postcodes each notice is filed under, which for a council order is often "
                 "the council's address; the notice text names the places affected.",
     }

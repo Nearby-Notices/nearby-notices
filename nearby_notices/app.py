@@ -86,7 +86,8 @@ templates.env.filters["nice_date"] = nice_date
 def _ctx(request: Request, **kw) -> dict:
     return {"request": request, "disclaimer": DISCLAIMER, "allowed": ALLOWED, "excluded": EXCLUDED,
             "group_name": groups.group_name, "group_colour": groups.group_colour, "icons": groups.ICONS, "units": geo.UNITS,
-            "unit_choices": {u: spec["choices"] for u, spec in geo.UNITS.items()}, **kw}
+            "unit_choices": {u: spec["choices"] for u, spec in geo.UNITS.items()},
+            "since_choices": config.SINCE_CHOICES, "since": config.DEFAULT_SINCE_DAYS, **kw}
 
 
 @app.on_event("startup")
@@ -101,23 +102,25 @@ def home(request: Request):
 
 
 @app.get("/search", response_class=HTMLResponse)
-def search_page(request: Request, place: str = "", distance: float | None = None, unit: str = "mi", view: str = "map"):
+def search_page(request: Request, place: str = "", distance: float | None = None, unit: str = "mi", view: str = "map",
+                since: int | None = None):
     unit = geo.unit_key(unit)
     distance = geo.choose_distance(distance if distance is not None else config.DEFAULT_DISTANCE_MILES, unit)
+    since = search.choose_since(since)
     try:
-        found = search.find(place, distance, unit, report=progress.reporter(place))
+        found = search.find(place, distance, unit, report=progress.reporter(place), since_days=since)
     except (gazette.GazetteUnavailable, httpx.HTTPError):
         return templates.TemplateResponse(request, "home.html", _ctx(
-            request, distance=distance, unit=unit, place_value=place,
+            request, distance=distance, unit=unit, place_value=place, since=since,
             error="The Gazette or the place lookup is not answering just now, so the search could not finish. Please try again in a minute."),
             status_code=503)
     finally:
         progress.clear(place)
     if not found:
         return templates.TemplateResponse(request, "home.html", _ctx(
-            request, distance=distance, unit=unit, error="I could not find that place. Try a full postcode or a town name."))
+            request, distance=distance, unit=unit, since=since, place_value=place, error="I could not find that place. Try a full postcode or a town name."))
     if found.pending:
-        worker.enqueue(found.pending)
+        worker.enqueue(found.pending[:config.FIRST_SUMMARIES])    # the rest are asked for as they come into view (/status)
     results, where = found.results, found.where
     counts = {g: sum(1 for r in results if r["group"] == g) for g in groups.ORDER}
     grouped = [(g, [r for r in results if r["group"] == g]) for g in groups.ORDER if counts[g]]
@@ -131,6 +134,7 @@ def search_page(request: Request, place: str = "", distance: float | None = None
     return templates.TemplateResponse(request, "results.html", _ctx(
         request, place=where, distance=found.distance, unit=unit, distance_label=geo.fmt(found.asked_m, unit), asked_m=found.asked_m,
         results=results, grouped=grouped, counts=counts, pending_ids=found.pending, order=groups.ORDER, points=points,
+        since=found.since_days, since_label=config.SINCE_CHOICES[found.since_days], first_summaries=config.FIRST_SUMMARIES,
         view=view if view in ("all", "grouped", "map") else "map", back=back, card_query=card_query,
         names={g: groups.group_name(g) for g in groups.ORDER}))
 
@@ -155,8 +159,12 @@ def search_progress(place: str = ""):
 
 
 @app.get("/status")
-def status(ids: str = ""):
-    """Which of these notices now have a plain-English version. Polled by the results page instead of reloading it."""
+def status(ids: str = "", want: str = ""):
+    """Which of these notices now have a summary. Polled by the results page instead of reloading it. `want` names
+    notices now on the reader's screen (or whose pin was opened): they are written next, ahead of everything else."""
+    asked_now = [i for i in want.split(",") if _ID.match(i)][:12]
+    if asked_now:
+        worker.enqueue(asked_now, worker.NOW)
     wanted = [i for i in ids.split(",") if _ID.match(i)][:60]
     ready = []
     with store.db() as con:

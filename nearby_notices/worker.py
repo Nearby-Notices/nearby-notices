@@ -1,21 +1,27 @@
-"""One background thread reads notices through the model, one at a time, so a search page can return at once
-and the local model is never hit by a burst. The page shows "reading" for notices still in the queue."""
+"""Background writers that make each notice's simple summary, several side by side, so a search page returns at
+once and the cards fill in as summaries are ready. Summaries are written on demand, in order of need: a notice
+on someone's screen (or whose pin was opened) first, then the first few of a new search, then warm-up work.
+Each summary is written once, kept, and shown to everyone after, so nothing is paid for twice."""
 from __future__ import annotations
 
+import itertools
 import queue
 import threading
 
 from . import config, extract, search, store
 
-_q: queue.Queue[str] = queue.Queue()
-_pending: set[str] = set()
+NOW, SOON, LATER = 0, 1, 2          # on screen; first few of a search; warm-up after a restart
+
+_q: queue.PriorityQueue[tuple[int, int, str]] = queue.PriorityQueue()
+_order = itertools.count()           # first come, first served within a priority
+_pending: dict[str, int] = {}        # notice id -> the most urgent priority it has been queued at
 _lock = threading.Lock()
-_thread: threading.Thread | None = None
+_threads: list[threading.Thread] = []
 
 
 def _run() -> None:
     while True:
-        nid = _q.get()
+        _, _, nid = _q.get()
         try:
             with store.db() as con:       # a short read, then the connection is released before the model is called
                 row = None if store.get_extraction(con, nid, config.MODEL) is not None else store.get_notice(con, nid)
@@ -29,25 +35,29 @@ def _run() -> None:
                                                               "places": [], "dropped_places": []}, 0, 0, 0.0)
         finally:
             with _lock:
-                _pending.discard(nid)
+                _pending.pop(nid, None)
             _q.task_done()
 
 
 def start() -> None:
-    global _thread
     config.discover_model()
-    if _thread is None or not _thread.is_alive():
-        _thread = threading.Thread(target=_run, name="notice-reader", daemon=True)
-        _thread.start()
+    with _lock:
+        _threads[:] = [t for t in _threads if t.is_alive()]
+        while len(_threads) < max(1, config.READERS):
+            t = threading.Thread(target=_run, name=f"summary-writer-{len(_threads) + 1}", daemon=True)
+            t.start()
+            _threads.append(t)
 
 
-def enqueue(ids: list[str]) -> None:
+def enqueue(ids: list[str], priority: int = SOON) -> None:
+    """Queue notices for a summary. A notice already queued is moved up if it is now needed sooner; a notice
+    that is queued twice is written once (the writer skips one that already has a summary)."""
     start()
     with _lock:
         for nid in ids:
-            if nid not in _pending:
-                _pending.add(nid)
-                _q.put(nid)
+            if nid not in _pending or priority < _pending[nid]:
+                _pending[nid] = priority
+                _q.put((priority, next(_order), nid))
 
 
 def warm_up(limit: int = 60) -> int:
@@ -65,7 +75,7 @@ def warm_up(limit: int = 60) -> int:
                     break
             if len(ids) >= limit:
                 break
-    enqueue(ids)
+    enqueue(ids, LATER)
     return len(ids)
 
 

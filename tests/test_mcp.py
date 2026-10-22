@@ -22,7 +22,7 @@ def offline(tmp_path, monkeypatch):
     monkeypatch.setattr(worker, "enqueue", lambda ids: None)
     monkeypatch.setattr(worker, "is_pending", lambda nid: False)
     monkeypatch.setattr(places, "resolve", lambda q, client=None: places.Place(q, "DY1 1HF", "Dudley, West Midlands", *CENTRE) if q != "nowhere" else None)
-    monkeypatch.setattr(gazette, "search_near", lambda postcode, miles, page_size=10, client=None, on_category=None: [notice("1", 52.5122, -2.0843), notice("3", 52.0, -2.0)])
+    monkeypatch.setattr(gazette, "search_near", lambda postcode, miles, page_size=100, client=None, on_category=None, **kw: [notice("1", 52.5122, -2.0843), notice("3", 52.0, -2.0)])
     monkeypatch.setattr(gazette, "points", lambda nid, client=None: [{"postcode": "GL1 1AA", "lat": 52.0, "lon": -2.0}])
     calls = []
     monkeypatch.setattr(extract, "extract", lambda text, ask=None: calls.append(text) or extract.Result(

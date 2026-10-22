@@ -89,9 +89,19 @@ def get_notice(con: sqlite3.Connection, nid: str) -> dict | None:
     return d
 
 
+RETRY_FAILED_AFTER_S = 600   # a summary that failed because the model was busy or down is tried again after this
+
+
 def get_extraction(con: sqlite3.Connection, nid: str, model: str) -> dict | None:
+    """The stored summary, or None if there is none yet. A summary that failed because the model service was busy
+    or unavailable counts as none once it is ten minutes old, so it is written again the next time it is needed."""
     row = con.execute("SELECT * FROM extractions WHERE notice_id=? AND model=?", (nid, model)).fetchone()
-    return json.loads(row["payload"]) if row else None
+    if not row:
+        return None
+    payload = json.loads(row["payload"])
+    if str(payload.get("error") or "").startswith("model unavailable") and time.time() - (row["created_at"] or 0) > RETRY_FAILED_AFTER_S:
+        return None
+    return payload
 
 
 def put_extraction(con: sqlite3.Connection, nid: str, model: str, payload: dict, kept: int, removed: int, seconds: float) -> None:
@@ -104,10 +114,10 @@ def put_extraction(con: sqlite3.Connection, nid: str, model: str, payload: dict,
 _KEY_SALT = os.urandom(32)   # new on every start: a key cannot be turned back into a postcode, even with the database
 
 
-def feed_key(postcode: str, radius: int) -> str:
+def feed_key(postcode: str, radius: int, since_days: int | None = None) -> str:
     """The cache key for a feed lookup: a keyed one-way code of the postcode, never the postcode itself."""
     code = hmac.new(_KEY_SALT, (postcode or "").upper().replace(" ", "").encode(), hashlib.sha256).hexdigest()[:32]
-    return f"h:{code}|g{radius}"
+    return f"h:{code}|g{radius}" + (f"|d{since_days}" if since_days else "")
 
 
 def cached_feed(con: sqlite3.Connection, key: str) -> list | None:

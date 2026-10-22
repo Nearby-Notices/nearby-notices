@@ -3,6 +3,7 @@ smallest radius it honours that covers the distance, measure every candidate aga
 filed under, and describe what is left. Nothing typed by the user is stored."""
 from __future__ import annotations
 
+import datetime
 from concurrent.futures import ThreadPoolExecutor
 from dataclasses import dataclass, field
 
@@ -10,8 +11,7 @@ import httpx
 
 from . import config, counter, extract, gazette, geo, groups, places, store
 
-MAX_POINT_FETCHES = 16     # linked-data lookups per search, so one search can never hammer the Gazette
-PAGE_SIZE = 6              # latest notices per category asked of the Gazette; six categories, so at most 36 candidates
+MAX_POINT_FETCHES = 40     # linked-data lookups per search, nearest first, so one search can never hammer the Gazette
 TOLERANCE = 1.02           # measured distance may exceed the asked distance by 2% plus 50 m before a notice is dropped
 SHORT_WORDS = 60           # a feed entry shorter than this is a summary; its full text is fetched before it is read
 
@@ -22,6 +22,7 @@ class Found:
     distance: int
     unit: str
     asked_m: float
+    since_days: int = 30
     results: list[dict] = field(default_factory=list)
     pending: list[str] = field(default_factory=list)   # notice ids with no plain-English version yet
 
@@ -34,17 +35,24 @@ def _quiet(stage: str, done: int = 0, total: int = 0) -> None:
     """The default progress reporter: the MCP server and the tests do not show a bar."""
 
 
-def candidates(con, where: places.Place, radius: int, report=_quiet) -> list[str]:
-    """Every notice the Gazette lists within one of its honoured radii, cached for an hour under that radius so a
-    change of distance or unit within it needs no new feed call."""
-    key = store.feed_key(where.postcode, radius)
+def choose_since(days: int | None) -> int:
+    """The time window in days: one of the offered choices, the default when none or an odd value is asked."""
+    return days if days in config.SINCE_CHOICES else config.DEFAULT_SINCE_DAYS
+
+
+def candidates(con, where: places.Place, radius: int, report=_quiet, since_days: int | None = None) -> list[str]:
+    """Every notice the Gazette lists within one of its honoured radii and published within the window, cached for
+    an hour under that radius and window so a change of distance or unit within it needs no new feed call."""
+    since_days = choose_since(since_days)
+    key = store.feed_key(where.postcode, radius, since_days)
     ids = store.cached_feed(con, key)
     if ids is not None:
         return ids
     # All network first, then one short burst of writes: a transaction must never wait on the Gazette.
     with httpx.Client() as client:
         report("feed", 0, len(gazette.ALLOWED))
-        notices = gazette.search_near(where.postcode, radius, page_size=PAGE_SIZE, client=client,
+        since = (datetime.date.today() - datetime.timedelta(days=since_days)).isoformat()
+        notices = gazette.search_near(where.postcode, radius, client=client, since=since,
                                       on_category=lambda d, t: report("feed", d, t))
         # Most feed entries are short summaries. Their full texts are NOT fetched here: the search does not need
         # them, and fetching 20 to 30 of them was most of a first search's wait. The background reader fetches
@@ -70,7 +78,7 @@ def filed_points(row: dict) -> list[dict]:
 def select(con, where: places.Place, ids: list[str], asked_m: float, report=_quiet) -> list[str]:
     """Measure each candidate against the nearest postcode it is filed under and keep those inside the asked distance."""
     if where.lat is None or where.lon is None:
-        return ids[: config.MAX_RESULTS]
+        return list(ids)
     rows = {nid: row for nid in ids if (row := store.get_notice(con, nid))}
 
     def measured(row: dict) -> dict | None:
@@ -80,6 +88,7 @@ def select(con, where: places.Place, ids: list[str], asked_m: float, report=_qui
     # postcode it is filed under (one small request each, a few side by side, kept with the notice for good).
     unsure = [nid for nid, row in rows.items() if not row["points"] and (near := measured(row)) and not within(near["m"], asked_m)]
     if unsure:
+        unsure.sort(key=lambda nid: measured(rows[nid])["m"])     # nearest first: those most likely to be inside
         ask = unsure[:MAX_POINT_FETCHES]
         fetched = []
         report("points", 0, len(ask))
@@ -93,7 +102,7 @@ def select(con, where: places.Place, ids: list[str], asked_m: float, report=_qui
                 rows[nid]["points"] = pts
         con.commit()
     kept = [nid for nid, row in rows.items() if (near := measured(row)) is None or within(near["m"], asked_m)]
-    return kept[: config.MAX_RESULTS]
+    return kept
 
 
 def _points_or_none(nid: str, client: httpx.Client) -> list[dict]:
@@ -132,8 +141,9 @@ def describe(con, row: dict, where: places.Place | None, unit: str, asked_m: flo
             "outside": bool(near and asked_m is not None and not within(near["m"], asked_m))}
 
 
-def find(place_query: str, distance: float | None, unit: str, report=_quiet) -> Found | None:
-    """Notices near a postcode or town, within the distance, newest first. None when the place is not found.
+def find(place_query: str, distance: float | None, unit: str, report=_quiet, since_days: int | None = None) -> Found | None:
+    """Every notice near a postcode or town, within the distance and published within the window, newest first.
+    None when the place is not found.
     report(stage, done, total) is told each step, for the page's progress bar (see progress.py)."""
     unit = geo.unit_key(unit)
     distance = geo.choose_distance(distance if distance is not None else config.DEFAULT_DISTANCE_MILES, unit)
@@ -146,11 +156,12 @@ def find(place_query: str, distance: float | None, unit: str, report=_quiet) -> 
         store.bump(con, "search")
         counter.count("search")
         con.commit()                      # the counter is its own tiny transaction; nothing waits behind it
-        found_ids = candidates(con, where, geo.gazette_radius(geo.to_miles(distance, unit)), report)
+        since_days = choose_since(since_days)
+        found_ids = candidates(con, where, geo.gazette_radius(geo.to_miles(distance, unit)), report, since_days)
         ids = select(con, where, found_ids, asked_m, report)
         report("done")
         results = [describe(con, row, where, unit, asked_m) for nid in ids if (row := store.get_notice(con, nid))]
-    return Found(where, distance, unit, asked_m, results, [r["n"]["id"] for r in results if r["x"] is None])
+    return Found(where, distance, unit, asked_m, since_days, results, [r["n"]["id"] for r in results if r["x"] is None])
 
 
 def read(notice_id: str, make_now: bool = False) -> tuple[dict, dict | None] | None:

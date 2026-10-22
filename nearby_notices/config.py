@@ -43,7 +43,14 @@ USER_AGENT = os.environ.get("NN_USER_AGENT", "NearbyNotices/0.1 (open-source civ
 GAZETTE_BASE = "https://www.thegazette.co.uk"
 POSTCODES_BASE = "https://api.postcodes.io"
 DEFAULT_DISTANCE_MILES = int(os.environ.get("NN_DEFAULT_DISTANCE", "3"))
-MAX_RESULTS = int(os.environ.get("NN_MAX_RESULTS", "12"))
+# How far back a search looks. Every notice published in the window is shown; the default is what is current:
+# most objection periods run three to four weeks, so a month covers the notices people can still act on.
+SINCE_CHOICES = {7: "the past week", 30: "the past month", 90: "the past 3 months", 365: "the past year"}
+DEFAULT_SINCE_DAYS = int(os.environ.get("NN_DEFAULT_SINCE_DAYS", "30"))
+# Summaries are written on demand: the first few of a search at once, then each notice as it comes into view
+# (or its pin is opened). Each summary is written once and kept for everyone, so nothing is paid for twice.
+FIRST_SUMMARIES = int(os.environ.get("NN_FIRST_SUMMARIES", "6"))
+READERS = int(os.environ.get("NN_READERS", "4"))   # summaries written side by side; set 1 for a single local model
 FEED_CACHE_SECONDS = int(os.environ.get("NN_FEED_CACHE_SECONDS", "3600"))
 SEARCHES_PER_MINUTE = int(os.environ.get("NN_SEARCHES_PER_MINUTE", "10"))   # per client; a public endpoint should keep this low
 # The GitHub Pages front, which shows this site in a frame for networks that block newly registered domains.

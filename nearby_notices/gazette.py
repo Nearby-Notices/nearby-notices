@@ -24,6 +24,8 @@ from .categories import ALLOWED, is_allowed
 
 POSTCODE_ID = "https://www.thegazette.co.uk/id/postcode/"
 PARALLEL = 6   # requests side by side (six categories at once); the Gazette answers each in 2 to 4 s
+PAGE_SIZE = 100   # notices per feed page, the most the Gazette gives in one answer
+MAX_PAGES = 10    # per category and search: a safety limit for the Gazette's sake (1,000 notices of one kind), not a display cap
 
 _TAG = re.compile(r"<[^>]+>")
 _WS = re.compile(r"\s+")
@@ -121,9 +123,10 @@ def _parse_entry(e: dict) -> Notice | None:
     )
 
 
-def search_near(postcode: str, distance_miles: int, page_size: int = 10, client: httpx.Client | None = None,
-                on_category=None) -> list[Notice]:
-    """Latest notices in every allowed category within the distance of the postcode (the Gazette's own filter).
+def search_near(postcode: str, distance_miles: int, page_size: int = PAGE_SIZE, client: httpx.Client | None = None,
+                on_category=None, since: str | None = None, max_pages: int = MAX_PAGES) -> list[Notice]:
+    """Every notice in every allowed category within the distance of the postcode (the Gazette's own filter),
+    published on or after `since` (YYYY-MM-DD), newest first. All pages are read, up to max_pages per category.
 
     distance_miles must be one of the radii the Gazette honours (see geo.gazette_radius); others are silently rounded down by the Gazette.
     on_category(done, total) is called as each category's answer is taken in, for a progress bar."""
@@ -141,12 +144,27 @@ def search_near(postcode: str, distance_miles: int, page_size: int = 10, client:
             "results-page-size": page_size,
             "results-page": 1,
         }
+        if since:
+            params["start-publish-date"] = since
+        found: list[Notice] = []
         try:
-            r = _polite_get(client, f"{config.GAZETTE_BASE}/all-notices/notice/data.json", params)
-            return [n for n in (_parse_entry(e) for e in _entries(r.json())) if n]
+            payload = _polite_get(client, f"{config.GAZETTE_BASE}/all-notices/notice/data.json", params).json()
         except (httpx.HTTPError, ValueError):     # one slow or failed category is skipped, not the whole search
             failed.append(cat)
             return []
+        found.extend(n for n in (_parse_entry(e) for e in _entries(payload)) if n)
+        try:
+            total = int(payload.get("f:total") or 0)
+        except (TypeError, ValueError):
+            total = 0
+        pages = min(-(-total // page_size), max_pages)
+        for page in range(2, pages + 1):         # later pages of a busy category; a failed page ends that category early
+            try:
+                payload = _polite_get(client, f"{config.GAZETTE_BASE}/all-notices/notice/data.json", {**params, "results-page": page}).json()
+            except (httpx.HTTPError, ValueError):
+                break
+            found.extend(n for n in (_parse_entry(e) for e in _entries(payload)) if n)
+        return found
 
     out: list[Notice] = []
     try:

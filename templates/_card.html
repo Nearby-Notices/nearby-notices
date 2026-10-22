@@ -8,11 +8,12 @@
   <h2>{{ (r.x.what if r.x and r.x.what else r.n.title) }}</h2>
   <p class="caption">{{ r.n.category }}{% if r.x and r.x.authority %} &middot; {{ r.x.authority }}{% endif %}{% if r.dist %} &middot; {{ r.dist }} away{% if r.near.postcode %} ({{ r.near.postcode }}){% endif %}{% endif %}</p>
   {% if not r.x %}
-    <p class="reading">Reading this notice in plain English&hellip; the facts and a checked summary will appear here. Meanwhile, how it starts:</p>
+    <p class="reading">Writing a simple summary of this notice&hellip; it will appear here, with the key facts. Meanwhile, how the notice starts:</p>
     <p class="preview">{{ r.n.text[:420] }}{% if r.n.text|length > 420 %}&hellip;{% endif %}</p>
   {% elif r.x.error %}
-    <p class="muted">No plain-English version available ({{ r.x.error }}). The notice is shown as published below.</p>
+    <p class="muted">A simple summary could not be written for this notice just now. The notice is shown as published below.</p>
   {% else %}
+    {% if r.x.summary %}<div class="summary"><p class="summary-label">Simple summary</p><p class="summary-text">{{ r.x.summary|join(' ') }}</p></div>{% endif %}
     <dl class="facts">
       {% if r.x.kind %}<dt>What kind</dt><dd>{{ r.x.kind }}</dd>{% endif %}
       {% if r.x.places %}<dt>Where</dt><dd>{{ r.x.places|join(', ') }}</dd>{% endif %}
@@ -20,15 +21,13 @@
       {% if r.x.ends %}<dt>Until</dt><dd>{{ r.x.ends }}</dd>{% endif %}
       {% if r.x.objection %}<dt>To object or comment</dt><dd>&ldquo;{{ r.x.objection }}&rdquo; <span class="small">(quoted from the notice)</span></dd>{% endif %}
     </dl>
-    {% if r.x.summary %}<p class="summary">{{ r.x.summary|join(' ') }}</p>{% endif %}
-    {% if r.x.removed %}<p class="small muted">{{ r.x.removed|length }} generated sentence{{ '' if r.x.removed|length == 1 else 's' }} removed by the checks{% if r.x.advice_removed %} ({{ r.x.advice_removed }} for telling you what to do){% endif %}: only sentences the notice supports word for word are shown.</p>{% endif %}
   {% endif %}
   <details><summary>The notice as published</summary><pre class="verbatim">{{ r.n.text }}</pre></details>
   <div class="actions">
     {% if view == 'map' and r.near %}<button type="button" class="show-on-map" data-id="{{ r.n.id }}">Show on map</button>{% endif %}
     <a href="{{ r.n.url }}" rel="noopener">Read on The Gazette</a>
     <form class="inline" method="post" action="/feedback"><input type="hidden" name="notice_id" value="{{ r.n.id }}"><input type="hidden" name="back" value="{{ back }}">
-      <span class="small">Was the plain English right?</span>
+      <span class="small">Was the summary right?</span>
       <button name="vote" value="up" title="Accurate">Yes {{ r.fb.up }}</button>
       <button name="vote" value="down" title="Wrong or unclear">No {{ r.fb.down }}</button></form>
   </div>

@@ -3,7 +3,7 @@
 {% block body %}
 <div class="prose">
 <h1>About</h1>
-<p>Public notices that affect where people live are published in The Gazette in legal language that is hard to read and hard to search by place. This tool finds the notices near a postcode or town and reads them back in plain English, each linked to the notice as published. The map can also show the food hygiene ratings of businesses nearby.</p>
+<p>Public notices that affect where people live are published in The Gazette in legal language that is hard to read and hard to search by place. This tool finds every notice near a postcode or town, published in the time you choose, and gives each one a simple summary, linked to the notice as published. The map can also show the food hygiene ratings of businesses nearby.</p>
 <h2>Where the information comes from</h2>
 <ul>
   <li><strong>Public notices:</strong> The Gazette, the UK's official public record, reused under the Open Government Licence v3.</li>
@@ -11,14 +11,14 @@
   <li><strong>Place lookup:</strong> postcodes.io, built on ONS and Ordnance Survey open data.</li>
   <li><strong>Map:</strong> OpenStreetMap contributors.</li>
 </ul>
-<h2>How the plain English is made, and checked</h2>
-<p>A language model reads the notice and returns the facts (what is changing, where, from when, who published it, how to object) and a two- or three-sentence summary. Every place name must appear word for word in the notice or it is dropped. Every summary sentence is then checked against the notice by a second step that must return a supporting quote that really is in the text; a sentence that fails is removed and counted. The model never writes advice: where a notice says how to object, that sentence is quoted, not composed.</p>
+<h2>How the simple summaries are written, and checked</h2>
+<p>A language model is given the notice and returns the facts (what is changing, where, from when, who published it, how to object) and a two- or three-sentence summary. Every place name must appear word for word in the notice or it is dropped. Every summary sentence is then checked against the notice by a second step that must return a supporting quote that really is in the text; a sentence that fails is removed and counted. The model never writes advice: where a notice says how to object, that sentence is quoted, not composed.</p>
 <h2>What it covers, and what it refuses</h2>
 <p>Covered: {% for k, v in allowed.items() %}{{ v }}{% if not loop.last %}, {% endif %}{% endfor %}.</p>
 <p>Refused at every layer, by design: {% for k, v in excluded.items() %}{{ v }}{% if not loop.last %}; {% endif %}{% endfor %}. The Gazette's licence does not cover personal data, and this tool is not for finding out about people.</p>
 <h2>Numbers so far</h2>
 <ul>
-  <li>Notices read: {{ stats.notices }}; plain-English versions made: {{ stats.extractions }}</li>
+  <li>Notices found: {{ stats.notices }}; simple summaries written: {{ stats.extractions }}</li>
   <li>Generated sentences kept: {{ stats.sentences_kept }}; removed by the check: {{ stats.sentences_removed }}</li>
   <li>Feedback: {{ stats.feedback_up }} accurate, {{ stats.feedback_down }} wrong or unclear</li>
   <li>Searches by day: {% for d in stats.searches_by_day %}{{ d.day }}: {{ d.n }}{% if not loop.last %}; {% endif %}{% endfor %}</li>

@@ -16,7 +16,9 @@ from __future__ import annotations
 
 import json
 import re
+import threading
 import time
+from concurrent.futures import ThreadPoolExecutor
 from dataclasses import dataclass, field
 
 import litellm
@@ -164,15 +166,20 @@ def for_model(text: str) -> str:
     return t.strip()[:6000]
 
 
+_cap_lock = threading.Lock()
+
+
 def _cap() -> None:
     day = time.strftime("%Y-%m-%d")
-    _calls_today.setdefault(day, 0)
-    if _calls_today[day] >= config.DAILY_CALL_CAP:
-        raise RuntimeError("daily model-call cap reached")
-    _calls_today[day] += 1
+    with _cap_lock:                       # several summaries are written side by side
+        _calls_today.setdefault(day, 0)
+        if _calls_today[day] >= config.DAILY_CALL_CAP:
+            raise RuntimeError("daily model-call cap reached")
+        _calls_today[day] += 1
 
 
 RETRY_PAUSE_S = 5.0
+RATE_LIMIT_PAUSES = (5.0, 15.0, 30.0)     # a burst over the deployment's per-minute allowance waits and tries again
 
 
 def _ask(system: str, user: str, max_tokens: int) -> str:
@@ -181,7 +188,10 @@ def _ask(system: str, user: str, max_tokens: int) -> str:
     if "qwen" not in config.MODEL.lower():
         user = user.replace("\n/no_think", "")          # the thinking switch is a Qwen convention; other models just see noise
     extra = {"api_version": config.MODEL_API_VERSION} if config.MODEL_API_VERSION else {}
-    for attempt in (1, 2):
+    limited = 0
+    attempt = 0
+    while True:
+        attempt += 1
         try:
             r = litellm.completion(
                 model=config.MODEL, api_base=config.MODEL_API_BASE or None, api_key=config.MODEL_API_KEY,
@@ -189,12 +199,16 @@ def _ask(system: str, user: str, max_tokens: int) -> str:
                 temperature=0, max_tokens=max_tokens, timeout=120, **extra,
             )
             return r.choices[0].message.content or ""
+        except litellm.exceptions.RateLimitError:
+            if limited >= len(RATE_LIMIT_PAUSES):
+                raise
+            time.sleep(RATE_LIMIT_PAUSES[limited])
+            limited += 1
         except (litellm.exceptions.ServiceUnavailableError, litellm.exceptions.APIConnectionError, litellm.exceptions.Timeout,
                 litellm.exceptions.InternalServerError):
-            if attempt == 2:
+            if attempt >= 2:
                 raise
             time.sleep(RETRY_PAUSE_S)
-    raise RuntimeError("unreachable")
 
 
 def _json(s: str) -> dict:
@@ -258,9 +272,12 @@ def extract(text: str, ask=_ask) -> Result:
     text, res.scrubbed = scrub(text)
     calls = 0
 
+    count_lock = threading.Lock()
+
     def asked(system: str, user: str, max_tokens: int) -> str:
         nonlocal calls
-        calls += 1
+        with count_lock:
+            calls += 1
         return ask(system, user, max_tokens)
 
     try:
@@ -298,20 +315,29 @@ def extract(text: str, ask=_ask) -> Result:
     res.objection = obj if _in_text(obj, tn) else None
     summary = d.get("summary")
     sentences = _sentences(summary if isinstance(summary, str) else " ".join(str(s) for s in (summary or [])))
+    # Every sentence is still checked on its own, exactly as before; the checks now run side by side. The first runs
+    # alone so the notice text it sends is cached by the model service, and the rest are billed at the cached rate.
+    what = str(d.get("what") or "").strip() or None
+    to_check = [s for s in sentences[:4] if not is_advice(s)] + ([what] if what and not is_advice(what) else [])
+    verdicts: dict[str, bool] = {}
+    if to_check:
+        verdicts[to_check[0]] = gate(text, to_check[0], asked)[0]
+        rest = [s for s in to_check[1:] if s not in verdicts]
+        if rest:
+            with ThreadPoolExecutor(max_workers=min(4, len(rest))) as pool:
+                for s, (ok, _) in zip(rest, pool.map(lambda s: gate(text, s, asked), rest)):
+                    verdicts[s] = ok
     for s in sentences[:4]:
         if is_advice(s):
             res.removed.append(s)
             res.advice_removed += 1
             continue
-        ok, _ = gate(text, s, asked)
-        (res.summary if ok else res.removed).append(s)
-    what = str(d.get("what") or "").strip() or None
+        (res.summary if verdicts.get(s) else res.removed).append(s)
     if what and is_advice(what):
         res.removed.append(what)
         res.advice_removed += 1
     elif what:
-        ok, _ = gate(text, what, asked)
-        if ok:
+        if verdicts.get(what):
             res.what, res.heading_source = what, "model"
         else:
             res.removed.append(what)

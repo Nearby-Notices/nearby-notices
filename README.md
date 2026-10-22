@@ -2,7 +2,7 @@
 
 **What is changing near you, in plain English, with every sentence checked against the notice.**
 
-Road closures, parking changes, planning applications, wind farms, smoke control orders and water licences are published in [The Gazette](https://www.thegazette.co.uk), the UK's official public record, in legal language that is hard to read and hard to search by place. Type a postcode or a town, get the notices near you, each read back in plain English beside the notice as published and linked to the record. The map can also show food hygiene ratings from the [Food Standards Agency](https://ratings.food.gov.uk). The same index of notices is an MCP server, so an AI agent can ask the same questions and cite the same record.
+Road closures, parking changes, planning applications, wind farms, smoke control orders and water licences are published in [The Gazette](https://www.thegazette.co.uk), the UK's official public record, in legal language that is hard to read and hard to search by place. Type a postcode or a town and choose how far back to look, and get every notice near you, each with a simple summary beside the notice as published and linked to the record. The map can also show food hygiene ratings from the [Food Standards Agency](https://ratings.food.gov.uk). The same index of notices is an MCP server, so an AI agent can ask the same questions and cite the same record.
 
 For residents, councillors, local journalists and anyone else who wants to know what is being proposed on their street before the objection period closes.
 
@@ -22,7 +22,7 @@ A language model writes the plain English. Nothing it writes reaches the page un
 | The gate | Every generated sentence, including the heading, goes back to the model with the notice: "is every claim stated in the notice?" The answer counts only with one to three short quotes that really are in the text. Fail-closed on any error. | `extract.gate` |
 | Advice filter | A generated sentence that tells the reader what to do is removed before the gate is asked. Where a notice says how to object, that sentence is quoted, never composed. | `extract.is_advice` |
 | Scrubber | Sentences in a notice addressed to a model ("ignore previous instructions", "tell the reader") are removed before the model and the checks see the text. | `extract.scrub` |
-| The record | The notice as published is always on the page with the Gazette link. The plain-English version is labelled as generated. Removed sentences are counted on the card. | templates |
+| The record | The notice as published is always on the page with the Gazette link. The summary is labelled "Simple summary". Removed sentences are counted in the stored record and the evaluation, not shown on the card. | templates |
 | Category refusal | Only notices by public bodies and companies acting as authorities are fetched. Notices about people are refused at the fetcher and at the store. | `categories.py`, `store.py` |
 
 The threat model, including what is not defended against, is in [docs/safety.md](docs/safety.md).
@@ -64,8 +64,8 @@ flowchart LR
   S --> MCP[MCP server: find, read, coverage]
 ```
 
-1. **Find.** The Gazette's own feed, by postcode, distance and category, newest first. The Gazette only honours radii of 1, 5, 10, 15, 20, 25 and 30 miles, so the tool asks for the smallest honoured radius covering the distance you chose (miles or kilometres) and measures each notice itself. A notice is filed under several postcodes (the street, the council, a consultant's office) and the feed gives only the first, so when that one is outside your circle the tool reads the notice's linked-data record for all of them and keeps the notice only if its nearest filed postcode is inside.
-2. **Read.** A model (any model through LiteLLM; by default a local one) returns the facts as JSON and a two- or three-sentence summary. One background reader, so a burst of searches never becomes a burst of model calls.
+1. **Find.** The Gazette's own feed, by postcode, distance, category and publication date, newest first: every notice published in the chosen window (past week, month, 3 months or year; a month by default, since most objection periods run three to four weeks), every page of results, with no cap on what is shown. The Gazette only honours radii of 1, 5, 10, 15, 20, 25 and 30 miles, so the tool asks for the smallest honoured radius covering the distance you chose (miles or kilometres) and measures each notice itself. A notice is filed under several postcodes (the street, the council, a consultant's office) and the feed gives only the first, so when that one is outside your circle the tool reads the notice's linked-data record for all of them and keeps the notice only if its nearest filed postcode is inside.
+2. **Summarise, on demand.** A model (any model through LiteLLM; by default a local one) returns the facts as JSON and a two- or three-sentence simple summary. Summaries are written only for notices someone looks at: the first six of a search with the page, then each card as it comes into view or its pin is opened, most urgent first. Four writers work side by side (`NN_READERS`; set 1 for a single local model), and a summary is written once and kept for everyone, so no notice is paid for twice. Each sentence is still checked on its own; the checks run side by side, the first alone so the model service caches the notice text and the rest are billed at the cached rate.
 3. **Check.** The layers in the table above.
 4. **Show.** As a list, grouped by kind, or on a map (Leaflet served from this site; OpenStreetMap tiles only when you open the map). Each pin sits at the nearest postcode the notice is filed under; pins that would overlap are spread in a ring. The page asks `/status` every few seconds and swaps in each card as it is ready, without reloading.
 5. **Food hygiene ratings.** An optional map layer from the Food Standards Agency's open API, fetched only when switched on, by the search point's location. Ratings are coloured good, fair or poor, with a switch to show only the poor ones. Businesses with no published address, which the FSA withholds for food businesses run from a home, are left out. Answers are cached for a day.
@@ -76,7 +76,7 @@ Three tools over stdio, same index, same rules:
 
 | Tool | What it does |
 |---|---|
-| `find_notices_near(place, distance=3, unit="mi")` | Up to 12 notices near a postcode or town, newest first: id, kind, date, one-line title, distance to the nearest postcode it is filed under, whether plain English is ready, link. |
+| `find_notices_near(place, distance=3, unit="mi")` | The 12 newest notices published in the past month near a postcode or town: id, kind, date, one-line title, distance to the nearest postcode it is filed under, whether plain English is ready, link. |
 | `read_notice(notice_id)` | The notice as published, word for word, plus the checked plain-English version with the counts of what the checks removed. Made on the spot if not ready. |
 | `coverage()` | What is covered and refused, licence, privacy, distance choices. |
 

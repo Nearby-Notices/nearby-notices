@@ -19,13 +19,13 @@ def notice(nid, lat, lon):
 @pytest.fixture
 def client(tmp_path, monkeypatch):
     monkeypatch.setattr(config, "DB_PATH", tmp_path / "t.sqlite")
-    monkeypatch.setattr(worker, "enqueue", lambda ids: None)          # no model in tests
+    monkeypatch.setattr(worker, "enqueue", lambda ids, priority=1: None)          # no model in tests
     monkeypatch.setattr(places, "resolve", lambda q, client=None: places.Place(q, "DY1 1HF", "Dudley, West Midlands", *CENTRE) if q else None)
     asked = []
     feed = [notice("1", 52.5122, -2.0843),      # filed 0.3 km away
             notice("2", 52.1853, -2.1797),      # feed point is a Worcester office, but also filed under a Dudley postcode
             notice("3", 52.0, -2.0)]            # genuinely far, nothing nearer
-    monkeypatch.setattr(gazette, "search_near", lambda postcode, miles, page_size=10, client=None, on_category=None: asked.append(miles) or list(feed))
+    monkeypatch.setattr(gazette, "search_near", lambda postcode, miles, page_size=100, client=None, on_category=None, **kw: asked.append(miles) or list(feed))
     jsonld = {"2": [{"postcode": "WR5 2QT", "lat": 52.1853, "lon": -2.1797}, {"postcode": "DY1 1RY", "lat": 52.5097, "lon": -2.0879}],
               "3": [{"postcode": "GL1 1AA", "lat": 52.0, "lon": -2.0}]}
     looked_up = []
@@ -83,7 +83,7 @@ def test_unknown_place_shows_the_form_again(client):
 def test_warm_up_queues_cached_searches_that_lack_plain_english(client, monkeypatch):
     client.get("/search", params={"place": "Dudley", "distance": 3, "unit": "mi"})
     queued = []
-    monkeypatch.setattr(worker, "enqueue", lambda ids: queued.extend(ids))
+    monkeypatch.setattr(worker, "enqueue", lambda ids, priority=1: queued.extend(ids))
     assert worker.warm_up() == 3 and sorted(queued) == ["1", "2", "3"], "every notice of a cached search lacks a version, including the one outside this distance"
     with store.db() as con:
         store.put_extraction(con, "1", config.MODEL, {"what": "x", "summary": [], "removed": []}, 0, 0, 0.0)

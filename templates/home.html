@@ -5,7 +5,7 @@
 <div class="wrap">
 <div class="hero-text">
   <h1>Find public information near you</h1>
-  <p class="lead">Road closures, parking changes, planning and environmental notices are published by councils and public bodies in legal language. Enter a postcode or a town to read the ones near you in plain English, each linked to the original. The map can also show food hygiene ratings.</p>
+  <p class="lead">Road closures, parking changes, planning and environmental notices are published by councils and public bodies in legal language. Enter a postcode or a town to see every one near you, each with a simple summary and a link to the original. The map can also show food hygiene ratings.</p>
 </div>
 {% if error %}<div class="error-summary" role="alert"><h2>There is a problem</h2><p>{{ error }}</p></div>{% endif %}
 <form action="/search" method="get" class="search-panel">
@@ -26,6 +26,13 @@
           {% for u, spec in units.items() %}<option value="{{ u }}" {% if u == unit %}selected{% endif %}>{{ spec.name }}</option>{% endfor %}
         </select>
       </div>
+    </div>
+    <div class="form-group">
+      <label class="label" for="since">Published in</label>
+      <p class="hint">How far back to look</p>
+      <select class="select" id="since" name="since">
+        {% for d, label in since_choices.items() %}<option value="{{ d }}" {% if d == since %}selected{% endif %}>{{ label[4:]|capitalize }}</option>{% endfor %}
+      </select>
     </div>
     <div class="form-group">
       <button class="button" type="submit">Search</button>
@@ -57,6 +64,6 @@
     <li class="cover">{{ tag('energy') }}<p>Electricity and pipeline notices</p></li>
     <li class="cover cover-food"><span class="tag tag-food"><span class="dot dot-good"></span>Food hygiene</span><p>Food Standards Agency ratings for cafes, restaurants, shops and takeaways, shown on the map</p></li>
   </ul>
-  <p class="small">It does not cover notices about people (insolvency, estates, appointments), by design. The first search of a place takes a little while: each notice is read and checked before it is shown.</p>
+  <p class="small">It does not cover notices about people (insolvency, estates, appointments), by design. Each simple summary is written by an AI model from the notice and checked against it, sentence by sentence; anything the notice does not support is left out.</p>
 </section>
 {% endblock %}
