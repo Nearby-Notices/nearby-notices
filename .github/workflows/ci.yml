@@ -18,3 +18,5 @@ jobs:
         env:
           NN_MODEL: openai/ci-no-model          # tests never call a model; this keeps the name honest if one slips through
           NN_MODEL_API_BASE: http://127.0.0.1:9/v1
+      - name: Infrastructure as code compiles and lints
+        run: az bicep build -f infra/main.bicep --stdout > /dev/null
