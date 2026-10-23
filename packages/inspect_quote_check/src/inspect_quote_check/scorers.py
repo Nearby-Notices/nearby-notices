@@ -3,7 +3,15 @@ from __future__ import annotations
 
 import json
 
-from inspect_ai.scorer import CORRECT, INCORRECT, Score, Target, accuracy, scorer, stderr
+from inspect_ai.scorer import (
+    CORRECT,
+    INCORRECT,
+    Score,
+    Target,
+    accuracy,
+    scorer,
+    stderr,
+)
 from inspect_ai.solver import TaskState
 
 from .check import decide

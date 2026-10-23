@@ -56,5 +56,5 @@ def decide(source: str, reply: str | dict, claim: str = "", min_words: int = 2) 
     if claim:
         absent = numbers(claim) - set().union(*(numbers(q) for q in quotes))
         if absent:
-            return False, quotes, f"number not in quotes: {sorted(absent)[0]}"
+            return False, quotes, f"number not in quotes: {min(absent)}"
     return True, quotes, "grounded"
