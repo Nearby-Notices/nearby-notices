@@ -1,0 +1,1764 @@
+{"id": "5231381", "kind": "planning application", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5225738", "kind": "planning application", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5222863", "kind": "planning application", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5211796", "kind": "planning application", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5211788", "kind": "planning application", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5202742", "kind": "planning application", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5199494", "kind": "planning application", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5165567", "kind": "planning application", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5034021", "kind": "planning application", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5007240", "kind": "water or drainage", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "4950886", "kind": "water or drainage", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "4949013", "kind": "water or drainage", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "4907366", "kind": "water or drainage", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "4873271", "kind": "electricity or energy", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "4830532", "kind": "electricity or energy", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "4759409", "kind": "water or drainage", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "4693269", "kind": "planning application", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "4666272", "kind": "electricity or energy", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "4659506", "kind": "electricity or energy", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "4635332", "kind": "speed limit", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "4609784", "kind": "planning application", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "4570354", "kind": "electricity or energy", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "4507823", "kind": "other", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "4458290", "kind": "electricity or energy", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "4406809", "kind": "speed limit", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "4167927", "kind": "water or drainage", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "4166829", "kind": "water or drainage", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "3540959", "kind": "other", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "3458814", "kind": "other", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "3421249", "kind": "other", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5231745", "kind": "planning application", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5227629", "kind": "planning application", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5222254", "kind": "planning application", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5222868", "kind": "electricity or energy", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5217896", "kind": "planning application", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5217894", "kind": "planning application", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5212573", "kind": "planning application", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5212574", "kind": "planning application", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5208975", "kind": "planning application", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5206082", "kind": "electricity or energy", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5204594", "kind": "electricity or energy", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5203208", "kind": "electricity or energy", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5201797", "kind": "electricity or energy", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5194533", "kind": "road closure", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5194543", "kind": "electricity or energy", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5157494", "kind": "electricity or energy", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5139315", "kind": "planning application", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5118566", "kind": "planning permission or order", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5085035", "kind": "planning application", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "4913569", "kind": "parking or waiting restriction", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "4912819", "kind": "speed limit", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "4863244", "kind": "parking or waiting restriction", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "4844973", "kind": "speed limit", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "4791389", "kind": "planning permission or order", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "2105855", "kind": "water or drainage", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "E-26082-1902-273", "kind": "water or drainage", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "E-26082-1902-272", "kind": "water or drainage", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "E-26078-1902-278", "kind": "water or drainage", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "E-26078-1902-279", "kind": "water or drainage", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "E-26070-1902-254", "kind": "water or drainage", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "E-25539-2001-204", "kind": "other", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "E-25258-2001-140", "kind": "planning permission or order", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5233137", "kind": "planning application", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5233135", "kind": "planning application", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5233134", "kind": "environmental permit", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5233131", "kind": "electricity or energy", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5231384", "kind": "planning application", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5231743", "kind": "environmental permit", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5231387", "kind": "environmental permit", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5231383", "kind": "environmental permit", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5231847", "kind": "electricity or energy", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5228847", "kind": "electricity or energy", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5228846", "kind": "electricity or energy", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5225735", "kind": "speed limit", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5225732", "kind": "speed limit", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5225745", "kind": "planning application", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5225750", "kind": "electricity or energy", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5223874", "kind": "electricity or energy", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5222873", "kind": "planning application", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5217892", "kind": "planning application", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5216259", "kind": "planning application", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5212575", "kind": "planning application", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5208968", "kind": "speed limit", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5208967", "kind": "speed limit", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5199485", "kind": "one way or turning restriction", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5199483", "kind": "speed limit", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "E-26781-29", "kind": "water or drainage", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "E-26764-36", "kind": "water or drainage", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "E-26746-32", "kind": "water or drainage", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "E-26740-26", "kind": "water or drainage", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "E-26492-1904-148", "kind": "water or drainage", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "E-26492-1904-83", "kind": "water or drainage", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5227627", "kind": "planning application", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5222869", "kind": "planning application", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5216262", "kind": "planning application", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5212563", "kind": "planning application", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5208979", "kind": "planning application", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5203722", "kind": "planning application", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5194532", "kind": "speed limit", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5231742", "kind": "planning application", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5227628", "kind": "planning application", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5225748", "kind": "planning application", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5222256", "kind": "planning application", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5217893", "kind": "planning application", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5216266", "kind": "planning application", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5065922", "kind": "electricity or energy", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "4965102", "kind": "electricity or energy", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "4957255", "kind": "environmental permit", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "4925861", "kind": "electricity or energy", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "4489281", "kind": "electricity or energy", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "4428527", "kind": "electricity or energy", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "3989934", "kind": "speed limit", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "3975476", "kind": "speed limit", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "3890736", "kind": "environmental permit", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "3187374", "kind": "environmental permit", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "3124523", "kind": "water or drainage", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "3040784", "kind": "planning application", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "E-26926-2", "kind": "one way or turning restriction", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "E-26737-5", "kind": "planning permission or order", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "E-26698-9", "kind": "planning permission or order", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "E-26695-3", "kind": "speed limit", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "E-25720-1902-198", "kind": "water or drainage", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "E-25712-1902-236", "kind": "water or drainage", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5190054", "kind": "electricity or energy", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5090598", "kind": "electricity or energy", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5029828", "kind": "planning permission or order", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "4927828", "kind": "planning application", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "4921549", "kind": "planning application", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "4878629", "kind": "planning application", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "4878627", "kind": "planning application", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "4832040", "kind": "planning permission or order", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "4353663", "kind": "planning permission or order", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "3739824", "kind": "road closure", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "3739800", "kind": "road closure", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "2141023", "kind": "environmental permit", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "L-58306-230912", "kind": "water or drainage", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "L-58306-230913", "kind": "water or drainage", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "L-58306-230914", "kind": "water or drainage", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "E-26235-1904-34", "kind": "water or drainage", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "E-26235-1904-33", "kind": "water or drainage", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "E-25792-2005-250", "kind": "tree or forestry", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "E-25788-2005-309", "kind": "tree or forestry", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "L-57563-830", "kind": "tree or forestry", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "L-57212-486", "kind": "tree or forestry", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "E-25583-2005-40", "kind": "tree or forestry", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5212567", "kind": "planning application", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5203717", "kind": "planning application", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5200011", "kind": "planning application", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5190945", "kind": "planning application", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5139310", "kind": "planning application", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5124710", "kind": "planning application", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "4241613", "kind": "electricity or energy", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "3486385", "kind": "electricity or energy", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "3291353", "kind": "electricity or energy", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "3286269", "kind": "electricity or energy", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "3117028", "kind": "electricity or energy", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "3095973", "kind": "electricity or energy", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5222864", "kind": "planning permission or order", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5208973", "kind": "planning application", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5209675", "kind": "electricity or energy", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5174685", "kind": "planning application", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5162053", "kind": "planning application", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5107333", "kind": "planning application", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5061435", "kind": "planning permission or order", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "4957129", "kind": "planning application", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "4936816", "kind": "electricity or energy", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "4209326", "kind": "electricity or energy", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "4205383", "kind": "electricity or energy", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5011291", "kind": "environmental permit", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "E-27345-17", "kind": "planning application", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "E-27071-9", "kind": "environmental permit", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "E-27069-32", "kind": "environmental permit", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "3044579", "kind": "water or drainage", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "E-27028-29", "kind": "planning application", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "E-26371-1803-254", "kind": "environmental permit", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "E-26184-1803-51", "kind": "planning application", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "E-26106-1803-289", "kind": "planning application", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "E-25792-1803-196", "kind": "planning application", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5190045", "kind": "planning application", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "4943357", "kind": "electricity or energy", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "4865436", "kind": "electricity or energy", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "4694138", "kind": "planning application", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "4679113", "kind": "planning application", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "4586294", "kind": "water or drainage", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "4255232", "kind": "water or drainage", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "3486367", "kind": "footpath or bridleway", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "3476121", "kind": "footpath or bridleway", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "E-26235-1904-35", "kind": "water or drainage", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5231385", "kind": "planning application", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5225741", "kind": "planning application", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5225754", "kind": "planning permission or order", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5222859", "kind": "footpath or bridleway", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5222872", "kind": "planning application", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5216267", "kind": "planning application", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5211787", "kind": "other", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5207558", "kind": "footpath or bridleway", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5194549", "kind": "electricity or energy", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5231375", "kind": "planning application", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5223881", "kind": "planning application", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5194540", "kind": "electricity or energy", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5181187", "kind": "planning application", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5174681", "kind": "footpath or bridleway", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5150197", "kind": "planning application", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5145932", "kind": "planning permission or order", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5128386", "kind": "planning permission or order", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5123101", "kind": "planning permission or order", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5059155", "kind": "other", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "4626526", "kind": "other", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "4626042", "kind": "other", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "4625043", "kind": "other", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "4625042", "kind": "other", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "4624659", "kind": "other", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "3427541", "kind": "environmental permit", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "3423105", "kind": "environmental permit", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "3418253", "kind": "environmental permit", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "L-60600-1885947", "kind": "water or drainage", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "E-26608-1902-339", "kind": "water or drainage", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5234842", "kind": "speed limit", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5234812", "kind": "parking or waiting restriction", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5234808", "kind": "parking or waiting restriction", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5234807", "kind": "parking or waiting restriction", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5234813", "kind": "planning permission or order", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5234858", "kind": "planning permission or order", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5232829", "kind": "parking or waiting restriction", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5231308", "kind": "planning permission or order", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5231296", "kind": "other", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5228868", "kind": "water or drainage", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5222874", "kind": "electricity or energy", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5222862", "kind": "electricity or energy", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5221930", "kind": "planning permission or order", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5220843", "kind": "planning permission or order", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5220842", "kind": "planning permission or order", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5219166", "kind": "planning application", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5216273", "kind": "electricity or energy", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5210603", "kind": "electricity or energy", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5214248", "kind": "electricity or energy", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5204520", "kind": "planning permission or order", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5192351", "kind": "water or drainage", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5186156", "kind": "other", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5183810", "kind": "water or drainage", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5183809", "kind": "water or drainage", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5166519", "kind": "other", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5166518", "kind": "other", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5166517", "kind": "other", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5012482", "kind": "planning permission or order", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "4986040", "kind": "water or drainage", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "4978344", "kind": "water or drainage", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "4632704", "kind": "water or drainage", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "4628749", "kind": "water or drainage", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "4189448", "kind": "planning permission or order", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "4187012", "kind": "other", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "4167925", "kind": "other", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5136304", "kind": "electricity or energy", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5232827", "kind": "parking or waiting restriction", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5232828", "kind": "one way or turning restriction", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5232823", "kind": "planning permission or order", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5231321", "kind": "parking or waiting restriction", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5231317", "kind": "one way or turning restriction", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5231319", "kind": "parking or waiting restriction", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5228800", "kind": "road closure", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5231318", "kind": "planning permission or order", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5232197", "kind": "road closure", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5234805", "kind": "planning permission or order", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5231320", "kind": "speed limit", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5224664", "kind": "speed limit", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5222948", "kind": "speed limit", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5231304", "kind": "parking or waiting restriction", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5231302", "kind": "other", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5230601", "kind": "other", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5230600", "kind": "parking or waiting restriction", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5230599", "kind": "parking or waiting restriction", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5230598", "kind": "parking or waiting restriction", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5218292", "kind": "parking or waiting restriction", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5230597", "kind": "parking or waiting restriction", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5227902", "kind": "parking or waiting restriction", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5228799", "kind": "one way or turning restriction", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5227966", "kind": "parking or waiting restriction", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5227901", "kind": "parking or waiting restriction", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5227900", "kind": "parking or waiting restriction", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5221932", "kind": "parking or waiting restriction", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5221936", "kind": "parking or waiting restriction", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5221967", "kind": "parking or waiting restriction", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5222949", "kind": "parking or waiting restriction", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5220820", "kind": "parking or waiting restriction", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5220809", "kind": "one way or turning restriction", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5220812", "kind": "other", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5220814", "kind": "parking or waiting restriction", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5220818", "kind": "parking or waiting restriction", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5220808", "kind": "one way or turning restriction", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5220807", "kind": "one way or turning restriction", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5218290", "kind": "parking or waiting restriction", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5218291", "kind": "road closure", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5217220", "kind": "other", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5218289", "kind": "parking or waiting restriction", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5217219", "kind": "parking or waiting restriction", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5232826", "kind": "parking or waiting restriction", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5217218", "kind": "parking or waiting restriction", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5231329", "kind": "parking or waiting restriction", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5231328", "kind": "parking or waiting restriction", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5231327", "kind": "parking or waiting restriction", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5231326", "kind": "parking or waiting restriction", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5231325", "kind": "parking or waiting restriction", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5234852", "kind": "parking or waiting restriction", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5234850", "kind": "parking or waiting restriction", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5234849", "kind": "parking or waiting restriction", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5234848", "kind": "parking or waiting restriction", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5234847", "kind": "parking or waiting restriction", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5234841", "kind": "one way or turning restriction", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5217206", "kind": "parking or waiting restriction", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5217203", "kind": "parking or waiting restriction", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5217196", "kind": "parking or waiting restriction", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5215142", "kind": "planning permission or order", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5215141", "kind": "planning permission or order", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5217195", "kind": "other", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5231038", "kind": "planning permission or order", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5230612", "kind": "planning permission or order", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5234856", "kind": "planning permission or order", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5231297", "kind": "planning permission or order", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5227878", "kind": "planning permission or order", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5228726", "kind": "planning permission or order", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5220821", "kind": "parking or waiting restriction", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5220811", "kind": "parking or waiting restriction", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5216307", "kind": "parking or waiting restriction", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5220819", "kind": "parking or waiting restriction", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5203581", "kind": "parking or waiting restriction", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5207815", "kind": "parking or waiting restriction", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5203605", "kind": "parking or waiting restriction", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5199775", "kind": "parking or waiting restriction", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5203570", "kind": "parking or waiting restriction", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5236239", "kind": "other", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5236234", "kind": "other", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5236236", "kind": "parking or waiting restriction", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5236238", "kind": "parking or waiting restriction", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5236233", "kind": "other", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5236232", "kind": "parking or waiting restriction", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5236206", "kind": "parking or waiting restriction", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5236210", "kind": "parking or waiting restriction", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "5236335", "kind": "planning application", "source": "summary", "model": "azure/gpt-4.1-mini"}
+{"id": "4974878", "kind": "environmental permit", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "4981468", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "4984710", "kind": "planning permission or order", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "4984841", "kind": "one way or turning restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "4984843", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "4985766", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "4985767", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "4985768", "kind": "road closure", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "4985769", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "4985770", "kind": "planning permission or order", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "4985775", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "4985922", "kind": "planning permission or order", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "4987939", "kind": "electricity or energy", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "4988112", "kind": "environmental permit", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "4988113", "kind": "electricity or energy", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "4988811", "kind": "planning permission or order", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "4988812", "kind": "road closure", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "4988814", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "4988815", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "4988820", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "4988821", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "4988822", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "4988823", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "4988825", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "4988826", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "4988827", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "4989446", "kind": "electricity or energy", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "4989622", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "4989623", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "4989624", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "4989631", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "4990319", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "4990324", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "4990325", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "4990331", "kind": "road closure", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "4990332", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "4990333", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "4990334", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "4990335", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "4990336", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "4990337", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "4990338", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "4990339", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "4990343", "kind": "planning permission or order", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "4990344", "kind": "planning application", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "4991818", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "4992118", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "4992121", "kind": "one way or turning restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "4992127", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "4992128", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "4992130", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "4992132", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "4992133", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "4993645", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "4993695", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "4993714", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "4993715", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "4993716", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "4993717", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "4993744", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "4994180", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "4994182", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "4994183", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "4994185", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "4994186", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "4994187", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "4994188", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "4994191", "kind": "planning permission or order", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "4996227", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "4996230", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "4996232", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "4996233", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "4996234", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "4996237", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "4996829", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "4996830", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "4996831", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "4996842", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "4996849", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "4996864", "kind": "planning permission or order", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "4996867", "kind": "planning permission or order", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "4997532", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "4997534", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "4997537", "kind": "road closure", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "4997539", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "4997540", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "4997541", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "4997542", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "4997543", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "4997544", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5000881", "kind": "planning permission or order", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5000931", "kind": "speed limit", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5000933", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5000948", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5000949", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5000950", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5000951", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5000952", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5001028", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5001797", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5001798", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5001801", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5001938", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5001992", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5002627", "kind": "planning permission or order", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5002646", "kind": "planning permission or order", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5002647", "kind": "planning permission or order", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5002744", "kind": "road closure", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5002752", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5002772", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5002773", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5002774", "kind": "road closure", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5004640", "kind": "planning permission or order", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5004648", "kind": "speed limit", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5004650", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5004651", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5004658", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5004659", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5004660", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5004661", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5005636", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5005637", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5005640", "kind": "speed limit", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5005648", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5005649", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5005992", "kind": "planning permission or order", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5007227", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5007228", "kind": "speed limit", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5007229", "kind": "speed limit", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5007230", "kind": "speed limit", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5007231", "kind": "one way or turning restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5007234", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5007235", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5007236", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5007237", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5007238", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5007239", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5007241", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5007242", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5007243", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5007244", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5007245", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5007246", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5007247", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5007248", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5007249", "kind": "road closure", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5009528", "kind": "planning application", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5009530", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5010224", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5010225", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5010230", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5010231", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5010232", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5010233", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5010235", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5011228", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5011230", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5011231", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5011232", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5011233", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5011243", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5011248", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5011250", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5012027", "kind": "planning permission or order", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5012028", "kind": "planning permission or order", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5012471", "kind": "speed limit", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5012472", "kind": "one way or turning restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5012473", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5012479", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5012481", "kind": "road closure", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5014132", "kind": "electricity or energy", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5015414", "kind": "road closure", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5015428", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5015429", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5015433", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5015435", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5016856", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5016857", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5016868", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5017460", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5017463", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5017468", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5017469", "kind": "planning permission or order", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5017470", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5017473", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5017474", "kind": "speed limit", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5017475", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5017476", "kind": "speed limit", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5017477", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5017478", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5017479", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5017480", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5020519", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5020522", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5020525", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5020526", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5020530", "kind": "road closure", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5020531", "kind": "road closure", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5020532", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5020794", "kind": "road closure", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5021232", "kind": "planning permission or order", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5021236", "kind": "one way or turning restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5021237", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5021238", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5021240", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5021243", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5021250", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5021251", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5021261", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5021263", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5021264", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5021265", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5022622", "kind": "planning permission or order", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5022626", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5022634", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5022635", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5022638", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5022639", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5027089", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5030072", "kind": "planning permission or order", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5031745", "kind": "speed limit", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5031747", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5031748", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5032417", "kind": "planning application", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5032710", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5032711", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5032713", "kind": "road closure", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5032714", "kind": "road closure", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5032715", "kind": "road closure", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5033547", "kind": "one way or turning restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5033548", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5033549", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5033550", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5033551", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5033552", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5033554", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5033555", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5033557", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5033833", "kind": "planning permission or order", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5035239", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5035241", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5035244", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5035253", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5035254", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5035255", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5035256", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5036021", "kind": "one way or turning restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5036031", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5036037", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5036038", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5036040", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5036050", "kind": "planning application", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5036946", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5036949", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5036950", "kind": "planning permission or order", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5036951", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5036952", "kind": "planning permission or order", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5037808", "kind": "planning application", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5037809", "kind": "planning application", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5038852", "kind": "planning permission or order", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5039033", "kind": "electricity or energy", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5039179", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5039180", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5039181", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5040052", "kind": "one way or turning restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5040054", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5040075", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5040077", "kind": "road closure", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5040079", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5040080", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5040082", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5040083", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5040085", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5040086", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5040087", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5040088", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5040089", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5040090", "kind": "speed limit", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5040091", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5040092", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5040093", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5040095", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5040108", "kind": "planning permission or order", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5040822", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5040838", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5040841", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5040842", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5040843", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5040845", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5040846", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5040847", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5040848", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5040849", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5040850", "kind": "speed limit", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5040851", "kind": "speed limit", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5042281", "kind": "planning permission or order", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5043065", "kind": "planning application", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5043209", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5043211", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5043212", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5043213", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5043218", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5043219", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5043221", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5043222", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5043223", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5043237", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5043238", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5043239", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5043240", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5043243", "kind": "road closure", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5043651", "kind": "planning permission or order", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5045258", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5045260", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5045261", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5045262", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5045263", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5045270", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5045271", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5045314", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5045315", "kind": "electricity or energy", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5045317", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5045459", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5045461", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5045472", "kind": "speed limit", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5045474", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5045475", "kind": "one way or turning restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5045586", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5047079", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5048023", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5048030", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5048031", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5048032", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5048033", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5048042", "kind": "road closure", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5048043", "kind": "road closure", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5048046", "kind": "road closure", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5048051", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5048052", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5048053", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5048060", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5048062", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5048063", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5049077", "kind": "electricity or energy", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5049241", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5049242", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5049243", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5049247", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5049248", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5049249", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5049250", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5049255", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5049257", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5049258", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5049260", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5049266", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5049267", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5049268", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5049269", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5049270", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5050141", "kind": "electricity or energy", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5050142", "kind": "one way or turning restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5050149", "kind": "one way or turning restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5050150", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5050161", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5050163", "kind": "road closure", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5050164", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5050165", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5050166", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5050167", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5050168", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5052988", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5052989", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5052990", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5052995", "kind": "speed limit", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5052996", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5053000", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5053001", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5053002", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5053003", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5053006", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5053007", "kind": "planning permission or order", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5053831", "kind": "planning application", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5053835", "kind": "electricity or energy", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5053939", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5053940", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5053957", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5053958", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5053959", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5053961", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5053962", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5053965", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5053966", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5053969", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5053971", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5053972", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5053973", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5053981", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5054919", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5054920", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5054921", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5054938", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5054940", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5057005", "kind": "environmental permit", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5058230", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5058238", "kind": "speed limit", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5058239", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5058240", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5058245", "kind": "road closure", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5058253", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5058254", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5058255", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5058256", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5058266", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5058267", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5058272", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5059224", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5059225", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5059226", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5059227", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5059234", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5059235", "kind": "road closure", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5059236", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5059237", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5059244", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5059245", "kind": "road closure", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5059247", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5059251", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5061365", "kind": "road closure", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5061405", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5061406", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5061407", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5061408", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5061409", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5061411", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5061413", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5061414", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5062407", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5062827", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5062829", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5062830", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5062833", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5062834", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5062835", "kind": "speed limit", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5062836", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5062837", "kind": "speed limit", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5063477", "kind": "planning permission or order", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5063849", "kind": "speed limit", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5063850", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5063851", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5063852", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5063853", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5063854", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5063855", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5063857", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5064729", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5064730", "kind": "speed limit", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5064731", "kind": "speed limit", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5064733", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5064734", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5064736", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5064737", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5064738", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5064739", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5064740", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5064741", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5064742", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5064748", "kind": "road closure", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5064749", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5064750", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5064751", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5064753", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5064756", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5064757", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5064758", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5064759", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5064768", "kind": "electricity or energy", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5067169", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5067170", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5067190", "kind": "speed limit", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5067191", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5067207", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5067208", "kind": "speed limit", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5067210", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5070642", "kind": "electricity or energy", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5070643", "kind": "electricity or energy", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5070852", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5070854", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5070861", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5070863", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5070866", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5070867", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5070868", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5070869", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5070870", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5070877", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5070878", "kind": "one way or turning restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5070881", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5072117", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5072119", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5072121", "kind": "speed limit", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5072123", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5072144", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5072146", "kind": "road closure", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5072147", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5072149", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5072153", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5072157", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5072160", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5072161", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5072162", "kind": "electricity or energy", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5072186", "kind": "planning permission or order", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5072188", "kind": "planning permission or order", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5072201", "kind": "planning permission or order", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5073871", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5073872", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5073873", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5073907", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5073908", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5073909", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5073910", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5073911", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5074298", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5076375", "kind": "planning permission or order", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5076580", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5076581", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5076582", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5076584", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5076593", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5076594", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5076595", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5076596", "kind": "one way or turning restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5076644", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5076645", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5076646", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5076647", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5076648", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5078163", "kind": "planning permission or order", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5078377", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5078382", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5078383", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5078384", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5078386", "kind": "road closure", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5078395", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5078396", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5078397", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5078398", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5078402", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5078403", "kind": "speed limit", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5078404", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5078405", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5079259", "kind": "footpath or bridleway", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5079605", "kind": "planning permission or order", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5079657", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5079658", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5079659", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5083344", "kind": "speed limit", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5083345", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5083347", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5083351", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5083352", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5083353", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5083354", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5083355", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5083356", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5083357", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5083358", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5083359", "kind": "speed limit", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5083360", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5083363", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5083367", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5084253", "kind": "planning permission or order", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5084255", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5084257", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5084309", "kind": "speed limit", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5084310", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5084312", "kind": "speed limit", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5084313", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5084316", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5084318", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5084319", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5084321", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5084323", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5084324", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5084327", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5084328", "kind": "speed limit", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5084329", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5084330", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5084331", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5084335", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5084336", "kind": "road closure", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5084341", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5084342", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5084343", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5084344", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5084345", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5084350", "kind": "planning permission or order", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5086630", "kind": "road closure", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5087239", "kind": "road closure", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5087241", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5087242", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5087254", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5087255", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5087256", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5087310", "kind": "speed limit", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5088919", "kind": "electricity or energy", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5088920", "kind": "electricity or energy", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5089204", "kind": "road closure", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5090691", "kind": "planning permission or order", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5091648", "kind": "water or drainage", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5091682", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5091690", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5091691", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5091692", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5091693", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5091694", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5091698", "kind": "speed limit", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5091699", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5091702", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5092162", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5092164", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5092165", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5092166", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5092168", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5092172", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5092177", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5092178", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5092183", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5092185", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5092186", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5092191", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5093900", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5093919", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5093920", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5093921", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5099677", "kind": "planning permission or order", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5099683", "kind": "planning permission or order", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5099687", "kind": "speed limit", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5099689", "kind": "road closure", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5099690", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5099691", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5102080", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5102082", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5102083", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5102087", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5102089", "kind": "planning permission or order", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5102090", "kind": "footpath or bridleway", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5102779", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5103249", "kind": "planning permission or order", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5103658", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5103659", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5103660", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5103661", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5103662", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5103663", "kind": "road closure", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5105318", "kind": "planning permission or order", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5105320", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5105322", "kind": "road closure", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5105323", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5105324", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5105361", "kind": "electricity or energy", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5107902", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5109163", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5109164", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5109919", "kind": "electricity or energy", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5111708", "kind": "planning permission or order", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5113497", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5113498", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5113499", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5113512", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5113514", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5113678", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5113679", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5113680", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5113681", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5113686", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5113694", "kind": "one way or turning restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5113706", "kind": "planning application", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5114783", "kind": "electricity or energy", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5114786", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5114788", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5114789", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5114790", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5114791", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5115557", "kind": "environmental permit", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5117575", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5117672", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5117676", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5117677", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5117679", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5117680", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5117686", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5118608", "kind": "planning permission or order", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5118610", "kind": "planning permission or order", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5119619", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5119647", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5119648", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5119649", "kind": "speed limit", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5119650", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5119651", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5119771", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5119772", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5119773", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5119830", "kind": "road closure", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5119915", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5120921", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5120922", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5120923", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5120924", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5120925", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5120926", "kind": "planning permission or order", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5120927", "kind": "planning permission or order", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5121942", "kind": "electricity or energy", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5122891", "kind": "planning permission or order", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5123230", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5123231", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5123232", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5123235", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5123238", "kind": "planning application", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5123239", "kind": "planning permission or order", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5124023", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5124024", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5124026", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5124030", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5124031", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5124032", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5124036", "kind": "speed limit", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5124038", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5124039", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5124966", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5124968", "kind": "speed limit", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5124970", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5124971", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5124972", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5124973", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5124974", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5124975", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5125265", "kind": "road closure", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5125266", "kind": "road closure", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5125267", "kind": "road closure", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5126355", "kind": "planning permission or order", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5126968", "kind": "planning permission or order", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5126970", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5126971", "kind": "road closure", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5126972", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5126973", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5126974", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5126975", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5126976", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5126977", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5128282", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5128283", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5128284", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5128285", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5128286", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5128321", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5128322", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5128323", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5128324", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5128792", "kind": "electricity or energy", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5130287", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5130288", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5130289", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5130290", "kind": "one way or turning restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5130301", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5130303", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5131603", "kind": "planning permission or order", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5131606", "kind": "planning permission or order", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5132749", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5132750", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5132757", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5132758", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5132759", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5132761", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5132766", "kind": "planning permission or order", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5133925", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5133950", "kind": "planning permission or order", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5134708", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5134709", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5134710", "kind": "one way or turning restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5134711", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5134884", "kind": "speed limit", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5134885", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5134886", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5134887", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5134889", "kind": "speed limit", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5134932", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5134933", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5134934", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5134935", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5135687", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5135709", "kind": "planning permission or order", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5135972", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5135973", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5135974", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5135975", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5135993", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5135994", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5135995", "kind": "one way or turning restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5135996", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5136001", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5136002", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5136003", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5138352", "kind": "planning permission or order", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5138447", "kind": "one way or turning restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5138448", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5138449", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5138452", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5138453", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5138454", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5138455", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5138456", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5138459", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5138461", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5138462", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5138463", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5139363", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5139365", "kind": "one way or turning restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5139371", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5139372", "kind": "speed limit", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5139373", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5139377", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5139378", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5139383", "kind": "road closure", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5139385", "kind": "planning permission or order", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5139387", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5140374", "kind": "electricity or energy", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5140452", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5140453", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5140454", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5140455", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5140456", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5140457", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5142832", "kind": "planning permission or order", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5142833", "kind": "planning permission or order", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5142857", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5142858", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5142864", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5142865", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5142866", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5142867", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5142868", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5142912", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5143522", "kind": "environmental permit", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5143589", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5143590", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5143620", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5143622", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5143634", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5143636", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5143638", "kind": "one way or turning restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5143639", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5143645", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5144239", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5144240", "kind": "road closure", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5144242", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5144244", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5144280", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5144281", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5144282", "kind": "road closure", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5144283", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5144284", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5145656", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5145663", "kind": "speed limit", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5145731", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5145733", "kind": "electricity or energy", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5145734", "kind": "electricity or energy", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5145768", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5145769", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5145771", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5145772", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5145773", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5146713", "kind": "environmental permit", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5146719", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5146722", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5146723", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5146731", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5146735", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5146736", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5147397", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5147398", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5147860", "kind": "environmental permit", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5149400", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5149402", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5150212", "kind": "planning application", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5150213", "kind": "electricity or energy", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5150271", "kind": "planning permission or order", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5150281", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5150286", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5150287", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5150288", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5150289", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5150290", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5150292", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5150296", "kind": "planning permission or order", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5150986", "kind": "planning permission or order", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5151002", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5151003", "kind": "one way or turning restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5151005", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5151006", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5151007", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5151008", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5151010", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5151017", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5151018", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5151019", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5151022", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5151023", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5151024", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5151026", "kind": "footpath or bridleway", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5154374", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5154376", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5154378", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5154468", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5154470", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5154471", "kind": "speed limit", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5154585", "kind": "planning permission or order", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5156602", "kind": "electricity or energy", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5156603", "kind": "electricity or energy", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5156685", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5156688", "kind": "road closure", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5156689", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5156690", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5156691", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5156692", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5156695", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5156696", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5156697", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5156698", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5156706", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5156707", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5156708", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5157739", "kind": "one way or turning restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5157740", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5157766", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5157767", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5157768", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5157769", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5157771", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5157777", "kind": "planning permission or order", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5157784", "kind": "road closure", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5158744", "kind": "electricity or energy", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5158773", "kind": "one way or turning restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5158775", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5159122", "kind": "electricity or energy", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5159366", "kind": "planning application", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5160365", "kind": "electricity or energy", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5160757", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5161122", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5161123", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5161125", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5161126", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5161127", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5161187", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5162055", "kind": "electricity or energy", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5162290", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5162293", "kind": "planning permission or order", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5162470", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5162471", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5162477", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5162478", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5162479", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5162480", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5162481", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5162483", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5162486", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5162487", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5162490", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5162491", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5163046", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5163047", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5163048", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5163051", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5163053", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5163054", "kind": "electricity or energy", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5163056", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5163057", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5163058", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5163059", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5163060", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5163070", "kind": "planning permission or order", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5163071", "kind": "planning permission or order", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5163072", "kind": "planning permission or order", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5163123", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5164731", "kind": "planning permission or order", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5164733", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5165646", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5165647", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5165654", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5165655", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5165661", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5166497", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5166501", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5166502", "kind": "electricity or energy", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5166503", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5166506", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5166507", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5166509", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5167855", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5167857", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5167858", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5168191", "kind": "road closure", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5168192", "kind": "road closure", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5168250", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5168251", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5168252", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5170092", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5170094", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5170095", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5170097", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5170098", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5170100", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5170640", "kind": "electricity or energy", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5171456", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5171523", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5171524", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5171559", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5171562", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5171563", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5171708", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5171713", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5171714", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5171715", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5171716", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5171719", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5171720", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5171721", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5171722", "kind": "road closure", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5171723", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5171724", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5171727", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5171729", "kind": "planning permission or order", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5173870", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5173872", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5173874", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5173875", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5173876", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5173877", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5173879", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5173881", "kind": "one way or turning restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5173884", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5173886", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5174794", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5174795", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5174796", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5174797", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5174802", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5174803", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5174804", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5174805", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5174806", "kind": "speed limit", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5174809", "kind": "planning application", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5175460", "kind": "electricity or energy", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5175860", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5175862", "kind": "electricity or energy", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5175865", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5178029", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5178031", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5178034", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5178035", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5178036", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5178037", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5178038", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5178041", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5178042", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5178043", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5178044", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5178050", "kind": "road closure", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5178052", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5178053", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5178054", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5178057", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5178061", "kind": "planning permission or order", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5178849", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5178852", "kind": "one way or turning restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5178853", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5178855", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5178856", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5178862", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5178863", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5178865", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5178866", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5178870", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5178871", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5178872", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5178873", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5178881", "kind": "planning application", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5180483", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5180485", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5180486", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5182225", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5182226", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5182227", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5182228", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5182238", "kind": "planning permission or order", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5183001", "kind": "electricity or energy", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5183004", "kind": "road closure", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5183005", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5183006", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5183007", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5183008", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5183018", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5183019", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5183274", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5183276", "kind": "electricity or energy", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5183798", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5183800", "kind": "road closure", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5183803", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5183804", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5185022", "kind": "road closure", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5185931", "kind": "electricity or energy", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5186071", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5186072", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5186073", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5186074", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5186075", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5186076", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5186077", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5186078", "kind": "road closure", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5186098", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5186099", "kind": "one way or turning restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5186100", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5186154", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5186161", "kind": "planning permission or order", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5187108", "kind": "footpath or bridleway", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5187273", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5187275", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5187276", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5187277", "kind": "road closure", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5187442", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5187445", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5187706", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5187708", "kind": "planning permission or order", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5187720", "kind": "one way or turning restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5187721", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5187722", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5187727", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5187728", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5187729", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5190084", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5190085", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5190086", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5190087", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5190088", "kind": "speed limit", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5190089", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5190090", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5190092", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5190780", "kind": "road closure", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5190783", "kind": "one way or turning restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5190784", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5190793", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5190794", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5190795", "kind": "road closure", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5190805", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5190806", "kind": "speed limit", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5190807", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5190817", "kind": "planning permission or order", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5190819", "kind": "road closure", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5191619", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5191620", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5191621", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5191622", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5192192", "kind": "electricity or energy", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5194519", "kind": "planning permission or order", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5194522", "kind": "planning permission or order", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5194565", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5194567", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5194569", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5194578", "kind": "one way or turning restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5194579", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5194581", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5195270", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5195271", "kind": "speed limit", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5195272", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5195590", "kind": "road closure", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5195592", "kind": "planning permission or order", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5195888", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5195889", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5195890", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5195891", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5195892", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5195893", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5195894", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5195895", "kind": "road closure", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5196013", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5196014", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5196015", "kind": "road closure", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5196017", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5196030", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5196031", "kind": "road closure", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5196032", "kind": "road closure", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5196118", "kind": "electricity or energy", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5196129", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5198276", "kind": "road closure", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5199524", "kind": "road closure", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5199777", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5199778", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5199779", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5199791", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5199792", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5199795", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5199810", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5200571", "kind": "planning permission or order", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5200898", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5200899", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5200900", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5200903", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5200904", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5201121", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5201123", "kind": "one way or turning restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5201124", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5201125", "kind": "road closure", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5201126", "kind": "road closure", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5201127", "kind": "footpath or bridleway", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5201798", "kind": "electricity or energy", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5202037", "kind": "road closure", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5202051", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5202053", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5202054", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5202060", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5203569", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5203571", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5203572", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5203573", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5203580", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5203606", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5203607", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5203608", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5203609", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5203636", "kind": "electricity or energy", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5204529", "kind": "road closure", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5204530", "kind": "footpath or bridleway", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5204532", "kind": "road closure", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5204643", "kind": "speed limit", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5204645", "kind": "road closure", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5204646", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5204949", "kind": "electricity or energy", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5205855", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5206010", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5206011", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5206012", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5206013", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5206014", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5206018", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5206019", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5206020", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5206026", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5206080", "kind": "electricity or energy", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5206831", "kind": "planning permission or order", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5207816", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5207817", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5207819", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5207824", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5207825", "kind": "one way or turning restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5207826", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5207827", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5208865", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5208875", "kind": "road closure", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5208877", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5208881", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5208882", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5208883", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5208884", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5208887", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5208888", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5208889", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5208890", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5208891", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5209630", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5209634", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5209638", "kind": "road closure", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5211726", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5211733", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5211743", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5211744", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5211745", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5211746", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5211747", "kind": "planning permission or order", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5211748", "kind": "planning permission or order", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5211749", "kind": "planning permission or order", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5211751", "kind": "planning permission or order", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5211752", "kind": "road closure", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5212535", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5212536", "kind": "one way or turning restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5212538", "kind": "one way or turning restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5212544", "kind": "speed limit", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5212545", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5212547", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5212548", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5212549", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5212560", "kind": "road closure", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5212561", "kind": "planning permission or order", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5212562", "kind": "planning permission or order", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5213383", "kind": "road closure", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5213386", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5213387", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5213388", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5213390", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5213391", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5213392", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5213397", "kind": "road closure", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5213398", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5213410", "kind": "road closure", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5213411", "kind": "planning permission or order", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5216302", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5216303", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5216304", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5216305", "kind": "road closure", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5216308", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5217200", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5217201", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5217202", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5217204", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5217205", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5217208", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5217209", "kind": "road closure", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5217216", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5217217", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5217221", "kind": "planning permission or order", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5217222", "kind": "planning permission or order", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5217226", "kind": "planning permission or order", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5217228", "kind": "planning permission or order", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5217229", "kind": "planning permission or order", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5217230", "kind": "road closure", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5218281", "kind": "road closure", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5218282", "kind": "planning permission or order", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5218283", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5218284", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5218285", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5220810", "kind": "speed limit", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5220813", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5220815", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5220816", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5220822", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5220834", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5220835", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5220836", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5220837", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5220841", "kind": "road closure", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5221933", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5221934", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5221941", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5221942", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5221959", "kind": "road closure", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5221960", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5221966", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5221969", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5221970", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5221973", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5221974", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5221975", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5221976", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5221977", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5222940", "kind": "planning permission or order", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5222941", "kind": "road closure", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5222945", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5222946", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5222947", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5222953", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5223925", "kind": "road closure", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5224665", "kind": "planning permission or order", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5225965", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5225967", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5225968", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5225969", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5225970", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5226169", "kind": "road closure", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5226170", "kind": "planning permission or order", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5226171", "kind": "road closure", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5226172", "kind": "planning permission or order", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5226173", "kind": "road closure", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5227839", "kind": "planning permission or order", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5227840", "kind": "planning permission or order", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5227841", "kind": "road closure", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5227842", "kind": "planning permission or order", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5227843", "kind": "road closure", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5227844", "kind": "road closure", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5227845", "kind": "planning permission or order", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5227873", "kind": "road closure", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5227874", "kind": "planning permission or order", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5227875", "kind": "planning permission or order", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5227876", "kind": "planning permission or order", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5227877", "kind": "planning permission or order", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5227899", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5227964", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5227965", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5227967", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5228807", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5228808", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5228809", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5228810", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5228811", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5230592", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5230593", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5230594", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5230595", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5230602", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5230603", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5230604", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5230605", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5231306", "kind": "speed limit", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5231307", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5231309", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5231310", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5231314", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5231315", "kind": "other", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5234809", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5234824", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5234825", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5234826", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5234830", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5234831", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5234832", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5234833", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5234834", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5234838", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5234840", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5234857", "kind": "planning application", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5236207", "kind": "speed limit", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5236208", "kind": "one way or turning restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5236222", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5236226", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5236228", "kind": "speed limit", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5236230", "kind": "speed limit", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5236231", "kind": "parking or waiting restriction", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
+{"id": "5236243", "kind": "planning permission or order", "source": "kind-only", "model": "azure/gpt-4.1-mini"}
