@@ -69,3 +69,7 @@ Full run on the Azure OpenAI gpt-4.1-mini deployment the site uses (results/2026
 - **Checked on fresh notices, not on the set the fix was shaped on.** A second pre-registered set of 330 sentences from 141 new notices (`evals/leak/confirm/`): 0 got through, so the leak rate is below 0.9% at 95% confidence.
 - **Known limit.** On the first set after the fix, 1 of 329 still gets through: the "29m" sentence, because 29m is in a quote, just about another street. A sentence that joins a number from one row of a table to a place from another row needs the model's judgement; the code cannot see it.
 - Live from commit f7efb87, deployed 22/10/2026 22:38 (BST).
+
+## 23/10/2026, morning, two deploys collided
+
+- **A deploy failed with ContainerAppOperationInProgress.** Two commits pushed a minute apart each started a deploy; the second tried to update the app while the first was still rolling, so the live service stayed on the earlier commit (functionally the same; the later one only tidied a package's lint). Fix: the deploy workflow now runs one at a time (a concurrency group that queues, never cancels) and retries the update up to five times, 30 seconds apart.
