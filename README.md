@@ -50,6 +50,15 @@ Earlier runs on the 30-notice set (17 and 18 October, local and Azure models) an
 
 What the numbers mean, and the labelling rules, are in [evals/README.md](evals/README.md). The headline to watch is the gate's false-catch rate: a false sentence the gate keeps would reach the page.
 
+### A trained model for the kind of notice
+
+Every notice gets a kind (road closure, parking or waiting restriction, speed limit, planning application and eight more) so results can be filtered. Only notices that have been read have a kind from the language model, so a small classifier trained on the service's own labels sorts the rest at search time, with no model call: word and character n-grams with logistic regression (scikit-learn), in `nearby_notices/kinds.py`, built by `evals/kinds/build.py` as the DVC stage `kinds`.
+
+- **Data:** 1,764 stored notices, each labelled by the live model (338 kinds from written summaries, 1,426 from a kind-only question).
+- **Test fixed first:** a quarter of each kind held out before training, with the measures, baseline, deploy rule and fallback written down in [evals/kinds/PREREGISTRATION.md](evals/kinds/PREREGISTRATION.md).
+- **Result** ([evals/kinds/RESULTS.md](evals/kinds/RESULTS.md)): 402 of 440 held-out notices agree with the language model's kind (91.4%, 95% interval 88.4% to 93.6%), against 70.2% for the baseline of the most common kind per notice code (exact McNemar p = 3.8e-20). Weakest kind: road closures (F1 0.68).
+- **In production:** a test fails the build if the shipped model drops below 80% on the held-out set; each new summary's kind is compared with the model's and the agreement is shown on the About page; below 70% over the last 50 comparisons the model's kinds are switched off until it is retrained.
+
 ## How it works
 
 ![How it works: a postcode or town is looked up, the Gazette feed is read for the chosen window, notices are measured to the place and kept under its law, stored, summarised on demand, checked and gated, then shown on the website and through the MCP server](docs/how-it-works.png)

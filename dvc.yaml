@@ -83,3 +83,23 @@ stages:
     outs:
       - evals/SUBGROUPS.md:
           cache: false
+
+  kinds:
+    # The notice-kind classifier (evals/kinds): trained on the live model's labels, tested on the held-out set fixed in
+    # split.json before any training (PREREGISTRATION.md). The shipped model is an output, so dvc.lock ties it to the
+    # exact labels, split and code; tests/test_kinds.py re-checks its held-out accuracy on every build.
+    cmd: python evals/kinds/build.py train
+    deps:
+      - evals/kinds/build.py
+      - evals/kinds/labels.jsonl
+      - evals/kinds/split.json
+      - evals/kinds/notices.jsonl
+      - nearby_notices/kinds.py
+    outs:
+      - nearby_notices/models/kinds.joblib:
+          cache: false
+      - evals/kinds/RESULTS.md:
+          cache: false
+    metrics:
+      - evals/kinds/metrics.json:
+          cache: false

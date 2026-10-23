@@ -175,3 +175,39 @@ stages:
       md5: 1e9a59e4bc123ea47403819335627aaf.dir
       size: 4286361
       nfiles: 1
+  kinds:
+    cmd: python evals/kinds/build.py train
+    deps:
+    - path: evals/kinds/build.py
+      hash: md5
+      md5: bf6fd54f0d01a8597599adb9043dc4f0
+      size: 10575
+    - path: evals/kinds/labels.jsonl
+      hash: md5
+      md5: 309a1e5578714fa450df7cb09f975716
+      size: 189426
+    - path: evals/kinds/notices.jsonl
+      hash: md5
+      md5: b4ae38e091c757d14c2460b3712c820a
+      size: 1631227
+    - path: evals/kinds/split.json
+      hash: md5
+      md5: 73b00b48ec609f315cab6903d4f493e0
+      size: 5879
+    - path: nearby_notices/kinds.py
+      hash: md5
+      md5: 85947eb5356969b65d6875610c3f09df
+      size: 3314
+    outs:
+    - path: evals/kinds/RESULTS.md
+      hash: md5
+      md5: 3ec4467fed4eb523bbb8ebb55b917df8
+      size: 2279
+    - path: evals/kinds/metrics.json
+      hash: md5
+      md5: f5a1082b40be07069e36838f29c516d7
+      size: 329
+    - path: nearby_notices/models/kinds.joblib
+      hash: md5
+      md5: 560fbe7c13b073d86724de363b1c3f6b
+      size: 3737816

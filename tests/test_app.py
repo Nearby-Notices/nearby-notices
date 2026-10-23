@@ -185,3 +185,14 @@ def test_a_search_that_finds_only_road_orders_offers_a_longer_time(client):
     assert 'id="one-kind"' in page and "road and transport orders" in page
     assert "since=90" in page and "search the past 3 months" in page
     assert 'id="one-kind"' not in client.get("/search", params={"place": "Dudley", "distance": 3, "unit": "mi", "since": 365}).text
+
+
+def test_every_notice_gets_a_kind_and_the_page_filters_by_kind(client):
+    page = client.get("/search", params={"place": "Dudley", "distance": 3, "unit": "mi"}).text
+    assert 'data-kind="' in page and 'data-kind=""' not in page, "the classifier gives every unread notice a kind"
+    assert 'class="kind"' in page and "Sorted by a small model trained on this service" in page
+
+
+def test_the_about_page_reports_the_kind_model_and_its_live_agreement(client):
+    page = client.get("/about").text
+    assert "Kinds of notice" in page and "held back for testing" in page and "No comparisons yet." in page

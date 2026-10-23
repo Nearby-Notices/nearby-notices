@@ -1,0 +1,24 @@
+{
+ "held_out": 440,
+ "train": 1324,
+ "accuracy": 0.9136,
+ "accuracy_ci95": [
+  0.8837,
+  0.9364
+ ],
+ "macro_f1": 0.8684,
+ "baseline_accuracy": 0.7023,
+ "baseline_ci95": [
+  0.6579,
+  0.7431
+ ],
+ "mcnemar": {
+  "model_only": 104,
+  "baseline_only": 11,
+  "p": 3.82e-20
+ },
+ "sources": {
+  "summary": 338,
+  "kind-only": 1426
+ }
+}

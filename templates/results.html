@@ -41,6 +41,15 @@
   <span class="viewtoggle" role="group" aria-label="View"><a href="{{ q }}&view=all" {% if view == 'all' %}class="on" aria-current="page"{% endif %}>List</a><a href="{{ q }}&view=grouped" {% if view == 'grouped' %}class="on" aria-current="page"{% endif %}>Grouped</a><a href="{{ q }}&view=map" {% if view == 'map' %}class="on" aria-current="page"{% endif %}>Map</a></span>
 </nav>
 
+{% set kind_counts = {} %}{% for r in results %}{% if r.kind %}{% set _ = kind_counts.update({r.kind: kind_counts.get(r.kind, 0) + 1}) %}{% endif %}{% endfor %}
+{% if kind_counts|length > 1 %}
+<nav class="filters kind-filters" aria-label="Filter by kind of notice">
+  <span class="small muted">Kind:</span>
+  <button class="chip kind-chip active" data-kind="all">Any</button>
+  {% for k, n in kind_counts|dictsort(by='value', reverse=true) %}<button class="chip kind-chip" data-kind="{{ k }}">{{ k|capitalize }} <span>({{ n }})</span></button>{% endfor %}
+</nav>
+{% endif %}
+
 {% if view == 'map' %}
 <div class="map-layout"><div class="map-col">
 <link rel="stylesheet" href="/static/vendor/leaflet/leaflet.css">
@@ -275,14 +284,27 @@
 {% endif %}
 <script>
 (function () {
-  var current = 'all';
+  var current = 'all', currentKind = 'all';
   function applyFilter() {
-    document.querySelectorAll('.card, .group').forEach(function (el) { el.style.display = (current === 'all' || el.dataset.group === current) ? '' : 'none'; });
+    document.querySelectorAll('.card').forEach(function (el) {
+      var show = (current === 'all' || el.dataset.group === current) && (currentKind === 'all' || el.dataset.kind === currentKind);
+      el.style.display = show ? '' : 'none';
+    });
+    document.querySelectorAll('.group').forEach(function (el) { el.style.display = (current === 'all' || el.dataset.group === current) ? '' : 'none'; });
   }
-  document.querySelectorAll('.filters .chip').forEach(function (b) {
+  document.querySelectorAll('.filters .chip:not(.kind-chip)').forEach(function (b) {
     b.addEventListener('click', function () {
       current = b.dataset.group;
-      document.querySelectorAll('.filters .chip').forEach(function (c) { c.classList.toggle('active', c === b); });
+      document.querySelectorAll('.filters .chip:not(.kind-chip)').forEach(function (c) { c.classList.toggle('active', c === b); });
+      applyFilter();
+    });
+  });
+  // Kinds come from the simple summary where there is one, and otherwise from a small model trained on the service's
+  // own summaries (nearby_notices/kinds.py), so every notice can be filtered by kind before it has been read.
+  document.querySelectorAll('.kind-chip').forEach(function (b) {
+    b.addEventListener('click', function () {
+      currentKind = b.dataset.kind;
+      document.querySelectorAll('.kind-chip').forEach(function (c) { c.classList.toggle('active', c === b); });
       applyFilter();
     });
   });

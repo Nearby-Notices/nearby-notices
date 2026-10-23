@@ -1,8 +1,9 @@
 {% from "_ui.html" import tag with context %}
 {% macro card(r) %}
-<article class="card" data-group="{{ r.group }}" id="n{{ r.n.id }}">
+<article class="card" data-group="{{ r.group }}" data-kind="{{ r.kind or '' }}" id="n{{ r.n.id }}">
   <div class="card-top">
-    {{ tag(r.group) }}
+    <span class="tags">{{ tag(r.group) }}
+    {% if r.kind %}<span class="kind" title="{{ 'From the simple summary' if r.kind_source == 'summary' else 'Sorted by a small model trained on this service\'s summaries' }}">{{ r.kind|capitalize }}</span>{% endif %}</span>
     <span class="date">Published {{ r.n.published|nice_date }}</span>
   </div>
   <h2>{{ (r.x.what if r.x and r.x.what else r.n.title) }}</h2>

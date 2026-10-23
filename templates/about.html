@@ -23,6 +23,9 @@
   <li>Feedback: {{ stats.feedback_up }} accurate, {{ stats.feedback_down }} wrong or unclear</li>
   <li>Searches by day: {% for d in stats.searches_by_day %}{{ d.day }}: {{ d.n }}{% if not loop.last %}; {% endif %}{% endfor %}</li>
 </ul>
+<h2>Kinds of notice</h2>
+<p>Every notice is sorted into a kind (road closure, parking or waiting restriction, speed limit, planning application and so on) so results can be filtered. Where a simple summary exists, its kind is used. Otherwise a small model trained on this service's own summaries sorts the notice at once, without calling the language model{% if kinds.train_size %}: trained on {{ kinds.train_size }} notices, it agreed with the language model on {{ '%.1f'|format(kinds.held_out_accuracy * 100) }}% of notices held back for testing{% endif %}.</p>
+<p>Checked live: each time a new summary is written, its kind is compared with the model's. {% if kinds.total %}So far they agree on {{ kinds.agreed }} of {{ kinds.total }}.{% else %}No comparisons yet.{% endif %} {% if not kinds.on %}Agreement has fallen below 70% over the last 50, so the model's kinds are switched off until it is retrained.{% endif %}</p>
 <p class="small">Model in use: {{ model }}. Built with an AI coding assistant under the author's direction, in the author's own time, with open data. The evaluation and its results are available on request.</p>
 </div>
 {% endblock %}

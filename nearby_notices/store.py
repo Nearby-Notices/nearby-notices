@@ -25,6 +25,7 @@ CREATE TABLE IF NOT EXISTS extractions (
 CREATE TABLE IF NOT EXISTS feed_cache (key TEXT PRIMARY KEY, payload TEXT, fetched_at REAL);
 CREATE TABLE IF NOT EXISTS feedback (notice_id TEXT, up INTEGER DEFAULT 0, down INTEGER DEFAULT 0, PRIMARY KEY (notice_id));
 CREATE TABLE IF NOT EXISTS counters (day TEXT, name TEXT, n INTEGER DEFAULT 0, PRIMARY KEY (day, name));
+CREATE TABLE IF NOT EXISTS kind_checks (at REAL, notice_id TEXT, model_kind TEXT, llm_kind TEXT, agree INTEGER);
 """
 
 

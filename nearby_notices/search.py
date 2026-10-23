@@ -10,7 +10,7 @@ from dataclasses import dataclass, field
 
 import httpx
 
-from . import config, counter, extract, gazette, geo, groups, places, store
+from . import config, counter, extract, gazette, geo, groups, kinds, places, store
 
 MAX_POINT_FETCHES = 40     # linked-data lookups per search, nearest first, so one search can never hammer the Gazette
 TOLERANCE = 1.02           # measured distance may exceed the asked distance by 2% plus 50 m before a notice is dropped
@@ -163,7 +163,9 @@ def describe(con, row: dict, where: places.Place | None, unit: str, asked_m: flo
     fb = con.execute("SELECT up, down FROM feedback WHERE notice_id=?", (row["id"],)).fetchone()
     pts = filed_points(row)
     near = geo.nearest(pts, where.lat, where.lon) if where and where.lat is not None and where.lon is not None and pts else None
+    kind = ex.get("kind") if ex and not ex.get("error") else None
     return {"n": row, "x": ex, "group": groups.group_of(row["notice_code"]), "fb": dict(fb) if fb else {"up": 0, "down": 0},
+            "kind": kind, "kind_source": "summary" if kind else None,
             "near": near, "dist": geo.fmt(near["m"], unit) if near else None,
             "outside": bool(near and asked_m is not None and not within(near["m"], asked_m))}
 
@@ -188,6 +190,10 @@ def find(place_query: str, distance: float | None, unit: str, report=_quiet, sin
         ids = select(con, where, found_ids, asked_m, report)
         report("done")
         results = [describe(con, row, where, unit, asked_m) for nid in ids if (row := store.get_notice(con, nid))]
+        need = [r for r in results if not r["kind"]]
+        if need and kinds.status(con)["on"]:      # off when live agreement with the language model has fallen (kinds.py)
+            for r, k in zip(need, kinds.predict([r["n"] for r in need])):
+                r["kind"], r["kind_source"] = k, "model" if k else None
     return Found(where, distance, unit, asked_m, since_days, results, [r["n"]["id"] for r in results if r["x"] is None])
 
 
@@ -204,4 +210,5 @@ def read(notice_id: str, make_now: bool = False) -> tuple[dict, dict | None] | N
         ex = r.to_dict()
         with store.db() as con:
             store.put_extraction(con, notice_id, config.MODEL, ex, len(r.summary), len(r.removed), r.seconds)
+            kinds.record(con, row, r.kind)
     return row, ex

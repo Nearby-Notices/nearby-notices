@@ -30,6 +30,7 @@ from . import (
     gazette,
     geo,
     groups,
+    kinds,
     places,
     progress,
     ratelimit,
@@ -206,7 +207,8 @@ def privacy(request: Request):
 def about(request: Request):
     with store.db() as con:
         s = store.stats(con)
-    return templates.TemplateResponse(request, "about.html", _ctx(request, stats=s, model=config.MODEL))
+        k = kinds.status(con)
+    return templates.TemplateResponse(request, "about.html", _ctx(request, stats=s, model=config.MODEL, kinds=k))
 
 
 @app.get("/health")

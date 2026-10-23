@@ -8,7 +8,7 @@ import itertools
 import queue
 import threading
 
-from . import config, extract, search, store
+from . import config, extract, kinds, search, store
 
 NOW, SOON, LATER = 0, 1, 2          # on screen; first few of a search; warm-up after a restart
 
@@ -29,6 +29,7 @@ def _run() -> None:
                 r = extract.extract(search.full_text_for(row))     # the full text, fetched now if the feed held a summary
                 with store.db() as con:
                     store.put_extraction(con, nid, config.MODEL, r.to_dict(), len(r.summary), len(r.removed), r.seconds)
+                    kinds.record(con, row, r.kind)       # the classifier checked against the language model, live
         except Exception as e:  # noqa: BLE001 the worker must survive any single failure; the page shows "reading" until retried
             with store.db() as con:
                 store.put_extraction(con, nid, config.MODEL, {"error": f"model unavailable: {type(e).__name__}", "summary": [], "removed": [],

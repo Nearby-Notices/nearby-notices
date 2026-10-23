@@ -74,7 +74,7 @@ def cmd_label(a) -> None:
         text, _ = extract.scrub(f"{n['title']}\n{n['text']}")
         try:
             d = extract._json(extract._ask(extract.EXTRACT_SYSTEM, KIND_USER.format(text=extract.for_model(text), kinds=kinds), 30))
-        except Exception as e:                        # one failed call never stops the run; the notice is asked again next time
+        except Exception as e:  # noqa: BLE001 one failed call never stops the run; the notice is asked again next time
             print(f"  {nid}: {type(e).__name__}")
             return None
         k = str(d.get("kind") or "").strip().lower()
@@ -108,11 +108,9 @@ def cmd_split(a) -> None:
     print(f"held out {len(held)} of {sum(len(v) for v in by.values())} labelled notices")
 
 
-def features(n: dict) -> str:
-    """What the model reads: the notice code as a token, the title, and the first 400 words of the scrubbed text."""
-    from nearby_notices import extract
-    text, _ = extract.scrub(n.get("text") or "")
-    return f"code{n.get('notice_code')} cat{str(n.get('notice_code'))[:2]} {n.get('title') or ''} " + " ".join(text.split()[:400])
+from nearby_notices.kinds import (
+    features,  # the one feature function, shared with the live service
+)
 
 
 def make_model():
@@ -127,7 +125,7 @@ def make_model():
 def cmd_train(a) -> None:
     import joblib
     import sklearn
-    from sklearn.metrics import accuracy_score, confusion_matrix, f1_score
+    from sklearn.metrics import confusion_matrix, f1_score
 
     sys.path.insert(0, str(ROOT / "evals"))
     from stats import mcnemar_exact, wilson
@@ -165,7 +163,7 @@ def cmd_train(a) -> None:
     metrics = {"held_out": n, "train": len(train), "accuracy": round(acc / n, 4), "accuracy_ci95": [round(lo, 4), round(hi, 4)],
                "macro_f1": round(float(f1_score(yte, pred, average="macro", zero_division=0)), 4),
                "baseline_accuracy": round(sum(right_b) / n, 4), "baseline_ci95": [round(blo, 4), round(bhi, 4)],
-               "mcnemar": {"model_only": only_m, "baseline_only": only_b, "p": round(p_value, 6)},
+               "mcnemar": {"model_only": only_m, "baseline_only": only_b, "p": float(f"{p_value:.3g}")},
                "sources": dict(Counter(labels[i]["source"] for i in labels))}
     (HERE / "metrics.json").write_text(json.dumps(metrics, indent=1) + "\n")
     cm = confusion_matrix(yte, pred, labels=kinds)
