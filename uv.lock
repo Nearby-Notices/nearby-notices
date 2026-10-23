@@ -6,6 +6,12 @@ resolution-markers = [
     "python_full_version < '3.14'",
 ]
 
+[manifest]
+members = [
+    "inspect-quote-check",
+    "nearby-notices",
+]
+
 [[package]]
 name = "agent-client-protocol"
 version = "0.12.1"
@@ -1709,6 +1715,17 @@ wheels = [
 ]
 
 [[package]]
+name = "inspect-quote-check"
+version = "0.1.0"
+source = { editable = "packages/inspect_quote_check" }
+dependencies = [
+    { name = "inspect-ai" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "inspect-ai", specifier = ">=0.3" }]
+
+[[package]]
 name = "isodate"
 version = "0.7.2"
 source = { registry = "https://pypi.org/simple" }
@@ -2467,6 +2484,7 @@ evals = [
     { name = "azure-ai-inference" },
     { name = "dvc" },
     { name = "inspect-ai" },
+    { name = "inspect-quote-check" },
 ]
 
 [package.metadata]
@@ -2490,6 +2508,7 @@ evals = [
     { name = "azure-ai-inference", specifier = ">=1.0.0b9" },
     { name = "dvc", specifier = ">=3.50" },
     { name = "inspect-ai", specifier = ">=0.3.282" },
+    { name = "inspect-quote-check", editable = "packages/inspect_quote_check" },
 ]
 
 [[package]]

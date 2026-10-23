@@ -6,6 +6,7 @@ WORKDIR /app
 ENV UV_COMPILE_BYTECODE=1 UV_LINK_MODE=copy UV_NO_SYNC=1 NN_DB_PATH=/data/notices.sqlite
 
 COPY pyproject.toml uv.lock ./
+COPY packages ./packages
 RUN uv sync --frozen --no-dev --no-install-project
 
 COPY nearby_notices ./nearby_notices

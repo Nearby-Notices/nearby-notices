@@ -113,3 +113,13 @@ def leak_samples() -> list[Sample]:
 def leak() -> Task:
     return Task(dataset=MemoryDataset(leak_samples()), solver=generate(), scorer=gate_decision(),
                 config=GenerateConfig(temperature=0, max_tokens=300))
+
+
+@task
+def leak_plugin() -> Task:
+    """The fresh confirmation set scored by the packaged extension (inspect_quote_check/verbatim_quotes), not the
+    service's own code: a check that the general-purpose scorer reaches the same decisions."""
+    from inspect_quote_check import verbatim_quotes
+    fresh = [s for s in leak_samples() if s.metadata["label"] == "fresh confirmation set"]
+    return Task(dataset=MemoryDataset(fresh), solver=generate(), scorer=verbatim_quotes(source_field="text", claim_field="sentence"),
+                config=GenerateConfig(temperature=0, max_tokens=300))

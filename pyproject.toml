@@ -23,8 +23,17 @@ evals = [
     "azure-ai-inference>=1.0.0b9",
     "dvc>=3.50",
     "inspect-ai>=0.3.282",
+    "inspect-quote-check",
 ]
 
 [tool.pytest.ini_options]
 pythonpath = ["."]
 testpaths = ["tests"]
+
+[tool.uv.workspace]
+members = [
+    "packages/inspect_quote_check",
+]
+
+[tool.uv.sources]
+inspect-quote-check = { workspace = true, editable = true }

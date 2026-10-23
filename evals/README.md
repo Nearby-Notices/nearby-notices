@@ -60,6 +60,7 @@ Two tasks, both DVC stages:
 
 - **`gate`, the 84 hand-labelled sentences.** 84 of 84 on 20 October 2026 and again on 22 October with the numbers rule; 83 of 84 on the rerun of 22 October, when the model offered, for a true sentence about a bilingual notice's deadline, a "quote" it had half translated from the Welsh ("to reach by 13 Mawrth 2015"). That is not in the notice, so the code check refused it and the true sentence was removed: the safe side, and the same notice has kept it on every other run. Run to run, the model's quotes vary even at temperature 0.
 - **`leak`, the 659 unsupported sentences of the two leak tests.** 658 of 659 removed on 22 October: 330 of 330 in the fresh confirmation set, and 328 of 329 in the first set, where the one let through is the known "29m" case (the number is quoted, but for another street). Its logs hold the full notice texts, so they stay out of the public copy with the notices.
+- **`leak_plugin`, the same fresh set through a packaged Inspect extension.** `packages/inspect_quote_check` is a general-purpose scorer, registered with Inspect through its `inspect_ai` entry point (it resolves as `inspect_quote_check/verbatim_quotes`), with no dependency on this service's code. On 23 October 2026 it caught 330 of 330, the same decisions as the service's own check.
 
 ## The pipeline (DVC)
 
