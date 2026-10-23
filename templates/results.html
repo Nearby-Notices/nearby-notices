@@ -29,6 +29,11 @@
 {% if not results %}
 <p class="empty">No notices in the covered categories were published in {{ since_label }} within {{ distance_label }}. Try a longer time or a wider distance.</p>
 {% else %}
+{% set present = [] %}{% for g in order %}{% if counts[g] %}{% set _ = present.append(g) %}{% endif %}{% endfor %}
+{% if present|length == 1 and since < 365 %}
+{% set longer = (since_choices.keys()|select(">", since)|list)[0] %}
+<p class="empty" id="one-kind">{% if present[0] == "roads" %}All {{ results|length }} notices here are road and transport orders, which make up most of what The Gazette publishes. Planning, environment and energy notices are rarer, so a longer time often finds them: {% else %}All {{ results|length }} notices here are {{ group_name(present[0])|lower }} notices. A longer time may find other kinds: {% endif %}<a href="?place={{ place.query|urlencode }}&distance={{ distance }}&unit={{ unit }}&since={{ longer }}&view={{ view }}">search {{ since_choices[longer] }}</a>.</p>
+{% endif %}
 <nav class="filters" aria-label="Filter by kind">
   <button class="chip active" data-group="all">All <span>({{ results|length }})</span></button>
   {% for g in order %}{% if counts[g] %}<button class="chip chip-{{ g }}" data-group="{{ g }}">{{ icon(g) }}{{ group_name(g) }} <span>({{ counts[g] }})</span></button>{% endif %}{% endfor %}
@@ -41,7 +46,7 @@
 <link rel="stylesheet" href="/static/vendor/leaflet/leaflet.css">
 <div id="map" class="map" role="region" aria-label="Map of notices"></div>
 <div class="food-controls">
-  <label><input type="checkbox" id="food-on"> Food hygiene ratings</label>
+  <label><input type="checkbox" id="food-on" checked> Food hygiene ratings</label>
   <label id="food-poor-label" hidden><input type="checkbox" id="food-poor"> Only poor ratings</label>
   <span class="food-key" id="food-key" hidden><span class="dot dot-good"></span>Good (4 to 5, Pass) <span class="dot dot-fair"></span>Satisfactory (3) <span class="dot dot-poor"></span>Poor (0 to 2, Improvement Required) <span class="dot dot-other"></span>Awaiting inspection or exempt</span>
   <span class="small muted" id="food-status" aria-live="polite"></span>
@@ -197,16 +202,20 @@
     if (!foodOn.checked) { return; }
     clearTimeout(foodTimer); foodTimer = setTimeout(loadFood, 400);
   });
-  foodOn.addEventListener('change', function () {
+  // On by default (23/10/2026: the first real user expected the ratings and did not find the switch); off with one click.
+  var foodToggle = function () {
     document.getElementById('food-poor-label').hidden = !foodOn.checked;
     document.getElementById('food-key').hidden = !foodOn.checked;
     if (foodOn.checked) { map.attributionControl.addAttribution('Food hygiene ratings: Food Standards Agency'); }
     else { map.attributionControl.removeAttribution('Food hygiene ratings: Food Standards Agency'); foodStatus.textContent = ''; }
     drawFood();
     loadFood();
+  };
+  foodOn.addEventListener('change', function () {
+    foodToggle();
   });
   foodPoor.addEventListener('change', drawFood);
-  if (centre[0] === null) { document.querySelector('.food-controls').hidden = true; }
+  if (centre[0] === null) { document.querySelector('.food-controls').hidden = true; } else if (foodOn.checked) { foodToggle(); }
 
   // Zoomed out past the search circle: offer the next distance that covers what is on screen. A button, not an
   // automatic search, because a wider search can take half a minute and reloads the page under the reader.

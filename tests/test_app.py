@@ -172,3 +172,16 @@ def test_the_full_text_fetch_failing_keeps_the_summary(client, monkeypatch):
 def test_only_the_site_and_its_github_front_may_frame_it(client):
     rule = client.get("/").headers["content-security-policy"]
     assert rule == "frame-ancestors 'self' https://nearby-notices.github.io"
+
+
+def test_food_ratings_are_on_by_default_and_one_click_turns_them_off(client):
+    page = client.get("/search", params={"place": "Dudley", "distance": 3, "unit": "mi"}).text
+    assert '<input type="checkbox" id="food-on" checked>' in page, "the first real user expected the ratings without finding the switch"
+    assert "else if (foodOn.checked) { foodToggle(); }" in page, "the layer loads on its own when the page opens"
+
+
+def test_a_search_that_finds_only_road_orders_offers_a_longer_time(client):
+    page = client.get("/search", params={"place": "Dudley", "distance": 3, "unit": "mi"}).text
+    assert 'id="one-kind"' in page and "road and transport orders" in page
+    assert "since=90" in page and "search the past 3 months" in page
+    assert 'id="one-kind"' not in client.get("/search", params={"place": "Dudley", "distance": 3, "unit": "mi", "since": 365}).text
