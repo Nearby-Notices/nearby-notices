@@ -1,0 +1,12 @@
+%%{init: {"theme": "neutral", "flowchart": {"htmlLabels": false, "curve": "basis", "nodeSpacing": 30, "rankSpacing": 35}, "themeVariables": {"fontSize": "18px"}}}%%
+flowchart TD
+  U["Postcode or town"] --> P["postcodes.io: place and country"]
+  P --> G["The Gazette feed: allowed categories, chosen window, every page"]
+  G --> M["Measure to the nearest filed postcode; keep notices under the place's law"]
+  M --> S[("SQLite cache")]
+  S --> X["Model writes the facts and a simple summary, on demand"]
+  X --> V["Checks: facts must be verbatim; advice filter"]
+  V --> Q["Gate: every sentence quoted from the notice; every number in its quotes"]
+  Q -->|kept sentences| S
+  S --> W["Website: list, grouped, map"]
+  S --> A["MCP server for AI agents: find, read, coverage"]

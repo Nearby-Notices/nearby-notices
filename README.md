@@ -52,17 +52,9 @@ What the numbers mean, and the labelling rules, are in [evals/README.md](evals/R
 
 ## How it works
 
-```mermaid
-flowchart LR
-  U[Postcode or town] --> P[postcodes.io] --> G[The Gazette feed<br/>allowed categories only]
-  G --> M[Measure to nearest filed postcode<br/>linked-data lookup when needed]
-  M --> S[(SQLite)]
-  S --> W[Background reader]
-  W --> X[Model: facts + summary] --> V{Verbatim checks<br/>advice filter}
-  V --> Q{Gate: quotes in the notice?} --> S
-  S --> Web[Website: list, grouped, map]
-  S --> MCP[MCP server: find, read, coverage]
-```
+![How it works: a postcode or town is looked up, the Gazette feed is read for the chosen window, notices are measured to the place and kept under its law, stored, summarised on demand, checked and gated, then shown on the website and through the MCP server](docs/how-it-works.png)
+
+(The diagram's source is `docs/how-it-works.mmd`.)
 
 1. **Find.** The Gazette's own feed, by postcode, distance, category and publication date, newest first: every notice published in the chosen window (past week, month, 3 months or year; a month by default, since most objection periods run three to four weeks), every page of results, with no cap on what is shown. The Gazette only honours radii of 1, 5, 10, 15, 20, 25 and 30 miles, so the tool asks for the smallest honoured radius covering the distance you chose (miles or kilometres) and measures each notice itself. A notice is filed under several postcodes (the street, the council, a consultant's office) and the feed gives only the first, so when that one is outside your circle the tool reads the notice's linked-data record for all of them and keeps the notice only if its nearest filed postcode is inside. A notice is often also filed under an office far from the place it is about (a Scottish wind farm under its developer's London office), so a notice made under Scottish or Northern Irish law, or under an England-and-Wales-only Act, is kept only for places in that country (`search.jurisdiction`).
 2. **Summarise, on demand.** A model (any model through LiteLLM; by default a local one) returns the facts as JSON and a two- or three-sentence simple summary. Summaries are written only for notices someone looks at: the first six of a search with the page, then each card as it comes into view or its pin is opened, most urgent first. Four writers work side by side (`NN_READERS`; set 1 for a single local model), and a summary is written once and kept for everyone, so no notice is paid for twice. Each sentence is still checked on its own; the checks run side by side, the first alone so the model service caches the notice text and the rest are billed at the cached rate.
